@@ -18,15 +18,17 @@ public class ProjetoUnikut {
                 case 1:
                     System.out.println("Informe o login:");
                     String login = in.nextLine();
+                    in.nextLine();
                     System.out.println("Informe a senha:");
                     String senha = in.nextLine();
-
                     break;
                 case 2:
                     System.out.println("Informe o login:");
                     login = in.nextLine();
+                    in.nextLine();
                     System.out.println("Informe a senha:");
                     senha = in.nextLine();
+                    
                     break;
                 case 3:
                     System.out.println("Fim do programa.");
