@@ -1,14 +1,10 @@
-
 package projeto.unikut;
-
 import java.util.Scanner;
-
-
-public class ProjetoUnikut {
-
-   
+import com.classes.Unikut.CadastroConta;
+public class ProjetoUnikut { 
     public static void main(String[] args) {
         Scanner in = new Scanner (System.in);
+        CadastroConta conta = new CadastroConta();
         int op;
         do{
             System.out.println("UNIKUT");
@@ -21,6 +17,32 @@ public class ProjetoUnikut {
                     in.nextLine();
                     System.out.println("Informe a senha:");
                     String senha = in.nextLine();
+                    boolean resultado = conta.entrar(login, senha);
+                    if(resultado == true){
+                        int op2;
+                        do{
+                            System.out.println("Bem-vindo");
+                            perfilOuAmigosOuRecados();
+                            op2 = in.nextInt();
+                            switch (op2){
+                                case 1:
+                                    System.out.println("Para alterar o perfil: Confirme.");
+                                    System.out.println("Informe o login:");
+                                    login = in.nextLine();
+                                    in.nextLine();
+                                    System.out.println("Informe a senha:");
+                                    senha = in.nextLine();
+                                    conta.alteraPerfil(login, senha);
+                                    break;
+                                case 2:
+                                    
+                                    break;
+                            }
+                        }while(op2!=4);
+                    }
+                    else{
+                        System.out.println("Conta inexistente!");
+                    }
                     break;
                 case 2:
                     System.out.println("Informe o login:");
@@ -28,7 +50,7 @@ public class ProjetoUnikut {
                     in.nextLine();
                     System.out.println("Informe a senha:");
                     senha = in.nextLine();
-                    
+                    conta.cadastrar(login,senha);
                     break;
                 case 3:
                     System.out.println("Fim do programa.");
@@ -48,4 +70,14 @@ public class ProjetoUnikut {
         System.out.println("3-Encerrar o programa.");
         System.out.println("Escolha uma opção:");
     }
+    
+    public static void perfilOuAmigosOuRecados(){
+        System.out.println("Menu de opções:");
+        System.out.println("1-Alterar perfil.");
+        System.out.println("2-Adicionar amigos.");
+        System.out.println("3-Visualizar recados.");
+        System.out.println("4-Sair do conta.");
+        System.out.println("Escolha uma opção:");
+    }
+    
 }

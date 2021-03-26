@@ -1,6 +1,4 @@
-
 package com.classes.classe.Unikut;
-
 class LSENode <T>{
     private T info;
     private LSENode<T> prox;

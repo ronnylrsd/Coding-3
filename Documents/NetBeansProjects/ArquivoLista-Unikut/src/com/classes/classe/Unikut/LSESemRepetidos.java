@@ -1,6 +1,4 @@
-
 package com.classes.classe.Unikut;
-
 public class LSESemRepetidos<T extends Comparable<T>> {
     private LSENode<T> prim;
     private LSENode<T> ult;
@@ -45,16 +43,13 @@ public class LSESemRepetidos<T extends Comparable<T>> {
         else { // lista não está vazia
             achou = this.buscar(valor);
             if (achou == true) { // achou!
-                System.out.println("Valor repetido! Inserção não efetuada!");
             }
             else {  // não achou!!!
                 ult.setProx(novo);
                 ult = novo;
                 qtd++;
-                System.out.println("Inserção efetuada!");
             }
         }
-        System.out.println("Inserção efetuada com sucesso!");
     }  
     
     
