@@ -10,6 +10,7 @@ public class ProjetoUnikut {
     public static void main(String[] args) {
         Scanner in = new Scanner (System.in);
         int op;
+        System.out.println("YAMETEEEEEEEEEEEEEEEEEEEEEEEEE KUDASAIIIIIIIII");
         do{
             System.out.println("UNIKUT");
             loginOuCadastro();
