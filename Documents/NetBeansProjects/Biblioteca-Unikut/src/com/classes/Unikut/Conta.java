@@ -22,7 +22,11 @@ public class Conta implements Comparable <Conta> {
        this.senha=senha;
        this.nome=nome;
     }
-
+    
+    public Conta(String log){
+        this.login = log;
+    }
+    
     public int getIdade() {
         return idade;
     }
@@ -148,6 +152,6 @@ public class Conta implements Comparable <Conta> {
     
     @Override
     public int compareTo(Conta t) {
-       return this.login.compareTo(t.login);
+       return this.login.compareTo(t.getLogin());
     }
 }

@@ -3,6 +3,30 @@ public class LSESemRepetidos<T extends Comparable<T>> {
     private LSENode<T> prim;
     private LSENode<T> ult;
     private int qtd;   
+
+    public LSENode<T> getPrim() {
+        return prim;
+    }
+
+    private void setPrim(LSENode<T> prim) {
+        this.prim = prim;
+    }
+
+    public LSENode<T> getUlt() {
+        return ult;
+    }
+
+    private void setUlt(LSENode<T> ult) {
+        this.ult = ult;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    private void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
     
 
     public void inserirValorInicio(T valor){
@@ -256,8 +280,5 @@ public class LSESemRepetidos<T extends Comparable<T>> {
             }            
         }
     }
-    
-    
-  
     
 }

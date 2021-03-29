@@ -35,7 +35,16 @@ public class ProjetoUnikut {
                                     conta.alteraPerfil(login, senha);
                                     break;
                                 case 2:
-                                    
+                                    conta.amigos();
+                                    break;
+                                case 3:
+                                    conta.recados();
+                                    break;
+                                case 4:
+                                    System.out.println("De volta ao menu inicial.");
+                                    break;
+                                default:
+                                    System.out.println("Escolha inválida. Tente novamente.");
                                     break;
                             }
                         }while(op2!=4);
@@ -74,8 +83,8 @@ public class ProjetoUnikut {
     public static void perfilOuAmigosOuRecados(){
         System.out.println("Menu de opções:");
         System.out.println("1-Alterar perfil.");
-        System.out.println("2-Adicionar amigos.");
-        System.out.println("3-Visualizar recados.");
+        System.out.println("2-Aba amigos.");
+        System.out.println("3-Aba recados.");
         System.out.println("4-Sair do conta.");
         System.out.println("Escolha uma opção:");
     }
