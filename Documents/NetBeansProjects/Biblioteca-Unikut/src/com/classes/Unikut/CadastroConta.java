@@ -36,7 +36,12 @@ public class CadastroConta {
         recados = new LSESemRepetidos();
     }
     
-    public boolean entrar (String login,String senha){
+    public boolean entrar (){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Informe o login:");
+        String login = in.nextLine();
+        System.out.println("Informe a senha:");
+        String senha = in.nextLine();
         Conta conta = new Conta(login,senha);
         return dados.buscarObjeto(conta) != null;
     }

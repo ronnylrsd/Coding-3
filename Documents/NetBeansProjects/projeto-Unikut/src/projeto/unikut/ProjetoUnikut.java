@@ -12,12 +12,7 @@ public class ProjetoUnikut {
             op = in.nextInt();
             switch(op){
                 case 1:
-                    System.out.println("Informe o login:");
-                    String login = in.nextLine();
-                    in.nextLine();
-                    System.out.println("Informe a senha:");
-                    String senha = in.nextLine();
-                    boolean resultado = conta.entrar(login, senha);
+                    boolean resultado = conta.entrar();
                     if(resultado == true){
                         int op2;
                         do{
@@ -28,10 +23,10 @@ public class ProjetoUnikut {
                                 case 1:
                                     System.out.println("Para alterar o perfil: Confirme.");
                                     System.out.println("Informe o login:");
-                                    login = in.nextLine();
+                                    String login = in.nextLine();
                                     in.nextLine();
                                     System.out.println("Informe a senha:");
-                                    senha = in.nextLine();
+                                    String senha = in.nextLine();
                                     conta.alteraPerfil(login, senha);
                                     break;
                                 case 2:
