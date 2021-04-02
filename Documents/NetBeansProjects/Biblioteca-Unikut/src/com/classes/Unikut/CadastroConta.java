@@ -37,12 +37,16 @@ public class CadastroConta {
     }
     
     public boolean entrar (String login,String senha){
-        Conta ct = new Conta(login,senha);
-        return dados.buscarObjeto(ct) != null;
+        Conta conta = new Conta(login,senha);
+        return dados.buscarObjeto(conta) != null;
     }
     
-    public void cadastrar (String login,String senha){
-    Scanner in = new Scanner(System.in);
+    public void cadastrar (){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Informe o login:");
+        String login = in.nextLine();
+        System.out.println("Informe a senha:");
+        String senha = in.nextLine();
         Conta ct = new Conta (login,senha);
         if(dados.buscarObjeto(ct)==null){
             System.out.println("Seu nome foi iniciado como convidado.");

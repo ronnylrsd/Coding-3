@@ -54,12 +54,7 @@ public class ProjetoUnikut {
                     }
                     break;
                 case 2:
-                    System.out.println("Informe o login:");
-                    login = in.nextLine();
-                    in.nextLine();
-                    System.out.println("Informe a senha:");
-                    senha = in.nextLine();
-                    conta.cadastrar(login,senha);
+                    conta.cadastrar();
                     break;
                 case 3:
                     System.out.println("Fim do programa.");
