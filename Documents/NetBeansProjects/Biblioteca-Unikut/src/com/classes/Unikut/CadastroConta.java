@@ -73,8 +73,14 @@ public class CadastroConta {
         }
     }
     
-    public void alteraPerfil (String lg,String s){
-        Conta ct = new Conta (lg,s);
+    public void alteraPerfil (){
+        Scanner in = new Scanner (System.in);
+        System.out.println("Para alterar o perfil: Confirme.");
+        System.out.println("Informe o login:");
+        String login = in.nextLine();
+        System.out.println("Informe a senha:");
+        String senha = in.nextLine();
+        Conta ct = new Conta (login,senha);
         Conta result = dados.buscarObjeto(ct);
         if(result != null){
             result.alterarDados(result);

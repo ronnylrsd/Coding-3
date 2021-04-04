@@ -21,13 +21,7 @@ public class ProjetoUnikut {
                             op2 = in.nextInt();
                             switch (op2){
                                 case 1:
-                                    System.out.println("Para alterar o perfil: Confirme.");
-                                    System.out.println("Informe o login:");
-                                    String login = in.nextLine();
-                                    in.nextLine();
-                                    System.out.println("Informe a senha:");
-                                    String senha = in.nextLine();
-                                    conta.alteraPerfil(login, senha);
+                                    conta.alteraPerfil();
                                     break;
                                 case 2:
                                     conta.amigos();
