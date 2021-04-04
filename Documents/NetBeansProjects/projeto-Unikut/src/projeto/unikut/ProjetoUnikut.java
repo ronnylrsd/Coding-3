@@ -30,7 +30,7 @@ public class ProjetoUnikut {
                                     conta.recados();
                                     break;
                                 case 4:
-                                    System.out.println("De volta ao menu inicial.");
+                                    System.out.println("De volta ao Menu Inicial.");
                                     break;
                                 default:
                                     System.out.println("Escolha inválida. Tente novamente.");
