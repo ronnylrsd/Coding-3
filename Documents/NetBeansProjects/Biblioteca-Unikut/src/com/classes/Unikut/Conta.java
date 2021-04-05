@@ -165,11 +165,11 @@ public class Conta implements Comparable <Conta> {
     }
     
     public void adicionaAmigos(Conta result){
-        amigos.inserirValorFim(result);
+        this.amigos.inserirValorFim(result);
     }
     
     public void listaAmigos(){
-        amigos.exibirValores();
+        this.amigos.exibirValores();
     }
     
     public void alteraStatusAmigos (Conta result){
