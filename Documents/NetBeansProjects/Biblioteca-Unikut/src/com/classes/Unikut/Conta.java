@@ -165,20 +165,15 @@ public class Conta implements Comparable <Conta> {
     }
     
     public void adicionaAmigos(Conta result){
-        amigos.inserirValorFinal(result);
+        amigos.inserirValorFim(result);
     }
     
     public void listaAmigos(){
-        amigos.exibirLista();
+        amigos.exibirValores();
     }
     
     public void alteraStatusAmigos (Conta result){
         result.setStatus(status);
-    }
-    
-    @Override
-    public String toString (){
-        return this.login+" "+this.status;
     }
     
     @Override

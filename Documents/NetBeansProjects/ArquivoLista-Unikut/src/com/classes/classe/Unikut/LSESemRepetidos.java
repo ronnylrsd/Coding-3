@@ -27,195 +27,30 @@ public class LSESemRepetidos<T extends Comparable<T>> {
     private void setQtd(int qtd) {
         this.qtd = qtd;
     }
-    
 
-    public void inserirValorInicio(T valor){
-        
-     LSENode<T> novo;
-     boolean achou;
-     novo = new LSENode(valor);
-     
-     if(qtd==0){
-      prim=novo;
-      ult =novo;
-      qtd++;
-     }
-     else{
-         achou=this.buscar(valor);
-         if(achou == true){
-             System.out.println("valor ja inserido!");
-         }else{
-             novo.setProx(prim);
-             prim=novo;
-             System.out.println("insercao feita");
-         }
-         
-     }
-        
-        
-        
-    }
-    public void inserirValorFinal (T valor) {
-        LSENode<T> novo;
-        boolean achou;
-        novo = new LSENode (valor);
-        if (qtd == 0) { // lista está vazia
+    public int inserirValorFim (T valor){
+        LSENode<T> novo = new LSENode(valor);//guarda o valor do nó enquanto ele não é inserido na lista
+        if(qtd == 0){//lista vazia
             prim = novo;
             ult = novo;
+            //primeiro e último recebem o mesmo valor pq só tem um nó
             qtd++;
+            return 1;
         }
-        else { // lista não está vazia
-            achou = this.buscar(valor);
-            if (achou == true) { // achou!
-            }
-            else {  // não achou!!!
+        else{
+            if(buscarSimples(valor) == null){
                 ult.setProx(novo);
                 ult = novo;
+                //a cada novo nó é encadeado depois do último
                 qtd++;
+                return 2;
+            }
+            else{
+                return -1;
             }
         }
-    }  
-    
-    
-    public void remover (T valor){
-     LSENode<T> aux, anterior = null; 
-     boolean busca;
-     
-     if (qtd==0){ // vazio
-         System.out.println("Operacao nao pode ser feita pois a lista está vazia");
-     
-     }else if(qtd==1){ // 1 item na lista 
-         
-       busca = buscar(valor);
-       
-       if(busca==true){
-        prim=null;
-        ult=null;
-        qtd --;
-       }else{
-           
-          System.out.println("Valor nao encontrado portanto a remocao nao foi feita");
-       }
-         
-    
-     
-     }else if(prim.getInfo().compareTo(valor)==0){ // lista qtd>1 && primeiro == remocao
-         
-         prim = prim.getProx();
-            qtd--;
-            System.out.println("Remoção efetuada!");
-         
-         
-     }else{ // caso geral
-       aux=prim;
-         
-           while(aux!=null){
-             
-            if(aux.getInfo().compareTo(valor)==0)  {
-               
-               anterior.setProx(aux.getProx());  
-                   qtd--; 
-                System.out.println("Remocao efetuada");
-                return;
-           }else{
-               
-               anterior=aux;
-               aux=aux.getProx();
-               
-           }
-                     
-             
-         }
-         
-          }
-     
-     
-        
-        
-        
     }
     
-    public boolean ehIgual(LSESemRepetidos<T> valor){
-        LSENode<T> origi ,segund;
-        origi=this.prim; // armazenar o valor do nó
-        segund=valor.prim; // armzenar o valor do nó externo
-        
-         if(this.qtd!=valor.qtd ){ // comparacao de qtd fora do while para evitar contagem desnecessaria
-            
-            return false; // retorna falso se o qtd for diferente
-         
-         }
-       
-         while(origi.getProx()!=null || segund.getProx()!=null){ // // condicao de parada do while quando o get prox for null
-            
-        
-          if(origi.getInfo().compareTo(segund.getInfo())!=0){  // comparando 2 nós
-        
-            return false;
-            
-            
-          }else if(origi.getProx()== null && segund.getProx()!=null
-            ||  origi.getProx()!= null && segund.getProx()==null    ){ // se a lista terminar e a outra nao 
-              
-              
-              return false;
-                    
-                    
-                      
-        }else{  // get prox para verifcar os outros nós
-          origi.getProx();
-          segund.getProx();
-            
-        }
-        
-        }
-        return true; // se nao caiu em nenhum dos returns , retorna true;
-        
-        
-    }
-    
-    
-    
-    
-    public void removerPrimeiro () {        
-        if (qtd == 0) {
-            System.out.println("Lista vazia!");
-        }
-        else if (qtd == 1) {
-            prim = null; //objeto
-            ult = null; // objeto
-            qtd = 0; // qtd
-            System.out.println("Remoção efetuada!");
-        }
-        else {
-            prim = prim.getProx();
-            qtd--;
-            System.out.println("Remoção efetuada!");
-        }
-    }
-    
-    public void removerUltimo () { 
-        LSENode<T> aux;
-        if (qtd == 0) {
-            System.out.println("Lista vazia!");
-        }
-        else if (qtd == 1) {
-            prim = null;
-            ult = null;
-            qtd = 0;
-            System.out.println("Remoção efetuada!");
-        }
-        else {
-            aux = prim;  
-            while (aux.getProx() != ult) {
-                aux = aux.getProx();
-            }
-            aux.setProx(null);
-            ult = aux;
-            qtd--;
-            System.out.println("Remoção efetuada!");
-        }
-    }
     
     private LSENode<T> buscarSimples (T valor) { // metodo de busca porem que retorna o objeto ao invez de um boleano
         LSENode<T> aux;                 // privada pois só vai ser usada pelos procedimentos    
@@ -246,39 +81,19 @@ public class LSESemRepetidos<T extends Comparable<T>> {
             return pos.getInfo(); //retorna o objeto
         }
     }
-    
-    public boolean buscar (T valor) { // Busca sequencial simples para nao inserir repetidos 
-                                      // apenas retorna um boleano , true ou false 
-        LSENode<T> aux;
-        if (qtd == 0) { // lista vazia
-            return false;
-        }
-        else {
-            aux = prim;
-            while (aux != null) {
-                if (aux.getInfo().compareTo(valor) == 0) {
-                    return true;
-                }
-                else {
-                    aux = aux.getProx();
-                }
-            }
-            return false;
-        }        
-    }
    
-    public void exibirLista () {
-        LSENode<T> aux;
-        if (qtd == 0) {
-            System.out.println("Lista vazia!!");
+    public T exibirValores(){
+        if(qtd == 0){
+            return null;
         }
-        else {
-            aux = prim;
-            while (aux != null) {
-                System.out.println(aux.getInfo());
-                aux = aux.getProx();
-            }            
+        else{
+            LSENode<T> aux;
+            //for(inicialização da variável de controle;condição de repetição;variação da variável)
+            for(aux = prim;aux != null;aux = aux.getProx()){
+                return aux.getInfo();
+            }
         }
+        return null;
     }
     
 }

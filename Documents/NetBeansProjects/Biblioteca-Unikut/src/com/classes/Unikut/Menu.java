@@ -41,11 +41,11 @@ public class Menu {
                 System.out.println("Informe o nome:");
                 String nome = in.nextLine();
                 ct= new Conta(login,senha,nome);
-                usuariosCadastrados.inserirValorFinal(ct);
+                usuariosCadastrados.inserirValorFim(ct);
             }
             else{
                 ct = new Conta(login,senha);
-                usuariosCadastrados.inserirValorFinal(ct);
+                usuariosCadastrados.inserirValorFim(ct);
             }
             System.out.println("Conta cadastrada com sucesso!");
         }
@@ -115,7 +115,12 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    result1.listaAmigos();
+                    if(result1 != null){
+                        result1.listaAmigos();
+                    }
+                    else{
+                        System.out.println("Lista Vazia!");
+                    }
                     break;
                 case 3:
                     System.out.println("Informe o login do usuário para alterar status:");
