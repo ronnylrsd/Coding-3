@@ -1,6 +1,6 @@
 package com.classes.Unikut;
 import java.util.Scanner;
-
+import com.classes.classe.Unikut.LSESemRepetidos;
 public class Conta implements Comparable <Conta> {
 
  private String login;
@@ -10,11 +10,14 @@ public class Conta implements Comparable <Conta> {
  private char sexo;
  private String aniversario;
  private String estadoCivil;
- 
+ private String status;
+ private LSESemRepetidos<Conta> amigos;
+
     public Conta(String log, String senha){ 
        this.login=log;
        this.senha=senha;
        this.nome="convidado";
+       this.amigos = new LSESemRepetidos();
     }
     
     public Conta(String log, String senha,String nome){
@@ -25,7 +28,33 @@ public class Conta implements Comparable <Conta> {
     
     public Conta(String log){
         this.login = log;
+        this.status = "pendente";
     }
+    
+    
+    public String getLogin() {
+        return login;
+    }
+    
+    private void setLogin(String login){
+        this.login = login;
+    }
+    
+    public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     
     public int getIdade() {
         return idade;
@@ -59,27 +88,12 @@ public class Conta implements Comparable <Conta> {
         this.estadoCivil = estadoCivil;
     }
     
-    public String getLogin() {
-        return login;
-    }
-    
-    private void setLogin(String login){
-        this.login = login;
-    }
-    
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha){
-        this.senha = senha;
-    }
-    
-    public String getNome() {
-        return nome;
+    public String getStatus() {
+        return status;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setStatus(String status) {
+        this.status = "amigo";
     }
     
     public void alterarDados (Conta result){
@@ -148,6 +162,23 @@ public class Conta implements Comparable <Conta> {
             }
             }while(op!=7);
         }
+    }
+    
+    public void adicionaAmigos(Conta result){
+        amigos.inserirValorFinal(result);
+    }
+    
+    public void listaAmigos(){
+        amigos.exibirLista();
+    }
+    
+    public void alteraStatusAmigos (Conta result){
+        result.setStatus(status);
+    }
+    
+    @Override
+    public String toString (){
+        return this.login+" "+this.status;
     }
     
     @Override

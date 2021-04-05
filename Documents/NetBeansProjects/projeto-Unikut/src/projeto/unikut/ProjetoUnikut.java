@@ -1,10 +1,10 @@
 package projeto.unikut;
 import java.util.Scanner;
-import com.classes.Unikut.CadastroConta;
+import com.classes.Unikut.Menu;
 public class ProjetoUnikut { 
     public static void main(String[] args) {
         Scanner in = new Scanner (System.in);
-        CadastroConta conta = new CadastroConta();
+        Menu conta = new Menu();
         int op;
         do{
             System.out.println("UNIKUT");
@@ -27,7 +27,6 @@ public class ProjetoUnikut {
                                     conta.amigos();
                                     break;
                                 case 3:
-                                    conta.recados();
                                     break;
                                 case 4:
                                     System.out.println("De volta ao Menu Inicial.");
