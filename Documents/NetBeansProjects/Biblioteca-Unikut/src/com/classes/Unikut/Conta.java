@@ -1,34 +1,40 @@
 package com.classes.Unikut;
+import java.util.LinkedList;
 import java.util.Scanner;
-import com.classes.classe.Unikut.LSESemRepetidos;
 public class Conta implements Comparable <Conta> {
-
- private String login;
- private String senha;
- private String nome;
- private int idade;
- private char sexo;
- private String aniversario;
- private String estadoCivil;
- private String status;
- private LSESemRepetidos<Conta> amigos;
+private String login;
+private String senha;
+private String nome;
+private int idade;
+private char sexo;
+private String aniversario;
+private String estadoCivil;
+private String status;
+private LinkedList<Conta> amigos;
+private LinkedList<String> recados;
 
     public Conta(String log, String senha){ 
        this.login=log;
        this.senha=senha;
        this.nome="convidado";
-       this.amigos = new LSESemRepetidos();
+       this.amigos = new LinkedList<>();
+       this.status = "pendente";
+       this.recados = new LinkedList<>();
     }
     
     public Conta(String log, String senha,String nome){
        this.login=log;
        this.senha=senha;
        this.nome=nome;
+       this.amigos = new LinkedList();
+       this.recados = new LinkedList<>();
     }
     
     public Conta(String log){
         this.login = log;
         this.status = "pendente";
+        this.amigos = new LinkedList();
+        this.recados = new LinkedList<>();
     }
     
     
@@ -92,10 +98,27 @@ public class Conta implements Comparable <Conta> {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus() {
         this.status = "amigo";
     }
-    
+
+    public LinkedList<Conta> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(LinkedList<Conta> amigos) {
+        this.amigos = amigos;
+    }
+
+    public LinkedList<String> getRecados() {
+        return recados;
+    }
+
+    public void setRecados(LinkedList<String> recados) {
+        this.recados = recados;
+    }
+
+
     public void alterarDados (Conta result){
         int op;
         Scanner in = new Scanner (System.in);
@@ -165,15 +188,103 @@ public class Conta implements Comparable <Conta> {
     }
     
     public void adicionaAmigos(Conta result){
-        this.amigos.inserirValorFim(result);
+        Conta conta = new Conta(login,senha);
+        if(buscaSimples(result) == null){
+            this.amigos.add(result);
+            result.amigos.add(conta);
+        }
+        else{
+            System.out.println("Amigo já adicionado.");
+        }
     }
     
     public void listaAmigos(){
-        this.amigos.exibirValores();
+        if(amigos.isEmpty()){
+            System.out.println("Lista vazia!");
+        }
+        else{
+            int i = 0;
+            Conta aux = amigos.getFirst();
+            Conta last = amigos.getLast();
+            while(aux != null){
+                System.out.println(aux);
+                if(amigos.indexOf(last)==i){
+                    return;
+                }
+                else{
+                    aux = amigos.get(i+1);
+                }
+            }
+        }
+    }
+    
+    private Conta buscaSimples(Conta ct){
+        int i=0;
+        if(amigos.isEmpty()){
+            return null;
+        }
+        else{
+            Conta conta = amigos.get(i);
+            Conta last = amigos.getLast();
+            while(conta != null){
+                if(conta.compareTo(ct)==0){
+                    return conta;
+                }
+                else{
+                    if(amigos.indexOf(last)==i){
+                        return null;
+                    }
+                    else{
+                        conta = amigos.get(i+1);
+                    }
+                }   
+            }
+            return null;
+        }
     }
     
     public void alteraStatusAmigos (Conta result){
-        result.setStatus(status);
+        Conta amigo = buscaSimples(result);
+        if(amigo != null){
+            if(amigo.getStatus().equalsIgnoreCase("pendente")){
+                amigo.setStatus();
+            }
+            else{
+                System.out.println("Solicitação já atualizada.");
+            }
+        }
+        else{
+            System.out.println("Amigo ou conta não existente.");
+        }
+    }
+    
+    public void adicionaRecado(String lg,String recado){
+        recados.add(lg+": "+recado);
+    }
+    
+    public void listaRecados(){
+        if(recados.isEmpty()){
+            System.out.println("Lista vazia!");
+        }
+        else{
+            int i = 0;
+            String aux = recados.getFirst();
+            String last = recados.getLast();
+            while(aux != null){
+                System.out.println(aux);
+                if(recados.indexOf(last)==i){
+                    return;
+                }
+                else{
+                    aux = recados.get(i+1);
+                }
+            }
+        }
+    }
+    
+    @Override
+    public String toString(){
+        return this.login+" "+this.status;
     }
     
     @Override

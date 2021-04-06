@@ -1,53 +1,84 @@
 package com.classes.Unikut;
-import com.classes.classe.Unikut.LSESemRepetidos;
+import java.util.LinkedList;
 import java.util.Scanner;
 public class Menu {
-    private LSESemRepetidos<Conta> usuariosCadastrados;
-    
-    public LSESemRepetidos<Conta> getUsuariosCadastrados() {
+    private LinkedList<Conta> usuariosCadastrados;
+    private String login;
+    private String senha;
+
+    public LinkedList getUsuariosCadastrados() {
         return usuariosCadastrados;
     }
 
-    private void setUsuariosCadastrados(LSESemRepetidos<Conta> dados) {
-        this.usuariosCadastrados = dados;
+    public void setUsuariosCadastrados(LinkedList usuariosCadastrados) {
+        this.usuariosCadastrados = usuariosCadastrados;
     }
     
     public Menu(){//criar a lista
-        usuariosCadastrados = new LSESemRepetidos();
+        usuariosCadastrados = new LinkedList<>();
+    }
+    
+    private Conta buscaSimples(Conta ct){
+        int i=0;
+        if(usuariosCadastrados.isEmpty()){
+            return null;
+        }
+        else{
+            Conta conta = usuariosCadastrados.get(i);
+            Conta last = usuariosCadastrados.getLast();
+            while(conta != null){
+                if(ct.compareTo(conta)==0){
+                    return conta;
+                }
+                else{
+                    if(usuariosCadastrados.indexOf(last)==i){
+                        return null;
+                    }
+                    else{
+                        conta = usuariosCadastrados.get(i+1);
+                    }
+                }   
+            }
+            return null;
+        }
     }
     
     public boolean entrar (){
         Scanner in = new Scanner(System.in);
         System.out.println("Informe o login:");
-        String login = in.nextLine();
+        login = in.nextLine();
         System.out.println("Informe a senha:");
-        String senha = in.nextLine();
-        Conta conta = new Conta(login,senha);
-        return usuariosCadastrados.buscarObjeto(conta) != null;
+        senha = in.nextLine();
+        Conta ctt = new Conta(login,senha);
+        return buscaSimples(ctt) != null;
     }
     
     public void cadastrar (){
         Scanner in = new Scanner(System.in);
         System.out.println("Informe o login:");
-        String login = in.nextLine();
+        String lg = in.nextLine();
         System.out.println("Informe a senha:");
-        String senha = in.nextLine();
-        Conta ct = new Conta (login,senha);
-        if(usuariosCadastrados.buscarObjeto(ct)==null){
+        String s = in.nextLine();
+        Conta ct = new Conta (lg,s);
+        if(!usuariosCadastrados.contains(ct)){
             System.out.println("Seu nome foi iniciado como convidado.");
             System.out.println("Você deseja alterar o seu nome?(Sim/Não)");
             String sn = in.nextLine();
             if(sn.equalsIgnoreCase("sim")==true){
                 System.out.println("Informe o nome:");
                 String nome = in.nextLine();
-                ct= new Conta(login,senha,nome);
-                usuariosCadastrados.inserirValorFim(ct);
+                ct= new Conta(lg,s,nome);
+                usuariosCadastrados.add(ct);
+                System.out.println("Conta com nome alterado cadastrada com sucesso!");
+            }
+            else if(sn.equalsIgnoreCase("nao")==true){
+                ct = new Conta(lg,s);
+                usuariosCadastrados.add(ct);
+                System.out.println("Conta sem nome alterado cadastrada com sucesso!");
             }
             else{
-                ct = new Conta(login,senha);
-                usuariosCadastrados.inserirValorFim(ct);
+                System.out.println("Resposta inválida.");
             }
-            System.out.println("Conta cadastrada com sucesso!");
         }
         else{
             System.out.println("Conta já cadastrada.");
@@ -55,29 +86,19 @@ public class Menu {
     }
     
     public void alteraPerfil (){
-        Scanner in = new Scanner (System.in);
-        System.out.println("Para alterar o perfil: Confirme.");
-        System.out.println("Informe o login:");
-        String login = in.nextLine();
-        System.out.println("Informe a senha:");
-        String senha = in.nextLine();
-        Conta ct = new Conta (login,senha);
-        Conta result = usuariosCadastrados.buscarObjeto(ct);
-        if(result != null){
-            result.alterarDados(result);
-        }
-        else{
-            System.out.println("Conta não cadastrado!");
-        }
+        Conta result;
+        Conta ctt = new Conta(login,senha);
+        result = buscaSimples(ctt);
+        result.alterarDados(result);
     }
     
     public void amigos (){
         Scanner in = new Scanner (System.in);
         int op;
         do{
-            Conta result1 = null;
-            Conta result2;
-            Conta result3;
+            Conta conta,amigo,amg;
+            Conta ctt = new Conta(login,senha);
+            conta = buscaSimples(ctt);
             System.out.println("Bem-vindo aos amigos.");
             System.out.println("Menu de opções:");
             System.out.println("1-Adicionar amigo.");
@@ -89,46 +110,28 @@ public class Menu {
             in.nextLine();
             switch(op){
                 case 1:
-                    System.out.println("Para alterar o perfil: Confirme.");
-                    System.out.println("Informe o login:");
-                    String login = in.nextLine();
-                    System.out.println("Informe a senha:");
-                    String senha = in.nextLine();
-                    Conta ct = new Conta (login,senha);
-                    result1 = usuariosCadastrados.buscarObjeto(ct);
-                    if(result1 != null){
-                        System.out.println("Informe o login do usuário para enviar a solicitação:");
-                        String lg = in.nextLine();
-                        Conta amg = new Conta (lg);
-                        result2 = usuariosCadastrados.buscarObjeto(amg);
-                        if(result2 != null){
-                            result1.adicionaAmigos(result2);
-                            result2.adicionaAmigos(result1);
-                            System.out.println("Solicitação enviada.");
-                        }
-                        else{
-                            System.out.println("Conta amiga não cadastrada!");
-                        }
+                    System.out.println("Informe o login do usuário para enviar a solicitação:");
+                    String lg = in.nextLine();
+                    Conta ct = new Conta (lg);
+                    amigo = buscaSimples(ct);
+                    if(amigo != null){
+                        conta.adicionaAmigos(amigo);
+                        System.out.println("Solicitação enviada.");
                     }
                     else{
-                        System.out.println("Conta não cadastrado!");
+                        System.out.println("Conta de amigo não cadastrada!");
                     }
                     break;
                 case 2:
-                    if(result1 != null){
-                        result1.listaAmigos();
-                    }
-                    else{
-                        System.out.println("Lista Vazia!");
-                    }
+                    conta.listaAmigos();
                     break;
                 case 3:
                     System.out.println("Informe o login do usuário para alterar status:");
-                    login = in.nextLine();
-                    Conta conta = new Conta (login);
-                    result3 = usuariosCadastrados.buscarObjeto(conta);
-                    if(result1 != null && result3 != null){
-                        result1.alteraStatusAmigos(result3);
+                    String l = in.nextLine();
+                    Conta c = new Conta(l);
+                    amg = buscaSimples(c);
+                    if(amg != null){
+                        conta.alteraStatusAmigos(amg);
                         System.out.println("Status de amigo, atualizado!");
                     }
                     else{
@@ -145,4 +148,46 @@ public class Menu {
         }while(op != 4);
     }
     
+    public void recados(){
+        Scanner in = new Scanner (System.in);
+        int op;
+        do{
+            Conta conta;
+            Conta ctt = new Conta(login,senha);
+            conta = buscaSimples(ctt);
+            System.out.println("Bem-vindo aos recados.");
+            System.out.println("Menu de opções:");
+            System.out.println("1-Enviar recado.");
+            System.out.println("2-Visualizar recados.");
+            System.out.println("3-Sair de recados.");
+            System.out.println("Escolha uma opção:");
+            op = in.nextInt();
+            switch(op){
+                case 1:
+                    System.out.println("Informe o login do destinatário:");
+                    String lgn= in.nextLine();
+                    in.nextLine();
+                    Conta ch = new Conta(lgn);
+                    Conta resultar = buscaSimples(ch);
+                    if(resultar != null){            
+                        System.out.println("Informe a mensagem:");
+                        String msg = in.nextLine();
+                        resultar.adicionaRecado(login,msg);
+                    }
+                    else{
+                        System.out.println("Login não encontrado!");
+                    }
+                    break;
+                case 2:
+                    conta.listaRecados();
+                    break;
+                case 3:
+                    System.out.println("De volta à conta.");
+                    break;
+                default:
+                    System.out.println("Escolha inválida. Tente novamente.");
+                    break;
+            }
+        }while(op != 3);
+    }
 }

@@ -27,6 +27,7 @@ public class ProjetoUnikut {
                                     conta.amigos();
                                     break;
                                 case 3:
+                                    conta.recados();
                                     break;
                                 case 4:
                                     System.out.println("De volta ao Menu Inicial.");
