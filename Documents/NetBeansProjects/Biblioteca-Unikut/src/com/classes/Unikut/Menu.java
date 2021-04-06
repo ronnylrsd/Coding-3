@@ -162,11 +162,11 @@ public class Menu {
             System.out.println("3-Sair de recados.");
             System.out.println("Escolha uma opção:");
             op = in.nextInt();
+            in.nextLine();
             switch(op){
                 case 1:
                     System.out.println("Informe o login do destinatário:");
                     String lgn= in.nextLine();
-                    in.nextLine();
                     Conta ch = new Conta(lgn);
                     Conta resultar = buscaSimples(ch);
                     if(resultar != null){            
@@ -190,4 +190,5 @@ public class Menu {
             }
         }while(op != 3);
     }
+    
 }

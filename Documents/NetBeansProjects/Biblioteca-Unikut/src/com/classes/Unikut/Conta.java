@@ -33,8 +33,6 @@ private LinkedList<String> recados;
     public Conta(String log){
         this.login = log;
         this.status = "pendente";
-        this.amigos = new LinkedList();
-        this.recados = new LinkedList<>();
     }
     
     
@@ -106,7 +104,7 @@ private LinkedList<String> recados;
         return amigos;
     }
 
-    public void setAmigos(LinkedList<Conta> amigos) {
+    private void setAmigos(LinkedList<Conta> amigos) {
         this.amigos = amigos;
     }
 
@@ -114,7 +112,7 @@ private LinkedList<String> recados;
         return recados;
     }
 
-    public void setRecados(LinkedList<String> recados) {
+    private void setRecados(LinkedList<String> recados) {
         this.recados = recados;
     }
 
