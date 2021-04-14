@@ -282,46 +282,6 @@ private LinkedList<String> recados;
         }
     }
     
-    protected void alteraAdm(Conta result){
-         int op;
-        Scanner in = new Scanner (System.in);
-        if(result == null){
-            System.out.println("Conta não encontrada!");
-        }
-        else{
-            System.out.println("Conta encotrada!");
-            do{
-                System.out.println("Menu de opções:");
-                System.out.println("1-Alterar login.");
-                System.out.println("2-Alterar senha.");
-                System.out.println("3-Voltar ao menu da conta.");
-                System.out.println("Escolha uma opção:");
-                op = in.nextInt();
-                in.nextLine();
-                switch(op){
-                case 1:
-                    System.out.println("Informe o novo login:");
-                    String nl = in.nextLine();
-                    result.setLogin(nl);
-                    System.out.println("Alteração concluída.");
-                    break;
-                case 2:
-                    System.out.println("Informe a nova senha:");
-                    String ne = in.nextLine();
-                    result.setSenha(ne);
-                    System.out.println("Alteração concluída.");
-                    break;
-                case 3:
-                    System.out.println("Voltando para o menu da conta.");
-                    break;
-                default:
-                    System.out.println("Escolha inválida.");
-                    break;
-            }
-            }while(op!=3);
-        }
-    }
-    
     @Override
     public String toString(){
         return this.login+" "+this.status;

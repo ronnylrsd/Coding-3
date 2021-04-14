@@ -134,7 +134,7 @@ public class Menu {
                     String lg = in.nextLine();
                     Conta ct = new Conta (lg);
                     amigo = buscaSimples(ct);
-                    if(amigo != null){
+                    if(amigo != null && login.compareTo(lg)!=0){
                         conta.adicionaAmigos(amigo);
                         System.out.println("Solicitação enviada.");
                     }
@@ -150,7 +150,7 @@ public class Menu {
                     String l = in.nextLine();
                     Conta c = new Conta(l);
                     amg = buscaSimples(c);
-                    if(amg != null){
+                    if(amg != null && login.compareTo(l)!=0){
                         conta.alteraStatusAmigos(amg);
                         System.out.println("Status de amigo, atualizado!");
                     }
@@ -189,7 +189,7 @@ public class Menu {
                     String lgn= in.nextLine();
                     Conta ch = new Conta(lgn);
                     Conta resultar = buscaSimples(ch);
-                    if(resultar != null){            
+                    if(resultar != null && login.compareTo(lgn)!=0){            
                         System.out.println("Informe a mensagem:");
                         String msg = in.nextLine();
                         resultar.adicionaRecado(login,msg);
@@ -218,12 +218,12 @@ public class Menu {
         String lge = in.nextLine();
         Conta teste = new Conta(lge);
         Conta busca = buscaSimples(teste);
-        if(busca != null){
-            usuariosCadastrados.remove(busca);
-            System.out.println("Conta removida!");
+        if(busca == null || login.compareTo(lge)==0){
+            System.out.println("Conta inexistente!");
         }
         else{
-            System.out.println("Conta inexistente!");
+            usuariosCadastrados.remove(busca);
+            System.out.println("Conta removida!");
         }
     }
     
@@ -234,11 +234,11 @@ public class Menu {
         String lge = in.nextLine();
         Conta teste = new Conta(lge);
         Conta busca =  buscaSimples(teste);
-        if(busca != null){
-            busca.alteraAdm(busca);
+        if(busca == null || login.compareTo(lge)==0){
+            System.out.println("Conta inexistente!");
         }
         else{
-            System.out.println("Conta inexistente!");
+            busca.alterarDados(busca);
         }
     }
     
