@@ -207,17 +207,15 @@ public class Menu {
         Conta busca = buscaSimples(teste);
         ContaAdministradora confirma = new ContaAdministradora(login,senha);
         ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
-        if(busca == null || login.compareTo(lge)==0){
+        if(busca == null){
             System.out.println("Conta inexistente!");
         }
+        else if (login.compareTo(lge)==0 || busca.getLogin().contains(".adm")==true){
+            System.out.println("A conta administradora não pode ser removida.");
+        }
         else{
-            if(adm == null){
-                System.out.println("Sua conta não é administradora.");
-            }
-            else{
-                usuariosCadastrados.remove(busca);
-                System.out.println("Conta removida!");
-            }
+            usuariosCadastrados.remove(busca);
+            System.out.println("Conta removida!");
         }
     }
     
@@ -230,8 +228,11 @@ public class Menu {
         Conta busca =  buscaSimples(teste);
         ContaAdministradora confirma = new ContaAdministradora(login,senha);
         ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
-        if(busca == null || login.compareTo(lge)==0){
+        if(busca == null){
             System.out.println("Conta inexistente!");
+        }
+        else if (login.compareTo(lge)==0 || busca.getLogin().contains(".adm")==true){
+            System.out.println("A conta administradora não pode ser alterada.");
         }
         else{
             adm.alteraAdm(busca);
@@ -247,8 +248,11 @@ public class Menu {
         Conta busca =  buscaSimples(teste);
         ContaAdministradora confirma = new ContaAdministradora(login,senha);
         ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
-        if(busca == null || login.compareTo(log)==0){
+        if(busca == null){
             System.out.println("Conta inexistente!");
+        }
+        else if (login.compareTo(log)==0 || busca.getLogin().contains(".adm")==true){
+            System.out.println("A conta administradora não pode ser exibida.");
         }
         else{
             adm.exibeContaAdm(busca);

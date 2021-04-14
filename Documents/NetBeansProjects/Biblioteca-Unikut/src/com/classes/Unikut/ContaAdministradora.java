@@ -32,7 +32,7 @@ public class ContaAdministradora extends Conta {
             else{
                 System.out.println("Idade: "+exibir.getIdade());
             }
-            if(exibir.getSexo()!='M' || exibir.getSexo()!='F' || exibir.getSexo()!='I'){
+            if(exibir.getSexo()!='M' && exibir.getSexo()!='F' && exibir.getSexo()!='I'){
                 System.out.println("Sexo: ainda não adicionado.");
             }
             else{
