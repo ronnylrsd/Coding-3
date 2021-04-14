@@ -20,7 +20,7 @@ public class ContaAdministradora extends Conta {
         }
         else{
             System.out.println("Informações sobre a conta:");
-            if(exibir.getNome().compareTo("null")==0 || exibir.getNome().compareTo("convidado")==0){
+            if(exibir.getNome().compareTo("convidado")==0){
                 System.out.println("Nome: ainda não adicionado.");
             }
             else{
@@ -33,18 +33,18 @@ public class ContaAdministradora extends Conta {
                 System.out.println("Idade: "+exibir.getIdade());
             }
             if(exibir.getSexo()!='M' || exibir.getSexo()!='F' || exibir.getSexo()!='I'){
-                System.out.println("Sexo: ainda não adicionado");
+                System.out.println("Sexo: ainda não adicionado.");
             }
             else{
                 System.out.println("Sexo: "+exibir.getSexo());
             }
-            if(exibir.getAniversario().compareTo("null")==0){
+            if(exibir.getAniversario() == null){
                 System.out.println("Aniversário: ainda não adicionado.");
             }
             else{
                 System.out.println("Aniversário: "+exibir.getAniversario());
             }
-            if(exibir.getEstadoCivil().compareTo("null")==0){
+            if(exibir.getEstadoCivil() == null){
                 System.out.println("Estado Civil: ainda não adicionado.");
             }
             else{
