@@ -1,4 +1,5 @@
 package com.classes.Unikut;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 public class Menu {
@@ -19,27 +20,13 @@ public class Menu {
     }
     
     protected Conta buscaSimples(Conta ct){
-        int i=0;
-        if(usuariosCadastrados.isEmpty()){
+        Collections.sort(usuariosCadastrados);
+        int index = Collections.binarySearch(usuariosCadastrados, ct);
+        if(index < 0){
             return null;
         }
         else{
-            Conta conta = usuariosCadastrados.get(i);
-            Conta last = usuariosCadastrados.getLast();
-            while(conta != null){
-                if(ct.compareTo(conta)==0){
-                    return conta;
-                }
-                else{
-                    if(usuariosCadastrados.indexOf(last)==i){
-                        return null;
-                    }
-                    else{
-                        conta = usuariosCadastrados.get(i+1);
-                    }
-                }   
-            }
-            return null;
+            return usuariosCadastrados.get(index);
         }
     }
     
