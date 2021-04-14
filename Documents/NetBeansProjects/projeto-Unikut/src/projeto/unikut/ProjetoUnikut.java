@@ -53,13 +53,16 @@ public class ProjetoUnikut {
                                         conta.alterarConta();
                                         break;
                                     case 3:
+                                        conta.exibirConta();
+                                        break;
+                                    case 4:
                                         System.out.println("De volta ao Menu Inicial.");
                                         break;
                                     default:
                                         System.out.println("Escolha inválida. Tente novamente.");
                                         break;
                                 }
-                            }while(op3!=3);
+                            }while(op3!=4);
                             break;
                         default:
                             System.out.println("Conta inexistente!");
@@ -101,7 +104,8 @@ public class ProjetoUnikut {
         System.out.println("Menu de opções:");
         System.out.println("1-Remover conta.");
         System.out.println("2-Alterar conta.");
-        System.out.println("3-Sair da conta administradora.");
+        System.out.println("3-Exibir conta");
+        System.out.println("4-Sair da conta administradora.");
         System.out.println("Escolha uma opção:");
     }
     

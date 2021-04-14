@@ -55,7 +55,7 @@ public class Menu {
         System.out.println("Informe a senha:");
         String s = in.nextLine();
         if(lg.contains(".adm")){
-            Conta ctt = new Conta(lg,s);
+            ContaAdministradora ctt = new ContaAdministradora(lg,s);
             if(buscaSimples(ctt) == null ){
                 usuariosCadastrados.add(ctt);
                 System.out.println("Conta administradora cadastrada com sucesso!");
@@ -205,12 +205,19 @@ public class Menu {
         String lge = in.nextLine();
         Conta teste = new Conta(lge);
         Conta busca = buscaSimples(teste);
+        ContaAdministradora confirma = new ContaAdministradora(login,senha);
+        ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
         if(busca == null || login.compareTo(lge)==0){
             System.out.println("Conta inexistente!");
         }
         else{
-            usuariosCadastrados.remove(busca);
-            System.out.println("Conta removida!");
+            if(adm == null){
+                System.out.println("Sua conta não é administradora.");
+            }
+            else{
+                usuariosCadastrados.remove(busca);
+                System.out.println("Conta removida!");
+            }
         }
     }
     
@@ -221,12 +228,30 @@ public class Menu {
         String lge = in.nextLine();
         Conta teste = new Conta(lge);
         Conta busca =  buscaSimples(teste);
+        ContaAdministradora confirma = new ContaAdministradora(login,senha);
+        ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
         if(busca == null || login.compareTo(lge)==0){
             System.out.println("Conta inexistente!");
         }
         else{
-            busca.alterarDados(busca);
+            adm.alteraAdm(busca);
         }
     }
     
+    public void exibirConta(){
+        Scanner in = new Scanner (System.in);
+        System.out.println("Processo para exibir conta.");
+        System.out.println("Informe o login da conta:");
+        String log = in.nextLine();
+        Conta teste = new Conta(log);
+        Conta busca =  buscaSimples(teste);
+        ContaAdministradora confirma = new ContaAdministradora(login,senha);
+        ContaAdministradora adm = (ContaAdministradora) buscaSimples(confirma);//cast
+        if(busca == null || login.compareTo(log)==0){
+            System.out.println("Conta inexistente!");
+        }
+        else{
+            adm.exibeContaAdm(busca);
+        }
+    }
 }
