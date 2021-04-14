@@ -12,35 +12,59 @@ public class ProjetoUnikut {
             op = in.nextInt();
             switch(op){
                 case 1:
-                    boolean resultado = conta.entrar();
-                    if(resultado == true){
-                        int op2;
-                        do{
-                            System.out.println("Bem-vindo");
-                            perfilOuAmigosOuRecados();
-                            op2 = in.nextInt();
-                            switch (op2){
-                                case 1:
-                                    conta.alteraPerfil();
-                                    break;
-                                case 2:
-                                    conta.amigos();
-                                    break;
-                                case 3:
-                                    conta.recados();
-                                    break;
-                                case 4:
-                                    System.out.println("De volta ao Menu Inicial.");
-                                    break;
-                                default:
-                                    System.out.println("Escolha inválida. Tente novamente.");
-                                    break;
-                            }
-                        }while(op2!=4);
-                    }
-                    else{
-                        System.out.println("Conta inexistente!");
-                    }
+                    int resultado = conta.entrar();
+                    switch (resultado) {
+                        case 0:
+                            int op2;
+                            do{
+                                System.out.println("Bem-vindo Usuário");
+                                perfilOuAmigosOuRecados();
+                                op2 = in.nextInt();
+                                switch (op2){
+                                    case 1:
+                                        conta.alteraPerfil();
+                                        break;
+                                    case 2:
+                                        conta.amigos();
+                                        break;
+                                    case 3:
+                                        conta.recados();
+                                        break;
+                                    case 4:
+                                        System.out.println("De volta ao Menu Inicial.");
+                                        break;
+                                    default:
+                                        System.out.println("Escolha inválida. Tente novamente.");
+                                        break;
+                                    }
+                                }while(op2!=4);
+                            break;
+                        case 1:
+                            int op3;
+                            do{
+                                System.out.println("Bem-vindo Administrador");
+                                removaOuAltera();
+                                op3 = in.nextInt();
+                                switch (op3){
+                                    case 1:
+                                        conta.removerConta();
+                                        break;
+                                    case 2:
+                                        conta.alterarConta();
+                                        break;
+                                    case 3:
+                                        System.out.println("De volta ao Menu Inicial.");
+                                        break;
+                                    default:
+                                        System.out.println("Escolha inválida. Tente novamente.");
+                                        break;
+                                }
+                            }while(op3!=3);
+                            break;
+                        default:
+                            System.out.println("Conta inexistente!");
+                            break;
+                        }
                     break;
                 case 2:
                     conta.cadastrar();
@@ -69,7 +93,15 @@ public class ProjetoUnikut {
         System.out.println("1-Alterar perfil.");
         System.out.println("2-Aba amigos.");
         System.out.println("3-Aba recados.");
-        System.out.println("4-Sair do conta.");
+        System.out.println("4-Sair da conta.");
+        System.out.println("Escolha uma opção:");
+    }
+    
+    public static void removaOuAltera(){
+        System.out.println("Menu de opções:");
+        System.out.println("1-Remover conta.");
+        System.out.println("2-Alterar conta.");
+        System.out.println("3-Sair da conta administradora.");
         System.out.println("Escolha uma opção:");
     }
     

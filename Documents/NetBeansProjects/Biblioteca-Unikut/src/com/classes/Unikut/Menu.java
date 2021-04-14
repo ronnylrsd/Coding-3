@@ -2,7 +2,7 @@ package com.classes.Unikut;
 import java.util.LinkedList;
 import java.util.Scanner;
 public class Menu {
-    private LinkedList<Conta> usuariosCadastrados;
+    protected LinkedList<Conta> usuariosCadastrados;
     private String login;
     private String senha;
 
@@ -18,7 +18,7 @@ public class Menu {
         usuariosCadastrados = new LinkedList<>();
     }
     
-    private Conta buscaSimples(Conta ct){
+    protected Conta buscaSimples(Conta ct){
         int i=0;
         if(usuariosCadastrados.isEmpty()){
             return null;
@@ -43,14 +43,22 @@ public class Menu {
         }
     }
     
-    public boolean entrar (){
+    public int entrar (){
         Scanner in = new Scanner(System.in);
         System.out.println("Informe o login:");
         login = in.nextLine();
         System.out.println("Informe a senha:");
         senha = in.nextLine();
         Conta ctt = new Conta(login,senha);
-        return buscaSimples(ctt) != null;
+        if(buscaSimples(ctt) != null){
+            if(login.contains(".adm")){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        return -1;
     }
     
     public void cadastrar (){
@@ -59,8 +67,19 @@ public class Menu {
         String lg = in.nextLine();
         System.out.println("Informe a senha:");
         String s = in.nextLine();
-        Conta ct = new Conta (lg,s);
-        if(!usuariosCadastrados.contains(ct)){
+        if(lg.contains(".adm")){
+            Conta ctt = new Conta(lg,s);
+            if(buscaSimples(ctt) == null ){
+                usuariosCadastrados.add(ctt);
+                System.out.println("Conta administradora cadastrada com sucesso!");
+            }
+            else{
+                System.out.println("Conta já cadastrada.");
+            }
+        }
+        else{
+            Conta ct = new Conta (lg,s);
+            if(buscaSimples(ct) == null ){
             System.out.println("Seu nome foi iniciado como convidado.");
             System.out.println("Você deseja alterar o seu nome?(Sim/Não)");
             String sn = in.nextLine();
@@ -82,6 +101,7 @@ public class Menu {
         }
         else{
             System.out.println("Conta já cadastrada.");
+        }
         }
     }
     
@@ -189,6 +209,37 @@ public class Menu {
                     break;
             }
         }while(op != 3);
+    }
+    
+    public void removerConta(){
+        Scanner in = new Scanner (System.in);
+        System.out.println("Processo para excluir conta.");
+        System.out.println("Informe o login da conta:");
+        String lge = in.nextLine();
+        Conta teste = new Conta(lge);
+        Conta busca = buscaSimples(teste);
+        if(busca != null){
+            usuariosCadastrados.remove(busca);
+            System.out.println("Conta removida!");
+        }
+        else{
+            System.out.println("Conta inexistente!");
+        }
+    }
+    
+    public void alterarConta(){
+        Scanner in = new Scanner (System.in);
+        System.out.println("Processo para alterar conta.");
+        System.out.println("Informe o login da conta:");
+        String lge = in.nextLine();
+        Conta teste = new Conta(lge);
+        Conta busca =  buscaSimples(teste);
+        if(busca != null){
+            busca.alteraAdm(busca);
+        }
+        else{
+            System.out.println("Conta inexistente!");
+        }
     }
     
 }

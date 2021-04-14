@@ -17,9 +17,7 @@ private LinkedList<String> recados;
        this.login=log;
        this.senha=senha;
        this.nome="convidado";
-       this.amigos = new LinkedList<>();
        this.status = "pendente";
-       this.recados = new LinkedList<>();
     }
     
     public Conta(String log, String senha,String nome){
@@ -35,12 +33,16 @@ private LinkedList<String> recados;
         this.status = "pendente";
     }
     
+    public Conta(){
+        this.amigos = new LinkedList<>();
+        this.recados = new LinkedList<>();
+    }
     
     public String getLogin() {
         return login;
     }
     
-    private void setLogin(String login){
+    protected void setLogin(String login){
         this.login = login;
     }
     
@@ -216,7 +218,7 @@ private LinkedList<String> recados;
         }
     }
     
-    private Conta buscaSimples(Conta ct){
+    protected Conta buscaSimples(Conta ct){
         int i=0;
         if(amigos.isEmpty()){
             return null;
@@ -277,6 +279,46 @@ private LinkedList<String> recados;
                     aux = recados.get(i+1);
                 }
             }
+        }
+    }
+    
+    protected void alteraAdm(Conta result){
+         int op;
+        Scanner in = new Scanner (System.in);
+        if(result == null){
+            System.out.println("Conta não encontrada!");
+        }
+        else{
+            System.out.println("Conta encotrada!");
+            do{
+                System.out.println("Menu de opções:");
+                System.out.println("1-Alterar login.");
+                System.out.println("2-Alterar senha.");
+                System.out.println("3-Voltar ao menu da conta.");
+                System.out.println("Escolha uma opção:");
+                op = in.nextInt();
+                in.nextLine();
+                switch(op){
+                case 1:
+                    System.out.println("Informe o novo login:");
+                    String nl = in.nextLine();
+                    result.setLogin(nl);
+                    System.out.println("Alteração concluída.");
+                    break;
+                case 2:
+                    System.out.println("Informe a nova senha:");
+                    String ne = in.nextLine();
+                    result.setSenha(ne);
+                    System.out.println("Alteração concluída.");
+                    break;
+                case 3:
+                    System.out.println("Voltando para o menu da conta.");
+                    break;
+                default:
+                    System.out.println("Escolha inválida.");
+                    break;
+            }
+            }while(op!=3);
         }
     }
     
