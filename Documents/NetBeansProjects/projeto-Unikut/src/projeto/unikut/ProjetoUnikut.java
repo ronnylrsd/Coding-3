@@ -14,6 +14,11 @@ public class ProjetoUnikut {
                 case 1:
                     int resultado = conta.entrar();
                     switch (resultado) {
+                        case -2:
+                            System.out.println("Senha da conta inválida!");
+                            break;
+                        case -1:
+                            System.out.println("Conta inexistente!");
                         case 0:
                             int op2;
                             do{
@@ -65,7 +70,7 @@ public class ProjetoUnikut {
                             }while(op3!=4);
                             break;
                         default:
-                            System.out.println("Conta inexistente!");
+                            System.out.println("Ainda não implementado!");
                             break;
                         }
                     break;

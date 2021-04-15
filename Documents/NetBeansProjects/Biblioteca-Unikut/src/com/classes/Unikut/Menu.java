@@ -37,13 +37,17 @@ public class Menu {
         System.out.println("Informe a senha:");
         senha = in.nextLine();
         Conta ctt = new Conta(login,senha);
-        if(buscaSimples(ctt) != null){
+        Conta busca = buscaSimples(ctt);
+        if(busca != null && busca.getSenha().compareTo(senha) == 0){
             if(login.contains(".adm")){
                 return 1;
             }
             else{
                 return 0;
             }
+        }
+        else if(busca != null && busca.getSenha().compareTo(senha) != 0){
+            return -2;
         }
         return -1;
     }
