@@ -1,5 +1,6 @@
 package com.classes.Unikut;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -268,24 +269,12 @@ public class Conta implements Comparable<Conta> {
     }
 
     protected Conta buscaSimples(Conta ct) {
-        int i = 0;
-        if (amigos.isEmpty()) {
+        Collections.sort(amigos);
+        int index = Collections.binarySearch(amigos, ct);
+        if (index < 0) {
             return null;
         } else {
-            Conta conta = amigos.get(i);
-            Conta last = amigos.getLast();
-            while (conta != null) {
-                if (conta.compareTo(ct) == 0) {
-                    return conta;
-                } else {
-                    if (amigos.indexOf(last) == i) {
-                        return null;
-                    } else {
-                        conta = amigos.get(i + 1);
-                    }
-                }
-            }
-            return null;
+            return amigos.get(index);
         }
     }
 
