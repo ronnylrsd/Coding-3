@@ -1,7 +1,7 @@
-package projeto.unikut;
+package com.view.Unikut;
 
 import java.util.Scanner;
-import com.classes.Unikut.Menu;
+import com.controller.Unikut.Menu;
 
 public class ProjetoUnikut {
 
