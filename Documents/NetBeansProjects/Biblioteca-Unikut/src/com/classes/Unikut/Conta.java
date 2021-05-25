@@ -18,6 +18,7 @@ public class Conta implements Comparable<Conta> {
     private LinkedList<Conta> Match;
     private String situacao;
     private String senhaRecado;
+    private LinkedList<String> Recadocomsenha;
 
     public Conta(String log, String senha) {
         this.login = log;
@@ -28,6 +29,8 @@ public class Conta implements Comparable<Conta> {
         this.recados = new LinkedList<>();
         this.Match = new LinkedList();
         this.situacao = "espera";
+       
+        this.Recadocomsenha = new LinkedList<>();
 
     }
 
@@ -37,6 +40,8 @@ public class Conta implements Comparable<Conta> {
         this.nome = nome;
         this.amigos = new LinkedList();
         this.recados = new LinkedList<>();
+       
+        this.Recadocomsenha = new LinkedList<>();
     }
 
     public Conta(String log) {
@@ -51,6 +56,7 @@ public class Conta implements Comparable<Conta> {
     public Conta() {
         this.amigos = new LinkedList<>();
         this.recados = new LinkedList<>();
+        this.Recadocomsenha = new LinkedList<>();
     }
 
     public String getLogin() {
@@ -146,7 +152,7 @@ public class Conta implements Comparable<Conta> {
     }
 
     public void adicionaRecadoComSenha(String lg, String recado, String senha1) {
-        recados.add(lg + ": " + recado);
+        Recadocomsenha.add(lg + ": " + recado);
         setsenhaRecado(senha1);
     }
 
@@ -156,6 +162,14 @@ public class Conta implements Comparable<Conta> {
 
     public void setsenhaRecado(String senhaRecado) {
         this.senhaRecado = senhaRecado;
+    }
+    
+    public LinkedList<String> getRecadocomsenha() {
+        return Recadocomsenha;
+    }
+
+    public void setRecadocomsenha(LinkedList<String> Recadocomsenha) {
+        this.Recadocomsenha = Recadocomsenha;
     }
 
     public void alterarDados(Conta result) {
@@ -397,18 +411,18 @@ public class Conta implements Comparable<Conta> {
 
         if (SenhaReal.equals(senha2)) {
 
-            if (recados.isEmpty()) {
+            if (Recadocomsenha.isEmpty()) {
                 System.out.println("Lista vazia!");
             } else {
                 int i = 0;
-                String aux = recados.getFirst();
-                String last = recados.getLast();
+                String aux = Recadocomsenha.getFirst();
+                String last = Recadocomsenha.getLast();
                 while (aux != null) {
                     System.out.println(aux);
-                    if (recados.indexOf(last) == i) {
+                    if (Recadocomsenha.indexOf(last) == i) {
                         return;
                     } else {
-                        aux = recados.get(i + 1);
+                        aux = Recadocomsenha.get(i + 1);
                     }
                 }
             }
