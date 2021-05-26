@@ -22,6 +22,7 @@ public class ProjetoUnikut {
                             break;
                         case -1:
                             System.out.println("Conta inexistente!");
+                            break;
                         case 0:
                             int op2;
                             do {
