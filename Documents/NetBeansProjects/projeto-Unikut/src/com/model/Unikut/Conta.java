@@ -2,15 +2,15 @@ package com.model.Unikut;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Scanner;
+
 
 public class Conta implements Comparable<Conta> {
 
     private String login;
     private String senha;
     private String nome;
-    private int idade;
-    private char sexo;
+    private String idade;
+    private String sexo;
     private String aniversario;
     private String estadoCivil;
     private String status;
@@ -20,6 +20,7 @@ public class Conta implements Comparable<Conta> {
     private String situacao;
     private String senhaRecado;
     private LinkedList<String> Recadocomsenha;
+    private LinkedList<String> MuralRecado;
 
     public Conta(String log, String senha) {
         this.login = log;
@@ -84,19 +85,19 @@ public class Conta implements Comparable<Conta> {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -173,70 +174,28 @@ public class Conta implements Comparable<Conta> {
         this.Recadocomsenha = Recadocomsenha;
     }
 
-    public void alterarDados(Conta result) {
-        int op;
-        Scanner in = new Scanner(System.in);
-        if (result == null) {
-            System.out.println("Conta não encontrada!");
-        } else {
-            System.out.println("Conta encotrada!");
-            do {
-                System.out.println("Menu de opções:");
-                System.out.println("1-Alterar nome.");
-                System.out.println("2-Alterar senha.");
-                System.out.println("3-Alterar idade.");
-                System.out.println("4-Alterar sexo.");
-                System.out.println("5-Alterar aniversario.");
-                System.out.println("6-Alterar estado civil.");
-                System.out.println("7-Voltar ao menu da conta.");
-                System.out.println("Escolha uma opção:");
-                op = in.nextInt();
-                in.nextLine();
-                switch (op) {
-                    case 1:
-                        System.out.println("Informe o novo nome:");
-                        String nn = in.nextLine();
-                        result.setNome(nn);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 2:
-                        System.out.println("Informe a nova senha:");
-                        String ne = in.nextLine();
-                        result.setSenha(ne);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 3:
-                        System.out.println("Informe a nova idade:");
-                        int ni = in.nextInt();
-                        result.setIdade(ni);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 4:
-                        System.out.println("Informe o sexo:");
-                        char ns = in.next().charAt(0);
-                        result.setSexo(ns);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 5:
-                        System.out.println("Informe o aniversário:");
-                        String na = in.nextLine();
-                        result.setAniversario(na);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 6:
-                        System.out.println("Informe o estado civil:");
-                        String nec = in.nextLine();
-                        result.setEstadoCivil(nec);
-                        System.out.println("Alteração concluída.");
-                        break;
-                    case 7:
-                        System.out.println("Voltando para o menu da conta.");
-                        break;
-                    default:
-                        System.out.println("Escolha inválida.");
-                        break;
-                }
-            } while (op != 7);
+    public void alterarDados(Conta result, String info, int resp) {
+
+        switch (resp) {
+            case 1:
+                result.setNome(info);
+                break;
+            case 2:
+                result.setSenha(info);
+                break;
+            case 3:
+                result.setIdade(info);
+                break;
+            case 4:
+                result.setSexo(info);
+                break;
+            case 5:
+                result.setAniversario(info);
+
+                break;
+            case 6:
+                result.setEstadoCivil(info);
+                break;
         }
     }
 
@@ -246,25 +205,15 @@ public class Conta implements Comparable<Conta> {
             this.amigos.add(result);
             result.amigos.add(conta);
         } else {
-            System.out.println("Amigo já adicionado.");
+            System.out.println("Amigo já adicionado."); /////// aqui
         }
     }
 
-    public void listaAmigos() {
+    public LinkedList listaAmigos() {
         if (amigos.isEmpty()) {
-            System.out.println("Lista vazia!");
+            return null;
         } else {
-            int i = 0;
-            Conta aux = amigos.getFirst();
-            Conta last = amigos.getLast();
-            while (aux != null) {
-                System.out.println(aux);
-                if (amigos.indexOf(last) == i) {
-                    return;
-                } else {
-                    aux = amigos.get(i + 1);
-                }
-            }
+            return amigos;
         }
     }
 
@@ -284,10 +233,10 @@ public class Conta implements Comparable<Conta> {
             if (amigo.getStatus().equalsIgnoreCase("pendente")) {
                 amigo.setStatus();
             } else {
-                System.out.println("Solicitação já atualizada.");
+                System.out.println("Solicitação já atualizada."); // aqui
             }
         } else {
-            System.out.println("Amigo ou conta não existente.");
+            System.out.println("Amigo ou conta não existente."); // aqui
         }
     }
 
@@ -296,42 +245,22 @@ public class Conta implements Comparable<Conta> {
     }
 
     public void adicionaRecadoMural(String lg, String recado) {
-        recados.add(lg + ": " + recado);
+        MuralRecado.add(lg + ": " + recado);
     }
 
-    public void listaRecadosMural() {
-        if (recados.isEmpty()) {
-            System.out.println("Lista vazia!");
+    public LinkedList listaRecadosMural() {
+        if (MuralRecado.isEmpty()) {
+            return null;
         } else {
-            int i = 0;
-            String aux = recados.getFirst();
-            String last = recados.getLast();
-            while (aux != null) {
-                System.out.println(aux);
-                if (recados.indexOf(last) == i) {
-                    return;
-                } else {
-                    aux = recados.get(i + 1);
-                }
-            }
+            return MuralRecado;
         }
     }
 
-    public void listaRecados() {
+    public LinkedList listaRecados() {
         if (recados.isEmpty()) {
-            System.out.println("Lista vazia!");
+            return null;
         } else {
-            int i = 0;
-            String aux = recados.getFirst();
-            String last = recados.getLast();
-            while (aux != null) {
-                System.out.println(aux);
-                if (recados.indexOf(last) == i) {
-                    return;
-                } else {
-                    aux = recados.get(i + 1);
-                }
-            }
+            return recados;
         }
     }
 
@@ -340,7 +269,7 @@ public class Conta implements Comparable<Conta> {
         if (this.Match.contains(passada)) {
             System.out.println("Conta ja adicionada na Aba Matches");
         } else if (flag.equals("Match")) {
-            passada.setSituacao();// mudo para Match
+            passada.setSituacao();// mudou para Match
             this.Match.add(passada);
 
         } else {
@@ -370,53 +299,25 @@ public class Conta implements Comparable<Conta> {
 
     }
 
-    public void ExibirMatch() {
-
+    public LinkedList ExibirMatch() {
         if (this.Match.isEmpty()) {
-            System.out.println("Nenhum Match");
+            return null;
         } else {
-            int cont = 0;
-            Conta Prim = Match.get(cont);
-            Conta Ult = Match.getLast();
-
-            while (Prim != null) {
-                System.out.print(Prim.getLogin());
-                System.out.print(":" + Prim.getSituacao());
-                System.out.println("");
-
-                if (Match.indexOf(Ult) == cont) {
-                    return;
-                } else {
-                    Prim = Match.get(cont + 1);
-                }
-            }
+            return Match;
         }
-
     }
 
-    public void listaRecadosComSenha(String senha2) {
-
+    public LinkedList listaRecadosComSenha(String senha2) {
         String SenhaReal = getsenhaRecado();
-
         if (SenhaReal.equals(senha2)) {
 
             if (Recadocomsenha.isEmpty()) {
-                System.out.println("Lista vazia!");
+                return null;
             } else {
-                int i = 0;
-                String aux = Recadocomsenha.getFirst();
-                String last = Recadocomsenha.getLast();
-                while (aux != null) {
-                    System.out.println(aux);
-                    if (Recadocomsenha.indexOf(last) == i) {
-                        return;
-                    } else {
-                        aux = Recadocomsenha.get(i + 1);
-                    }
-                }
+                return Recadocomsenha;
             }
         } else {
-            System.out.println("Senha Invalida.");
+            return null;
         }
     }
 
