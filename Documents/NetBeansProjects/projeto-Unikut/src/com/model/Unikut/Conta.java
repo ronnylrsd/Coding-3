@@ -199,13 +199,13 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void adicionaAmigos(Conta result) {
+    public void adicionaAmigos(Conta result) throws AmigoJaAdicionadoException {
         Conta conta = new Conta(login, senha);
         if (buscaSimples(result) == null) {
             this.amigos.add(result);
             result.amigos.add(conta);
         } else {
-            System.out.println("Amigo já adicionado."); /////// aqui
+            throw new AmigoJaAdicionadoException();
         }
     }
 
@@ -227,16 +227,16 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void alteraStatusAmigos(Conta result) {
+    public void alteraStatusAmigos(Conta result) throws SolicitacaoJaEnviadaException, AmigoContaNaoExistenteException {
         Conta amigo = buscaSimples(result);
         if (amigo != null) {
             if (amigo.getStatus().equalsIgnoreCase("pendente")) {
                 amigo.setStatus();
             } else {
-                System.out.println("Solicitação já atualizada."); // aqui
+                throw new SolicitacaoJaEnviadaException();
             }
         } else {
-            System.out.println("Amigo ou conta não existente."); // aqui
+            throw new AmigoContaNaoExistenteException();
         }
     }
 
@@ -264,10 +264,10 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void AdicionarMatch(Conta passada, String flag) {
+    public void AdicionarMatch(Conta passada, String flag) throws AmigoJaAdicionadoException {
 
         if (this.Match.contains(passada)) {
-            System.out.println("Conta ja adicionada na Aba Matches");
+          throw new AmigoJaAdicionadoException();
         } else if (flag.equals("Match")) {
             passada.setSituacao();// mudou para Match
             this.Match.add(passada);
