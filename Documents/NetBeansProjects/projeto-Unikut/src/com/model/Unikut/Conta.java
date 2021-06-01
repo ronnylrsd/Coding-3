@@ -1,8 +1,8 @@
 package com.model.Unikut;
 
+
 import java.util.Collections;
 import java.util.LinkedList;
-
 
 public class Conta implements Comparable<Conta> {
 
@@ -199,13 +199,16 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void adicionaAmigos(Conta result) throws AmigoJaAdicionadoException {
+    public boolean adicionaAmigos(Conta result) {
+
         Conta conta = new Conta(login, senha);
-        if (buscaSimples(result) == null) {
+
+        if (buscaAmigos(result) == null) {
             this.amigos.add(result);
             result.amigos.add(conta);
+            return true;
         } else {
-            throw new AmigoJaAdicionadoException();
+            return false;
         }
     }
 
@@ -217,7 +220,7 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    protected Conta buscaSimples(Conta ct) {
+    protected Conta buscaAmigos(Conta ct) {
         Collections.sort(amigos);
         int index = Collections.binarySearch(amigos, ct);
         if (index < 0) {
@@ -227,16 +230,17 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void alteraStatusAmigos(Conta result) throws SolicitacaoJaEnviadaException, AmigoContaNaoExistenteException {
-        Conta amigo = buscaSimples(result);
+    public boolean alteraStatusAmigos(Conta result) {
+        Conta amigo = buscaAmigos(result);
         if (amigo != null) {
             if (amigo.getStatus().equalsIgnoreCase("pendente")) {
                 amigo.setStatus();
+                return true;
             } else {
-                throw new SolicitacaoJaEnviadaException();
+                return false;
             }
         } else {
-            throw new AmigoContaNaoExistenteException();
+            return false;
         }
     }
 
@@ -264,16 +268,16 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void AdicionarMatch(Conta passada, String flag) throws AmigoJaAdicionadoException {
-
+    public boolean AdicionarMatch(Conta passada, String flag) {
         if (this.Match.contains(passada)) {
-          throw new AmigoJaAdicionadoException();
+           return false;
         } else if (flag.equals("Match")) {
             passada.setSituacao();// mudou para Match
             this.Match.add(passada);
-
+            return true;
         } else {
             this.Match.add(passada);
+            return true;
         }
     }
 
@@ -320,10 +324,14 @@ public class Conta implements Comparable<Conta> {
             return null;
         }
     }
-
+    
+    public String ImprimeInformacoesConta() {
+        return this.login+" "+this.nome+" "+this.idade+" "+this.sexo+" "+this.aniversario+" "+this.estadoCivil;
+    }
+    
     @Override
     public String toString() {
-        return this.login + " " + this.status;
+        return this.login+" "+this.status;
     }
 
     @Override
