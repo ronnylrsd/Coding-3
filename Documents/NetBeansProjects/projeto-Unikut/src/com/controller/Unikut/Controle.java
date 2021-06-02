@@ -89,13 +89,8 @@ public class Controle {
 
     }
 
-    public boolean adicionaMatch(String log) {
+  
 
-    }
-
-    public LinkedList exibirMatch() {
-
-    }
 
     public boolean enviarRecado(String log, String recado) {
 
@@ -151,5 +146,13 @@ public class Controle {
     public String controllerExibeConta(String lg) {
         return s.modelExibeConta(lg);
     }
+    
+    public void Match(String log){       
+        s.ArmazenarMatch(log);                        
+    }
+    
+   public LinkedList VerMeusMatchs(){
+       return s.VerMatch();
+   }
 
 }

@@ -225,10 +225,7 @@ public class MenuUsuario {
         int op;
 
         do {
-            Conta conta;
-            Conta Usuario = new Conta(login, senha);
-            conta = buscaSimples(Usuario); // armezanando a conta do Usuario que está mexendo na rede
-
+        
             System.out.println("O que deseja fazer?");
             System.out.println("1-Adicionar Match.");
             System.out.println("2-Ver Status Match.");
@@ -240,21 +237,18 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuario que voce quer adicionar no Match:");
                     String lgn;
                     lgn = in.nextLine();
-                    Conta descartavel = new Conta(lgn); // criando uma conta apenas para inicializar com o login passado
-                    Conta Armazenar = buscaSimples(descartavel);
-                    if (!usuariosCadastrados.contains(Armazenar)) {
+                    Controll.VerificarConta(lgn, " ");
+                    if (!Controll.VerificarConta(lgn, " ")) {
                         System.out.println("A conta não existe!");
                     } else {
-                        if (Armazenar.getMatch().contains(conta)) {// se a conta que eu quero adicionar possui a minha conta nos matchs
-                            conta.AdicionarMatch(Armazenar, "Match"); // irei usar o recurso adicionar na minha 
-                            Armazenar.AlterarStatus(Usuario);
-                        } else {
-                            conta.AdicionarMatch(Armazenar, " ");
-                        }
+                       Controll.Match(lgn);
                     }
                     break;
                 case 2:
-                    conta.ExibirMatch();
+                    LinkedList Match = Controll.VerMeusMatchs();
+                    for (int i = 0; i < Match.size(); i++) {
+                        System.out.println(Match.get(i));
+                    }
                     break;
                 case 3:
                     System.out.println("Saindo da Aba matches.");

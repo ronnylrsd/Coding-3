@@ -154,23 +154,7 @@ public class Singleton {
 
     }
 
-    public boolean adicionaMatch(String log) {
-        Conta ctt = new Conta(login, senha);
-        Conta conta = buscaSimples(ctt);
-        Conta descartavel = new Conta(log); // criando uma conta apenas para inicializar com o login passado
-        Conta Armazenar = buscaSimples(descartavel);
-        if (!rede.contains(Armazenar)) {
-            return false;
-        } else {
-            if (Armazenar.getMatch().contains(conta)) {// se a conta que eu quero adicionar possui a minha conta nos matchs
-                conta.AdicionarMatch(Armazenar, "Match"); // irei usar o recurso adicionar na minha 
-                Armazenar.AlterarStatus(conta);
-            } else {
-                conta.AdicionarMatch(Armazenar, " ");
-            }
-            return true;
-        }
-    }
+ 
 
     public LinkedList exibirMatch() {
         Conta usuario = new Conta(login, senha);
@@ -286,9 +270,32 @@ public class Singleton {
     }
     
     public String modelExibeConta(String log){
-        ContaAdministrador administrador = (ContaAdministrador) buscaSimples(login,senha);
+        ContaAdministradora administrador = (ContaAdministradora) buscaSimples(login,senha);
         Conta Usuario = buscaSimples(log, "");
         return administrador.exibeContaAdm(Usuario);
     }
+    
+   public void ArmazenarMatch(String log){
+     Conta Usuario = buscaSimples(login, "");
+     Conta Match = buscaSimples(log,"");
+     
+     if(Match.getMatch().contains(Usuario)){
+         Usuario.AdicionarMatch(Match,"Match");
+         Match.AlterarStatus(Match);
+         
+     }else{
+        Usuario.AdicionarMatch(Match," ");
+     }
+         
+       
+   }
+   public LinkedList VerMatch(){
+      Conta Usuario = buscaSimples(login, ""); 
+      return Usuario.getMatch();
+    
+  }
+           
+    
+    
     
 }
