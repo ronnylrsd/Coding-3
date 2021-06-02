@@ -36,11 +36,6 @@ public class Controle {
         return true;
     }
 
-    public boolean AdicionarAmigo(String log) {
-        return s.adicionarAmigos(log);
-
-    }
-
     public void alteraPerfil(int resp, String mudanca) {
 
         switch (resp) {
@@ -65,6 +60,11 @@ public class Controle {
         }
 
     }
+    
+    public boolean AdicionarAmigo(String log) {
+        return s.adicionarAmigos(log);
+
+    }
 
     public LinkedList ControlListaAmigos() {
 
@@ -77,44 +77,46 @@ public class Controle {
 
     }
 
-    public boolean adicionarAmigos(String log) {
 
+    public boolean controllerEnviarRecado(String log, String recado) {
+        return s.modelEnviarRecado(log, recado);
     }
 
-    public LinkedList listadeAmigos() {
-
+    public boolean controllerEnviarRecadoSecreto(String log, String recado, String sen) {
+        return s.modelEnviarRecadoSecreto(log, recado, sen);
+    }
+    
+    public boolean controllerEnviarRecadoMural(String msg){
+        return s.modelEnviarRecadoMural(msg);
+    }
+    
+    public LinkedList controllerVisualizarRecadosMuralPedente(){
+        return s.modelVisualizarRecadoMuralPendente();
+    }
+    
+    public void controllerRecadosMuralAceito(String recado){
+        s.modelRecadoMuralAceito(recado);
     }
 
-    public boolean alteraStatus(String log) {
-
+    public LinkedList controllerVisualizarRecados() {
+        return s.modelVisualizarRecados();
     }
 
-  
-
-
-    public boolean enviarRecado(String log, String recado) {
-
+    public LinkedList controllerVisualizarRecadoSecreto(String sen) {
+        return s.modelVisualizarRecadoSecreto(sen);
     }
 
-    public boolean enviarRecadoSecreto(String log, String recado, String sen) {
-
+    public LinkedList controllerVisualizarMuralRecados() {
+        return s.modelVisualizarRecadosMural();
     }
-
-    public LinkedList visualizarRecado() {
-
+    
+    public void Match(String log){       
+        s.ArmazenarMatch(log);                        
     }
-
-    public LinkedList visualizarRecadoSecreto(String sen) {
-
-    }
-
-    public boolean muralRecados(String log, String recado) {
-
-    }
-
-    public LinkedList visualizarMuralRecados() {
-
-    }
+    
+   public LinkedList VerMeusMatchs(){
+       return s.VerMatch();
+   }
 
     public boolean controllerRemoveConta(String lg) {
         return s.modelRemoveConta(lg);
@@ -146,13 +148,5 @@ public class Controle {
     public String controllerExibeConta(String lg) {
         return s.modelExibeConta(lg);
     }
-    
-    public void Match(String log){       
-        s.ArmazenarMatch(log);                        
-    }
-    
-   public LinkedList VerMeusMatchs(){
-       return s.VerMatch();
-   }
 
 }

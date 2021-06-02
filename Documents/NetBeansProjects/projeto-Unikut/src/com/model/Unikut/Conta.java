@@ -20,7 +20,6 @@ public class Conta implements Comparable<Conta> {
     private String situacao;
     private String senhaRecado;
     private LinkedList<String> Recadocomsenha;
-    private LinkedList<String> MuralRecado;
 
     public Conta(String log, String senha) {
         this.login = log;
@@ -153,11 +152,6 @@ public class Conta implements Comparable<Conta> {
         this.situacao = "Match";
     }
 
-    public void adicionaRecadoComSenha(String lg, String recado, String senha1) {
-        Recadocomsenha.add(lg + ": " + recado);
-        setsenhaRecado(senha1);
-    }
-
     public String getsenhaRecado() {
         return senhaRecado;
     }
@@ -244,20 +238,13 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public void adicionaRecado(String lg, String recado) {
-        recados.add(lg + ": " + recado);
+    public boolean adicionaRecado(String lg, String recado) {
+        return recados.add(lg + ": " + recado);
     }
-
-    public void adicionaRecadoMural(String lg, String recado) {
-        MuralRecado.add(lg + ": " + recado);
-    }
-
-    public LinkedList listaRecadosMural() {
-        if (MuralRecado.isEmpty()) {
-            return null;
-        } else {
-            return MuralRecado;
-        }
+    
+    public boolean adicionaRecadoComSenha(String lg, String recado, String senha1) {
+        setsenhaRecado(senha1);
+        return Recadocomsenha.add(lg + ": " + recado);
     }
 
     public LinkedList listaRecados() {
@@ -265,6 +252,19 @@ public class Conta implements Comparable<Conta> {
             return null;
         } else {
             return recados;
+        }
+    }
+    
+    public LinkedList listaRecadosComSenha(String senha2) {
+        String SenhaReal = getsenhaRecado();
+        if (SenhaReal.equals(senha2)) {
+            if (Recadocomsenha.isEmpty()) {
+                return null;
+            } else {
+                return Recadocomsenha;
+            }
+        } else {
+            return null;
         }
     }
 
@@ -308,20 +308,6 @@ public class Conta implements Comparable<Conta> {
             return null;
         } else {
             return Match;
-        }
-    }
-
-    public LinkedList listaRecadosComSenha(String senha2) {
-        String SenhaReal = getsenhaRecado();
-        if (SenhaReal.equals(senha2)) {
-
-            if (Recadocomsenha.isEmpty()) {
-                return null;
-            } else {
-                return Recadocomsenha;
-            }
-        } else {
-            return null;
         }
     }
     

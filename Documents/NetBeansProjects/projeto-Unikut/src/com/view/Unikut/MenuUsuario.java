@@ -1,4 +1,3 @@
-
 package com.view.Unikut;
 
 import com.controller.Unikut.Controle;
@@ -6,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MenuUsuario {
-    
+
     Controle Controll = new Controle();
     protected String login;
     protected String senha;
-    
+
     public void alteraPerfil() {
         int op;
         Scanner in = new Scanner(System.in);
@@ -76,7 +75,7 @@ public class MenuUsuario {
             }
         } while (op != 7);
     }
-    
+
     public void amigos() {
         Scanner in = new Scanner(System.in);
         int op;
@@ -132,14 +131,11 @@ public class MenuUsuario {
             }
         } while (op != 4);
     }
-    
+
     public void recados() {
         Scanner in = new Scanner(System.in);
         int op;
         do {
-            Conta conta;
-            Conta ctt = new Conta(login, senha);
-            conta = buscaSimples(ctt);
             System.out.println("Bem-vindo aos recados.");
             System.out.println("Menu de opções:");
             System.out.println("1-Enviar recado.");
@@ -157,57 +153,85 @@ public class MenuUsuario {
                 case 1:
                     System.out.println("Informe o login do destinatário:");
                     String lgn = in.nextLine();
-                    Conta ch = new Conta(lgn);
-                    Conta resultar = buscaSimples(ch);
-                    if (resultar != null && login.compareTo(lgn) != 0) {
+                    if (Controll.VerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
                         System.out.println("Informe a mensagem:");
                         String msg = in.nextLine();
-                        resultar.adicionaRecado(login, msg);
+                        Controll.controllerEnviarRecado(lgn, msg);
+                        System.out.println("Recado enviado!");
                     } else {
-                        System.out.println("Login não encontrado!");
+                        System.out.println("Conta não existe!");
                     }
                     break;
                 case 2:
                     System.out.println("Informe o login do destinatário:");
                     lgn = in.nextLine();
-                    ch = new Conta(lgn);
-                    resultar = buscaSimples(ch);
-                    if (resultar != null) {
+                    if (Controll.VerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
                         System.out.println("Informe a senha da mensagem:");
-                        String senha1 = in.nextLine();
+                        String sen = in.nextLine();
                         System.out.println("Informe a mensagem:");
                         String msg = in.nextLine();
-                        resultar.adicionaRecadoComSenha(login, msg, senha1);
+                        Controll.controllerEnviarRecadoSecreto(lgn, msg, sen);
+                        System.out.println("Recado secreto enviado!");
                     } else {
-                        System.out.println("Login não encontrado!");
+                        System.out.println("Conta não existe!");
                     }
                     break;
                 case 3:
                     System.out.println("Informe o login do destinatario");
                     String lgm = in.nextLine();
-                    Conta m = new Conta(lgm);
-                    Conta resulta = buscaSimples(m);
-                    if (resulta != null) {
-                        System.out.println("Informe a mensagem");
+                    if (Controll.VerificarConta(lgm, "") && login.compareTo(lgm) != 0) {
+                        System.out.println("Informe a mensagem do mural:");
                         String msg = in.nextLine();
-                        resulta.adicionaRecadoMural(login, msg);
+                        Controll.controllerEnviarRecadoMural(msg);
+                        System.out.println("Recado mural enviado!");
                     } else {
-                        System.out.println("Login não encontrado!");
+                        System.out.println("Conta não existe!");
                     }
                     break;
                 case 4:
-
+                    LinkedList MuralRecadosPendentes = Controll.controllerVisualizarRecadosMuralPedente();
+                    for (int i = 0; i < MuralRecadosPendentes.size(); i++) {
+                        System.out.println(MuralRecadosPendentes.get(i));
+                        System.out.println("Deseja aceitar recados? (Indique o número do recado)");
+                        String resposta = in.nextLine();
+                        if (resposta.compareToIgnoreCase("sim") == 0) {
+                            Controll.controllerRecadosMuralAceito((String) MuralRecadosPendentes.get(i));
+                        } else {
+                            System.out.println("Recado do mural não aceito.");
+                        }
+                    }
                     break;
                 case 5:
-                    conta.listaRecados();
+                    LinkedList recados = Controll.controllerVisualizarRecados();
+                    if (recados.isEmpty()) {
+                        System.out.println("Lista de recados vazia!");
+                    } else {
+                        for (int i = 0; i < recados.size(); i++) {
+                            System.out.println(recados.get(i));
+                        }
+                    }
                     break;
                 case 6:
                     System.out.println("Informe a senha para ler a mensagem:");
                     String senha2 = in.nextLine();
-                    conta.listaRecadosComSenha(senha2);
+                    LinkedList recadosSecreto = Controll.controllerVisualizarRecadoSecreto(senha2);
+                    if (recadosSecreto.isEmpty()) {
+                        System.out.println("Lista de recados vazia!");
+                    } else {
+                        for (int i = 0; i < recadosSecreto.size(); i++) {
+                            System.out.println(recadosSecreto.get(i));
+                        }
+                    }
                     break;
                 case 7:
-                    conta.listaRecadosMural();
+                    LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
+                    if (recadosMural.isEmpty()) {
+                        System.out.println("Lista de recados vazia!");
+                    } else {
+                        for (int i = 0; i < recadosMural.size(); i++) {
+                            System.out.println(recadosMural.get(i));
+                        }
+                    }
                     break;
                 case 8:
                     System.out.println("De volta à conta.");
@@ -218,14 +242,14 @@ public class MenuUsuario {
             }
         } while (op != 8);
     }
-    
+
     public void Match() {
         Scanner in = new Scanner(System.in);
         System.out.println("Bem vindo a aba de Matches");
         int op;
 
         do {
-        
+
             System.out.println("O que deseja fazer?");
             System.out.println("1-Adicionar Match.");
             System.out.println("2-Ver Status Match.");
@@ -241,13 +265,18 @@ public class MenuUsuario {
                     if (!Controll.VerificarConta(lgn, " ")) {
                         System.out.println("A conta não existe!");
                     } else {
-                       Controll.Match(lgn);
+                        Controll.Match(lgn);
+                        System.out.println("Match concluído!");
                     }
                     break;
                 case 2:
                     LinkedList Match = Controll.VerMeusMatchs();
-                    for (int i = 0; i < Match.size(); i++) {
-                        System.out.println(Match.get(i));
+                    if (Match.isEmpty()) {
+                        System.out.println("Lista de recados vazia!");
+                    } else {
+                        for (int i = 0; i < Match.size(); i++) {
+                            System.out.println(Match.get(i));
+                        }
                     }
                     break;
                 case 3:
