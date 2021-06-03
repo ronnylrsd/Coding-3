@@ -165,7 +165,7 @@ public class MenuUsuario {
                 case '1':
                     System.out.println("Informe o login do destinatário:");
                     String lgn = in.nextLine();
-                    if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
+                    if (Controll.controllerVerificar(lgn)) {
                         System.out.println("Informe a mensagem:");
                         String msg = in.nextLine();
                         Controll.controllerEnviarRecado(lgn, msg);
@@ -177,7 +177,7 @@ public class MenuUsuario {
                 case '2':
                     System.out.println("Informe o login do destinatário:");
                     lgn = in.nextLine();
-                    if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
+                    if (Controll.controllerVerificar(lgn)) {
                         System.out.println("Informe a senha da mensagem:");
                         String sen = in.nextLine();
                         System.out.println("Informe a mensagem:");
@@ -191,7 +191,7 @@ public class MenuUsuario {
                 case '3':
                     System.out.println("Informe o login do destinatario");
                     String lgm = in.nextLine();
-                    if (Controll.controllerVerificarConta(lgm, "") && login.compareTo(lgm) != 0) {
+                    if (Controll.controllerVerificar(lgm)) {
                         System.out.println("Informe a mensagem do mural:");
                         String msg = in.nextLine();
                         Controll.controllerEnviarRecadoMural(msg);
@@ -204,7 +204,7 @@ public class MenuUsuario {
                     LinkedList MuralRecadosPendentes = Controll.controllerVisualizarRecadosMuralPedente();
                     for (int i = 0; i < MuralRecadosPendentes.size(); i++) {
                         System.out.println(MuralRecadosPendentes.get(i));
-                        System.out.println("Deseja aceitar recados? (Indique o número do recado)");
+                        System.out.println("Deseja aceitar recados?Sim ou Nao");
                         String resposta = in.nextLine();
                         if (resposta.compareToIgnoreCase("sim") == 0) {
                             Controll.controllerRecadosMuralAceito((String) MuralRecadosPendentes.get(i));
@@ -249,7 +249,7 @@ public class MenuUsuario {
                     System.out.println("Escolha inválida. Tente novamente.");
                     break;
             }
-        } while (op != 0);
+        } while (op != '0');
     }
 
     public void Match() {

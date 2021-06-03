@@ -221,12 +221,12 @@ public class Singleton {
     }
 
     public boolean modelEnviarRecado(String log, String recado) {
-        Conta destinatario = buscaSimples(log, "");
+        Conta destinatario = busca(log);
         return destinatario.adicionaRecado(login, recado);
     }
 
     public boolean modelEnviarRecadoSecreto(String log, String recado, String sen) {
-        Conta destinatario = buscaSimples(log, "");
+        Conta destinatario = busca(log);
         return destinatario.adicionaRecadoComSenha(login, recado, sen);
     }
 
