@@ -24,19 +24,7 @@ public class Menu {
         login = in.nextLine();
         System.out.println("Informe a senha:");
         senha = in.nextLine();
-        if (Controll.VerificarContaAdm(login, senha)) {
-            if (Controll.EntrarAdm(login, senha)) {
-                System.out.println("Bem vindo a sua conta administrador!");
-                return true;
-            } else {
-                System.out.println("Senha incorreta!");
-                return false;
-            }
-
-        } else {
-            System.out.println("Administrador não existe!");
-            return false;
-        }
+        return Controll.EntrarAdm(login, senha);
     }
 
     public void cadastrar() {

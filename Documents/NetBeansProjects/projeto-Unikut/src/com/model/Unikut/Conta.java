@@ -13,7 +13,7 @@ public class Conta implements Comparable<Conta> {
     private String estadoCivil;
     private LinkedList<String> amigos;
     private LinkedList<String> recados;
-    private LinkedList<Conta> Match;
+    private LinkedList<String> Match;
     private String situacao;
     private String senhaRecado;
     private LinkedList<String> Recadocomsenha;
@@ -127,7 +127,7 @@ public class Conta implements Comparable<Conta> {
         this.recados = recados;
     }
 
-    public LinkedList<Conta> getMatch() {
+    public LinkedList<String> getMatch() {
         return Match;
     }
 
@@ -187,6 +187,15 @@ public class Conta implements Comparable<Conta> {
             }
         }
         return null;
+    }
+    
+    protected int buscaMatch(String amigo) {
+        for (String c : Match) {
+            if (c.contains(amigo) == true) {
+                return c.indexOf(amigo);
+            }
+        }
+        return 0;
     }
 
     public boolean adicionaAmigos(String loginAmigo) {
@@ -251,40 +260,33 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public boolean AdicionarMatch(Conta passada, String flag) {
+    public boolean AdicionarMatch(String passada, String flag) {
         if (this.Match.contains(passada)) {
             return false;
         } else if (flag.equals("Match")) {
-            passada.setSituacao();// mudou para Match
-            this.Match.add(passada);
+            
+            this.Match.add(passada+": MATCH");
             return true;
         } else {
-            this.Match.add(passada);
+            this.Match.add(passada+": PENDENTE");
             return true;
         }
     }
-
-    public void AlterarStatus(Conta passada) {
-        int cont = 0;
-        Conta Prim = Match.get(cont);
-        Conta Ult = Match.getLast();
-
-        while (Prim != null) {
-
-            if (Prim.compareTo(passada) == 0) {
-                Prim.setSituacao();
-                return;
-            } else {
-
-                if (Match.indexOf(Ult) == cont) {
-                    return;
-                } else {
-                    Prim = Match.get(cont + 1);
-                }
-            }
-        }
-
+    
+    public void AlteraMatch(String login){
+     int i= Match.indexOf(login+": PENDENTE");
+     Match.set(i,login+" MATCH");
+        
     }
+    public boolean ValidaMatch(String login){
+        if(this.Match.contains(login)){
+            return true;
+        }else{
+            return false;
+        }
+           
+    }
+ 
 
     public LinkedList ExibirMatch() {
         if (this.Match.isEmpty()) {

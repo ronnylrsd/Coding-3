@@ -270,8 +270,8 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuario que voce quer adicionar no Match:");
                     String lgn;
                     lgn = in.nextLine();
-                    Controll.controllerVerificarConta(lgn, " ");
-                    if (!Controll.controllerVerificarConta(lgn, " ")) {
+                    Controll.controllerVerificar(lgn);
+                    if (!Controll.controllerVerificar(lgn)){
                         System.out.println("A conta não existe!");
                     } else {
                         Controll.Match(lgn);
@@ -284,14 +284,14 @@ public class MenuUsuario {
                         System.out.println("Lista de recados vazia!");
                     } else {
                         for (int i = 0; i < Match.size(); i++) {
-                            System.out.println(Match.get(i));
+                            System.out.println(Match.get(i));                      
                         }
                     }
                     break;
                 default:
                     System.out.println("Insira um comando valido.");
             }
-        } while (op != 0);
+        } while (op != '0');
 
     }
 }

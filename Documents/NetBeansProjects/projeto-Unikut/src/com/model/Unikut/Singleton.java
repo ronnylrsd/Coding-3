@@ -12,6 +12,10 @@ public class Singleton {
     private Singleton() {//cria a lista
         rede = new LinkedList<>();
         mural = new LinkedList<>();
+        Conta amigo1 = new Conta("beto","123");
+        Conta amigo2 = new Conta("ronny","123");
+        rede.add(amigo1);
+        rede.add(amigo2);
     }
 
     public static Singleton getInstance() {
@@ -262,21 +266,21 @@ public class Singleton {
     }
 
     public void ArmazenarMatch(String log) {
-        Conta Usuario = buscaSimples(login, "");
-        Conta Match = buscaSimples(log, "");
+        Conta Usuario = buscaSimples(login, senha);
+        Conta Match = busca(log);
 
-        if (Match.getMatch().contains(Usuario)) {
-            Usuario.AdicionarMatch(Match, "Match");
-            Match.AlterarStatus(Match);
+        if (Match.getMatch().contains(login+": PENDENTE")){
+            Usuario.AdicionarMatch(log,"Match");
+            Match.AlteraMatch(login);
 
         } else {
-            Usuario.AdicionarMatch(Match, " ");
+            Usuario.AdicionarMatch(log, "");
         }
 
     }
 
     public LinkedList VerMatch() {
-        Conta Usuario = buscaSimples(login, "");
+        Conta Usuario = buscaSimples(login, senha);
         return Usuario.getMatch();
 
     }
