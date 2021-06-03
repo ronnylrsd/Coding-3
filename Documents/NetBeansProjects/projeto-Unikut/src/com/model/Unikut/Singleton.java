@@ -1,38 +1,57 @@
 package com.model.Unikut;
 
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Singleton {
 
-    private static Singleton instance;
-    private List<Conta> rede;
-    private List<String> mural;
-    String login, senha;
-
-    private Singleton() {
-        rede = new LinkedList<Conta>();
-        mural = new LinkedList<String>();
+    protected LinkedList<Conta> rede;
+    protected LinkedList<String> mural;
+    private String login, senha;
+    
+    public Singleton(){//cria a lista
+        rede = new LinkedList<>();
+        mural = new LinkedList<>();
+    }
+    
+    public LinkedList<Conta> getRede() {
+        return rede;
     }
 
-    public static Singleton getInstance() {
-        if (instance == null) {
-            instance = new Singleton();
-        }
-        return instance;
-
+    public void setRede(LinkedList<Conta> rede) {
+        this.rede = rede;
     }
 
-    public Conta buscaSimples(String login, String sen) {
-        Conta ct = new Conta(login, sen);
-        Collections.sort(rede);
-        int index = Collections.binarySearch(rede, ct);
-        if (index < 0) {
-            return null;
-        } else {
-            return rede.get(index);
+    public LinkedList<String> getMural() {
+        return mural;
+    }
+
+    public void setMural(LinkedList<String> mural) {
+        this.mural = mural;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Conta buscaSimples(String log, String sen) {
+        for(Conta c: rede){
+            if(c.getLogin().compareTo(log) == 0 && c.getSenha().compareTo(sen) == 0){
+                return c;
+            }
         }
+        return null;
     }
 
     public boolean Entrar(String log, String sen) {  // adicionar exception
@@ -42,7 +61,6 @@ public class Singleton {
                 this.login = log;
                 this.senha = sen;
                 return true;
-
             } else {
                 return false;
             }
@@ -69,7 +87,7 @@ public class Singleton {
 
     public boolean Cadastrar(String log, String sen) {
         Conta busca = buscaSimples(log, sen);
-        if (busca != null && !log.contains(".adm")) {
+        if (busca == null && !log.contains(".adm")) {
             Conta usuario = new Conta(log, sen);
             rede.add(usuario);
             return true;
@@ -80,7 +98,7 @@ public class Singleton {
 
     public boolean CadastrarAdm(String log, String sen) {
         Conta busca = buscaSimples(log, sen);
-        if (busca != null && !log.contains(".adm")) {
+        if (busca == null && !log.contains(".adm")) {
             ContaAdministradora adm = new ContaAdministradora(log, sen);
             rede.add(adm);
             return true;

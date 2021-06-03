@@ -1,14 +1,11 @@
-
 package com.controller.Unikut;
-
-
 
 import com.model.Unikut.Singleton;
 import java.util.LinkedList;
 
 public class Controle {
 
-    Singleton s = Singleton.getInstance();
+    Singleton s = new Singleton();
 
     public boolean VerificarConta(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == false;
@@ -60,7 +57,7 @@ public class Controle {
         }
 
     }
-    
+
     public boolean AdicionarAmigo(String log) {
         return s.adicionarAmigos(log);
 
@@ -77,7 +74,6 @@ public class Controle {
 
     }
 
-
     public boolean controllerEnviarRecado(String log, String recado) {
         return s.modelEnviarRecado(log, recado);
     }
@@ -85,16 +81,16 @@ public class Controle {
     public boolean controllerEnviarRecadoSecreto(String log, String recado, String sen) {
         return s.modelEnviarRecadoSecreto(log, recado, sen);
     }
-    
-    public boolean controllerEnviarRecadoMural(String msg){
+
+    public boolean controllerEnviarRecadoMural(String msg) {
         return s.modelEnviarRecadoMural(msg);
     }
-    
-    public LinkedList controllerVisualizarRecadosMuralPedente(){
+
+    public LinkedList controllerVisualizarRecadosMuralPedente() {
         return s.modelVisualizarRecadoMuralPendente();
     }
-    
-    public void controllerRecadosMuralAceito(String recado){
+
+    public void controllerRecadosMuralAceito(String recado) {
         s.modelRecadoMuralAceito(recado);
     }
 
@@ -109,38 +105,38 @@ public class Controle {
     public LinkedList controllerVisualizarMuralRecados() {
         return s.modelVisualizarRecadosMural();
     }
-    
-    public void Match(String log){       
-        s.ArmazenarMatch(log);                        
+
+    public void Match(String log) {
+        s.ArmazenarMatch(log);
     }
-    
-   public LinkedList VerMeusMatchs(){
-       return s.VerMatch();
-   }
+
+    public LinkedList VerMeusMatchs() {
+        return s.VerMatch();
+    }
 
     public boolean controllerRemoveConta(String lg) {
         return s.modelRemoveConta(lg);
     }
 
-    public void controllerAlteraPerfilAdm(String lg,int resp,String mudanca) {
+    public void controllerAlteraPerfilAdm(String lg, int resp, String mudanca) {
         switch (resp) {
             case 1:
-                s.modelAlteraNomeAdm(lg,mudanca);
+                s.modelAlteraNomeAdm(lg, mudanca);
                 break;
             case 2:
-                s.modelAlteraSenhaAdm(lg,mudanca);
+                s.modelAlteraSenhaAdm(lg, mudanca);
                 break;
             case 3:
-                s.modelAlteraIdadeAdm(lg,mudanca);
+                s.modelAlteraIdadeAdm(lg, mudanca);
                 break;
             case 4:
-                s.modelAlteraSexoAdm(lg,mudanca);
+                s.modelAlteraSexoAdm(lg, mudanca);
                 break;
             case 5:
-                s.modelAlteraAniversarioAdm(lg,mudanca);
+                s.modelAlteraAniversarioAdm(lg, mudanca);
                 break;
             case 6:
-                s.modelAlteraEstadoCivilAdm(lg,mudanca);
+                s.modelAlteraEstadoCivilAdm(lg, mudanca);
                 break;
         }
     }

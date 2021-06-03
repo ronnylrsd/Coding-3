@@ -1,4 +1,3 @@
-
 package com.view.Unikut;
 
 import com.controller.Unikut.Controle;
@@ -16,21 +15,9 @@ public class Menu {
         login = in.nextLine();
         System.out.println("Informe a senha:");
         senha = in.nextLine();
-        if (Controll.VerificarConta(login, senha)) {
-            if (Controll.Entrar(login, senha)) {
-                System.out.println("Bem vindo a sua conta usuário!");
-                return true;
-            } else {
-                System.out.println("Senha incorreta!");
-                return false;
-            }
-
-        } else {
-            System.out.println("Usuário não existe!");
-            return false;
-        }
+        return Controll.Entrar(login, senha);
     }
-    
+
     public boolean entrarAdm() {
         Scanner in = new Scanner(System.in);
         System.out.println("Informe o login:");
@@ -66,7 +53,7 @@ public class Menu {
             System.out.println("Conta do usuário já existente!");
         }
     }
-    
+
     public void cadastrarAdm() {
         Scanner in = new Scanner(System.in);
         System.out.println("Informe o login:");
