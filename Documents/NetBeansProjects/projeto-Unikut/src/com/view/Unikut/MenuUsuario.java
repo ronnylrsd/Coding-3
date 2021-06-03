@@ -182,6 +182,25 @@ public class MenuUsuario {
         }
     }
 
+    class threadExibirRecadosSegredo {
+
+        void executeTask3() {
+            Scanner in = new Scanner(System.in);
+            System.out.println("Informe a senha para ler a mensagem:");
+            String senha2 = in.nextLine();
+            LinkedList recadosSecreto = Controll.controllerVisualizarRecadoSecreto(senha2);
+
+            if (recadosSecreto != null) {
+                for (int i = 0; i < recadosSecreto.size(); i++) {
+                    System.out.println(recadosSecreto.get(i));
+                }
+            } else {
+                System.out.println("Senha Incorreta!");
+            }
+
+        }
+    }
+
     public void recados() {
         Scanner in = new Scanner(System.in);
         int op;
@@ -268,18 +287,8 @@ public class MenuUsuario {
                     task.executeTask();
                     break;
                 case '6':
-                    System.out.println("Informe a senha para ler a mensagem:");
-                    String senha2 = in.nextLine();
-                    LinkedList recadosSecreto = Controll.controllerVisualizarRecadoSecreto(senha2);
-
-                    if (recadosSecreto != null) {
-                        for (int i = 0; i < recadosSecreto.size(); i++) {
-                            System.out.println(recadosSecreto.get(i));
-                        }
-                    } else {
-                        System.out.println("Senha Incorreta!");
-                    }
-
+                    threadExibirRecadosSegredo task3 = new threadExibirRecadosSegredo();
+                    task3.executeTask3();
                     break;
                 case '7':
                     threadExibirRecadosMural task2 = new threadExibirRecadosMural();
