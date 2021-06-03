@@ -76,6 +76,21 @@ public class MenuUsuario {
         } while (op != '0');
     }
 
+    class threadExibirListaAmigos {
+
+        void executeTask() {
+            LinkedList amigos = Controll.controllerVisualizarAmigos();
+            if (amigos.isEmpty()) {
+                System.out.println("Lista Vazia!");
+            } else {
+                System.out.println("Lista de amigos!");
+                for (int i = 0; i < amigos.size(); i++) {
+                    System.out.println(amigos.get(i));
+                }
+            }
+        }
+    }
+
     public void amigos() {
         Scanner in = new Scanner(System.in);
         char op;
@@ -107,15 +122,8 @@ public class MenuUsuario {
                     }
                     break;
                 case '2':
-                    LinkedList amigos = Controll.controllerVisualizarAmigos();
-                    if (amigos.isEmpty()) {
-                        System.out.println("Lista Vazia!");
-                    } else {
-                        System.out.println("Lista de amigos!");
-                        for (int i = 0; i < amigos.size(); i++) {
-                            System.out.println(amigos.get(i));
-                        }
-                    }
+                    threadExibirListaAmigos task = new threadExibirListaAmigos();
+                    task.executeTask();
                     break;
                 case '3':
                     LinkedList amigosPendentes = Controll.controllerVisualizarAmigosPedentes();
@@ -141,6 +149,37 @@ public class MenuUsuario {
                     break;
             }
         } while (op != '0');
+    }
+
+    class threadExibirRecadosMural {
+
+        void executeTask2() {
+
+            LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
+            if (recadosMural.isEmpty()) {
+                System.out.println("Lista de recados do mural vazia!");
+            } else {
+                for (int i = 0; i < recadosMural.size(); i++) {
+                    System.out.println(recadosMural.get(i));
+                }
+            }
+
+        }
+    }
+
+    class threadExibirRecados {
+
+        void executeTask() {
+            LinkedList recados = Controll.controllerVisualizarRecados();
+            if (recados.isEmpty()) {
+                System.out.println("Lista de recados vazia!");
+            } else {
+                for (int i = 0; i < recados.size(); i++) {
+                    System.out.println(recados.get(i));
+                }
+            }
+
+        }
     }
 
     public void recados() {
@@ -196,7 +235,7 @@ public class MenuUsuario {
                     if (Controll.controllerVerificar(lgm)) {
                         System.out.println("Informe a mensagem do mural:");
                         String msg = in.nextLine();
-                        Controll.controllerEnviarRecadoMural(msg,lgm);
+                        Controll.controllerEnviarRecadoMural(msg, lgm);
                         System.out.println("Recado mural enviado!");
                     } else {
                         System.out.println("Conta não existe!");
@@ -213,10 +252,9 @@ public class MenuUsuario {
                             System.out.println("Deseja aceitar mural recado?");
                             String resposta = in.nextLine();
                             if (resposta.compareToIgnoreCase("sim") == 0) {
-                                if(Controll.controllerRecadosMuralAceito(i) == true){
+                                if (Controll.controllerRecadosMuralAceito(i) == true) {
                                     System.out.println("Recado mural adicionado.");
-                                }
-                                else{
+                                } else {
                                     System.out.println("Mural recado não pode ser aceito por quem enviou.");
                                 }
                             } else {
@@ -226,36 +264,26 @@ public class MenuUsuario {
                     }
                     break;
                 case '5':
-                    LinkedList recados = Controll.controllerVisualizarRecados();
-                    if (recados.isEmpty()) {
-                        System.out.println("Lista de recados vazia!");
-                    } else {
-                        for (int i = 0; i < recados.size(); i++) {
-                            System.out.println(recados.get(i));
-                        }
-                    }
+                    threadExibirRecados task = new threadExibirRecados();
+                    task.executeTask();
                     break;
                 case '6':
                     System.out.println("Informe a senha para ler a mensagem:");
                     String senha2 = in.nextLine();
                     LinkedList recadosSecreto = Controll.controllerVisualizarRecadoSecreto(senha2);
-                    if (recadosSecreto.isEmpty()) {
-                        System.out.println("Lista de recados vazia!");
-                    } else {
+
+                    if (recadosSecreto != null) {
                         for (int i = 0; i < recadosSecreto.size(); i++) {
                             System.out.println(recadosSecreto.get(i));
                         }
+                    } else {
+                        System.out.println("Senha Incorreta!");
                     }
+
                     break;
                 case '7':
-                    LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
-                    if (recadosMural.isEmpty()) {
-                        System.out.println("Lista de recados do mural vazia!");
-                    } else {
-                        for (int i = 0; i < recadosMural.size(); i++) {
-                            System.out.println(recadosMural.get(i));
-                        }
-                    }
+                    threadExibirRecadosMural task2 = new threadExibirRecadosMural();
+                    task2.executeTask2();
                     break;
                 default:
                     System.out.println("Escolha inválida. Tente novamente.");

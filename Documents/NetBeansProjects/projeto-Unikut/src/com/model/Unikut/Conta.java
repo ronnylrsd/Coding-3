@@ -29,7 +29,7 @@ public class Conta implements Comparable<Conta> {
         this.situacao = "espera";
         this.Solicitacoes = new LinkedList<>();
         this.Recadocomsenha = new LinkedList<>();
-
+        this.senhaRecado = "";
     }
 
     public Conta(String log, String senha, String nome) {
@@ -42,6 +42,7 @@ public class Conta implements Comparable<Conta> {
         this.Recadocomsenha = new LinkedList<>();
         this.Match = new LinkedList<>();
         this.situacao = "espera";
+        this.senhaRecado = "";
     }
 
     public Conta(String log) {
@@ -50,6 +51,7 @@ public class Conta implements Comparable<Conta> {
         this.situacao = "espera";
         this.Match = new LinkedList<>();
         this.Solicitacoes = new LinkedList<>();
+        this.senhaRecado = "";
     }
 
     public Conta() {
@@ -251,7 +253,10 @@ public class Conta implements Comparable<Conta> {
 
     public LinkedList listaRecadosComSenha(String senha2) {
         String SenhaReal = getsenhaRecado();
-        if (SenhaReal.equals(senha2)) {
+        if (SenhaReal.compareTo("") == 0) {
+            return null;
+        }
+        if (SenhaReal.compareTo(senha2) == 0) {
             if (Recadocomsenha.isEmpty()) {
                 return null;
             } else {
@@ -260,6 +265,7 @@ public class Conta implements Comparable<Conta> {
         } else {
             return null;
         }
+
     }
 
     public boolean verificarMatch(String match) {

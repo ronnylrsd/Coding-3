@@ -6,7 +6,7 @@ public class Singleton {
 
     private static Singleton instance;
     private LinkedList<Conta> rede;
-    private LinkedList<String> muralPendente,mural;
+    private LinkedList<String> muralPendente, mural;
     private String login, senha;
 
     public LinkedList<String> getMuralPendente() {
@@ -214,9 +214,9 @@ public class Singleton {
         return destinatario.adicionaRecadoComSenha(login, recado, sen);
     }
 
-    public boolean modelEnviarRecadoMural(String recado,String destinatario) {
+    public boolean modelEnviarRecadoMural(String recado, String destinatario) {
         String remetente = login;
-        return muralPendente.add(remetente+", mandou: "+recado);
+        return muralPendente.add(remetente + ", mandou: " + recado);
     }
 
     public LinkedList modelVisualizarRecadoMuralPendente() {
@@ -226,11 +226,10 @@ public class Singleton {
     public boolean modelRecadoMuralAceito(int index) {
         String msg;
         msg = muralPendente.get(index);
-        if(msg.contains(login)==true){
+        if (msg.contains(login) == true) {
             return false;
-        }
-        else{
-            mural.add(msg+" para: "+login+".");
+        } else {
+            mural.add(msg + " para: " + login + ".");
             return true;
         }
     }
@@ -243,8 +242,7 @@ public class Singleton {
 
     public LinkedList modelVisualizarRecadoSecreto(String sen) {
         Conta usuario = buscaSimples(login, senha);
-        LinkedList lista = usuario.listaRecadosComSenha(sen);
-        return lista;
+        return usuario.listaRecadosComSenha(sen);
     }
 
     public LinkedList modelVisualizarRecadosMural() {
@@ -281,43 +279,38 @@ public class Singleton {
         return rede.remove(usuario);
     }
 
-    public void modelAlterarConta(String log,char resp,String mud){
+    public void modelAlterarConta(String log, char resp, String mud) {
         Conta Usuario = busca(log);
         Usuario.alterarDadosAdm(resp, mud);
     }
-    
+
     public String modelExibeConta(String log) {
         Conta Usuario = busca(log);
-        String l = "Login: "+Usuario.getLogin()+".",nom,idd,sex,ani,estC;
-        if(Usuario.getNome().compareTo("convidado") == 0){
+        String l = "Login: " + Usuario.getLogin() + ".", nom, idd, sex, ani, estC;
+        if (Usuario.getNome().compareTo("convidado") == 0) {
             nom = "Nome: convidado.";
+        } else {
+            nom = "Nome: " + Usuario.getNome();
         }
-        else{
-            nom = "Nome: "+Usuario.getNome();
-        }
-        if(Usuario.getIdade() == null){
+        if (Usuario.getIdade() == null) {
             idd = "Idade ainda não informada.";
+        } else {
+            idd = "Idade: " + Usuario.getIdade();
         }
-        else{
-            idd = "Idade: "+Usuario.getIdade();
-        }
-        if(Usuario.getSexo() == null){
+        if (Usuario.getSexo() == null) {
             sex = "Sexo ainda não informado.";
+        } else {
+            sex = "Sexo: " + Usuario.getSexo();
         }
-        else{
-            sex = "Sexo: "+Usuario.getSexo();
-        }
-        if(Usuario.getAniversario() == null){
+        if (Usuario.getAniversario() == null) {
             ani = "Aniversario ainda não informado.";
+        } else {
+            ani = "Aniversário: " + Usuario.getAniversario();
         }
-        else{
-            ani = "Aniversário: "+Usuario.getAniversario();
-        }
-        if(Usuario.getEstadoCivil() == null){
+        if (Usuario.getEstadoCivil() == null) {
             estC = "Estado civil ainda não informado.";
-        }
-        else{
-            estC = "Estado Civil: "+Usuario.getEstadoCivil();
+        } else {
+            estC = "Estado Civil: " + Usuario.getEstadoCivil();
         }
         return l + " " + nom + " " + idd + " " + sex + " " + ani + " " + estC;
     }
