@@ -7,7 +7,7 @@ public class Controle {
 
     Singleton s = Singleton.getInstance();
 
-    public boolean VerificarConta(String log, String sen) {
+    public boolean controllerVerificarConta(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == false;
     }
     

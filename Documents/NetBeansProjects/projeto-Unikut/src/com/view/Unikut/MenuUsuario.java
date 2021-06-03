@@ -117,7 +117,7 @@ public class MenuUsuario {
                 case 3:
                     System.out.println("Informe o login do usuário para alterar status:");
                     String l = in.nextLine();
-                    if (Controll.VerificarConta(l, "") && login.compareTo(l) != 0) {
+                    if (Controll.controllerVerificarConta(l, "") && login.compareTo(l) != 0) {
                         System.out.println("Status de amigo atualizado!");
                         Controll.StatusDeAmigos(l);
                     } else {
@@ -156,7 +156,7 @@ public class MenuUsuario {
                 case 1:
                     System.out.println("Informe o login do destinatário:");
                     String lgn = in.nextLine();
-                    if (Controll.VerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
+                    if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
                         System.out.println("Informe a mensagem:");
                         String msg = in.nextLine();
                         Controll.controllerEnviarRecado(lgn, msg);
@@ -168,7 +168,7 @@ public class MenuUsuario {
                 case 2:
                     System.out.println("Informe o login do destinatário:");
                     lgn = in.nextLine();
-                    if (Controll.VerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
+                    if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
                         System.out.println("Informe a senha da mensagem:");
                         String sen = in.nextLine();
                         System.out.println("Informe a mensagem:");
@@ -182,7 +182,7 @@ public class MenuUsuario {
                 case 3:
                     System.out.println("Informe o login do destinatario");
                     String lgm = in.nextLine();
-                    if (Controll.VerificarConta(lgm, "") && login.compareTo(lgm) != 0) {
+                    if (Controll.controllerVerificarConta(lgm, "") && login.compareTo(lgm) != 0) {
                         System.out.println("Informe a mensagem do mural:");
                         String msg = in.nextLine();
                         Controll.controllerEnviarRecadoMural(msg);
@@ -264,8 +264,8 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuario que voce quer adicionar no Match:");
                     String lgn;
                     lgn = in.nextLine();
-                    Controll.VerificarConta(lgn, " ");
-                    if (!Controll.VerificarConta(lgn, " ")) {
+                    Controll.controllerVerificarConta(lgn, " ");
+                    if (!Controll.controllerVerificarConta(lgn, " ")) {
                         System.out.println("A conta não existe!");
                     } else {
                         Controll.Match(lgn);

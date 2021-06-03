@@ -53,16 +53,18 @@ public class Menu {
             in.nextLine();
             switch (resposta) {
                 case 'S':
+                case 's':
                     System.out.println("Informe o nome:");
                     nome = in.nextLine();
                     if (Controll.Cadastrar(lg, s, nome)) {
-                        System.out.println("Conta do usuário criada com sucesso!");
+                        System.out.println("Conta do usuário com nome criada com sucesso!");
                     } else {
                         System.out.println("Conta do usuário já existente!");
                     }   break;
                 case 'N':
+                case 'n':
                     if (Controll.Cadastrar(lg, s, nome)) {
-                        System.out.println("Conta do usuário criada com sucesso!");
+                        System.out.println("Conta do usuário sem nome criada com sucesso!");
                     } else {
                         System.out.println("Conta do usuário já existente!");
                     }   break;
@@ -80,7 +82,7 @@ public class Menu {
         System.out.println("Informe a senha:");
         String s = in.nextLine();
 
-        if (!Controll.VerificarConta(lg, s)) {
+        if (!Controll.controllerVerificarConta(lg, s)) {
             Controll.CadastrarAdm(lg, s);
             System.out.println("Conta do administrador criada com sucesso!");
         } else {

@@ -15,7 +15,7 @@ public class MenuAdministrador {
         System.out.println("Processo para excluir conta.");
         System.out.println("Informe o login da conta:");
         String lge = in.nextLine();
-        if (Controll.VerificarConta(lge, "")) {
+        if (Controll.controllerVerificarConta(lge, "")) {
             if (login.compareTo(lge) == 0 || lge.contains(".adm") == true) {
                 System.out.println("A conta administradora não pode ser removida!");
             } else {
@@ -33,7 +33,7 @@ public class MenuAdministrador {
         System.out.println("Processo para alterar conta.");
         System.out.println("Informe o login da conta:");
         String lge = in.nextLine();
-        if (Controll.VerificarConta(lge, "")) {
+        if (Controll.controllerVerificarConta(lge, "")) {
             if (login.compareTo(lge) == 0 || lge.contains(".adm") == true) {
                 System.out.println("A conta administradora não pode ser alterada!");
             } else {
@@ -110,7 +110,7 @@ public class MenuAdministrador {
         System.out.println("Processo para exibir conta.");
         System.out.println("Informe o login da conta:");
         String lge = in.nextLine();
-        if (Controll.VerificarConta(lge, "")) {
+        if (Controll.controllerVerificarConta(lge, "")) {
             if (login.compareTo(lge) == 0 || lge.contains(".adm") == true) {
                 System.out.println("A conta administradora não pode ser exibida!");
             } else {
