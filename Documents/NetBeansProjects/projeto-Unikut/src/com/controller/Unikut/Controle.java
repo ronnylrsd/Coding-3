@@ -23,8 +23,8 @@ public class Controle {
         return s.EntrarAdm(log, sen);
     }
 
-    public boolean Cadastrar(String log, String sen) {
-        return s.Cadastrar(log, sen);
+    public boolean Cadastrar(String log, String sen,String nom) {
+        return s.Cadastrar(log, sen, nom);
     }
 
     public boolean CadastrarAdm(String log, String sen) {

@@ -97,10 +97,10 @@ public class Singleton {
         }
     }
 
-    public boolean Cadastrar(String log, String sen) {
+    public boolean Cadastrar(String log, String sen, String n) {
         Conta busca = buscaSimples(log, sen);
         if (busca == null && !log.contains(".adm")) {
-            Conta usuario = new Conta(log, sen);
+            Conta usuario = new Conta(log, sen, n);
             rede.add(usuario);
             return true;
         } else {
