@@ -11,8 +11,7 @@ public class Conta implements Comparable<Conta> {
     private String sexo;
     private String aniversario;
     private String estadoCivil;
-    private String status;
-    private LinkedList<Conta> amigos;
+    private LinkedList<String> amigos;
     private LinkedList<String> recados;
     private LinkedList<Conta> Match;
     private String situacao;
@@ -24,7 +23,6 @@ public class Conta implements Comparable<Conta> {
         this.senha = senha;
         this.nome = "convidado";
         this.amigos = new LinkedList<>();
-        this.status = "pendente";
         this.recados = new LinkedList<>();
         this.Match = new LinkedList();
         this.situacao = "espera";
@@ -45,7 +43,6 @@ public class Conta implements Comparable<Conta> {
 
     public Conta(String log) {
         this.login = log;
-        this.status = "pendente";
         this.amigos = new LinkedList();
         this.situacao = "espera";
         this.Match = new LinkedList();
@@ -114,19 +111,11 @@ public class Conta implements Comparable<Conta> {
         this.estadoCivil = estadoCivil;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus() {
-        this.status = "amigo";
-    }
-
-    public LinkedList<Conta> getAmigos() {
+    public LinkedList<String> getAmigos() {
         return amigos;
     }
 
-    private void setAmigos(LinkedList<Conta> amigos) {
+    private void setAmigos(LinkedList<String> amigos) {
         this.amigos = amigos;
     }
 
@@ -191,39 +180,44 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    protected Conta buscaAmigos(Conta ct) {
-        for (Conta c : amigos) {
-            if (c.getLogin().compareTo(ct.getLogin()) == 0 && c.getSenha().compareTo(ct.getSenha()) == 0) {
-                return c;
+    protected String buscaAmigos(String amigo) {
+        for (String c : amigos) {
+            if (c.contains(amigo) == true) {
+                return amigo;
             }
         }
         return null;
     }
 
-    public void adicionaAmigos(Conta amigo) {
-        this.amigos.add(amigo);
-    }
-
-    public LinkedList listaAmigos() {
-        if (amigos.isEmpty()) {
-            return null;
+    public boolean adicionaAmigos(String loginAmigo) {
+        if (buscaAmigos(login) != null) {
+            return false;
         } else {
-            return amigos;
+            String status = "Pendente";
+            this.amigos.add(loginAmigo + ": " + status + ".");
+            return true;
         }
     }
 
-    public boolean alteraStatusAmigos(String log) {
-        Conta result = new Conta(log);
-        Conta amigo = buscaAmigos(result);
-        if (amigo != null) {
-            if (amigo.getStatus().equalsIgnoreCase("pendente")) {
-                amigo.setStatus();
-                return true;
-            } else {
-                return false;
+    public LinkedList listaAmigos() {
+        return amigos;
+    }
+    
+    public LinkedList listaAmigosPendentes(){
+        LinkedList amigosPendentes = new LinkedList();
+        for (int i = 0; i < amigosPendentes.size(); i++) {
+            if (amigos.get(i).contains(login) == true) {
+                amigosPendentes.add(amigos.get(i));
             }
-        } else {
-            return false;
+        }
+        return amigosPendentes;
+    }
+
+    public void alteraStatusAmigo(String amigo) {
+        for (int i = 0; i < amigos.size(); i++) {
+            if (amigos.get(i).compareTo(amigo) == 0) {
+                amigos.add(i, amigos.get(i).replace("Pendente", ": Amigo."));
+            }
         }
     }
 
@@ -306,7 +300,7 @@ public class Conta implements Comparable<Conta> {
 
     @Override
     public String toString() {
-        return this.login + " " + this.status;
+        return this.login;
     }
 
     @Override

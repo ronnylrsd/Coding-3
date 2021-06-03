@@ -60,18 +60,20 @@ public class Controle {
 
     }
 
-    public boolean AdicionarAmigo(String log) {
-        return s.adicionarAmigos(log);
+    public boolean controllerAdicionarAmigo(String log) {
+        return s.modelAdicionarAmigos(log);
+    }
+    
+    public LinkedList controllerVisualizarAmigos() {
+        return s.modelVisualizarAmigos();
     }
 
-    public LinkedList ControlListaAmigos() {
-        return s.ListaDeAmigos();
-
+    public LinkedList controllerVisualizarAmigosPedentes() {
+        return s.modelVisualizarAmigosPendentes();
     }
 
-    public boolean StatusDeAmigos(String l) {
-        return s.alteraStatus(l);
-
+    public void controllerAlterarStatusAmigo(String amigo) {
+        s.modelAlterarStatusAmigo(amigo);
     }
 
     public boolean controllerEnviarRecado(String log, String recado) {

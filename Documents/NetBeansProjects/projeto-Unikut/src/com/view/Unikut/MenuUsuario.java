@@ -97,18 +97,17 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuário para enviar a solicitação:");
                     String lg = in.nextLine();
                     if (Controll.controllerVerificar(lg)) {
-                        if (Controll.AdicionarAmigo(lg)) {
-                            System.out.println("Amigo adicionado com sucesso!");
+                        if (Controll.controllerAdicionarAmigo(lg)) {
+                            System.out.println("Amigo adicionado!");
                         } else {
-                            System.out.println("Amigo ja adicionado!");
+                            System.out.println("Não é possível se adicionar como amigo.");
                         }
-
                     } else {
                         System.out.println("Usuario não existe!");
                     }
                     break;
                 case '2':
-                    LinkedList amigos = Controll.ControlListaAmigos();
+                    LinkedList amigos = Controll.controllerVisualizarAmigos();
                     if (amigos.isEmpty()) {
                         System.out.println("Lista Vazia!");
                     } else {
@@ -118,13 +117,20 @@ public class MenuUsuario {
                     }
                     break;
                 case '3':
-                    System.out.println("Informe o login do usuário para alterar status:");
-                    String l = in.nextLine();
-                    if (Controll.controllerVerificar(l)) {
-                        System.out.println("Status de amigo atualizado!");
-                        Controll.StatusDeAmigos(l);
+                    LinkedList amigosPendentes = Controll.controllerVisualizarAmigosPedentes();
+                    if (amigosPendentes.isEmpty()) {
+                        System.out.println("Lista Vazia!");
                     } else {
-                        System.out.println("Usuario não existe!");
+                        for (int i = 0; i < amigosPendentes.size(); i++) {
+                            System.out.println(amigosPendentes.get(i));
+                            System.out.println("Deseja aceitar amigo?");
+                            String resposta = in.nextLine();
+                            if (resposta.compareToIgnoreCase("sim") == 0) {
+                                Controll.controllerAlterarStatusAmigo((String) amigosPendentes.get(i));
+                            } else {
+                                System.out.println("Amigo não aceito.");
+                            }
+                        }
                     }
                     break;
                 default:

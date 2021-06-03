@@ -66,6 +66,15 @@ public class Singleton {
         return null;
     }
     
+    public Conta busca(String log) {
+        for (Conta c : rede) {
+            if (c.getLogin().compareTo(log) == 0) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
     public boolean modelBusca(String log) {
         for (Conta c : rede) {
             if (c.getLogin().compareTo(log) == 0) {
@@ -119,7 +128,7 @@ public class Singleton {
 
     public boolean CadastrarAdm(String log, String sen) {
         Conta busca = buscaSimples(log, sen);
-        if (busca == null && !log.contains(".adm")) {
+        if (busca == null && log.contains(".adm")) {
             ContaAdministradora adm = new ContaAdministradora(log, sen);
             rede.add(adm);
             return true;
@@ -139,33 +148,6 @@ public class Singleton {
         }
     }
     
-    public boolean adicionarAmigos(String log) {
-        Conta Usuario = buscaSimples(login, senha);
-        Conta Amigo = buscaSimples(log, "");
-        if(Usuario.getAmigos().contains(Amigo)){
-            return false;
-        }
-        else{
-            Usuario.adicionaAmigos(Amigo);
-            return true;
-        }
-    }
-
-    public LinkedList ListaDeAmigos() {
-        Conta Usuario = buscaSimples(login, senha);
-        return Usuario.getAmigos();
-
-    }
-    
-    public boolean alteraStatus(String log) {
-        Conta Usuario = buscaSimples(login, senha);
-        if(modelBusca(log) == true){
-            return Usuario.alteraStatusAmigos(log);
-        }
-        return false;
-
-    }
-
     public void alteraNome(String nome) {
         Conta Usuario = buscaSimples(login, senha);
         Usuario.setNome(nome);
@@ -195,6 +177,35 @@ public class Singleton {
     public void alteraEstadoCivil(String est) {
         Conta Usuario = buscaSimples(login, senha);
         Usuario.setEstadoCivil(est);
+    }
+    
+    public boolean modelAdicionarAmigos(String loginAmigo) {
+        Conta Usuario = buscaSimples(login,senha);
+        Conta Amigo = busca(loginAmigo);
+        if(login.compareTo(loginAmigo)==0){
+            return false;
+        }
+        else{
+            Usuario.adicionaAmigos(loginAmigo);
+            Amigo.adicionaAmigos(login);
+            return true;
+        }
+    }
+    
+    public LinkedList modelVisualizarAmigos() {
+        Conta usuario = buscaSimples(login, senha);
+        LinkedList lista = usuario.listaAmigos();
+        return lista;
+    }
+
+    public LinkedList modelVisualizarAmigosPendentes() {
+        Conta usuario = buscaSimples(login, senha);
+        return usuario.listaAmigosPendentes();
+    }
+    
+    public void modelAlterarStatusAmigo(String amigo) {
+        Conta usuario = buscaSimples(login, senha);
+        usuario.alteraStatusAmigo(amigo);
     }
 
     public boolean modelEnviarRecado(String log, String recado) {
