@@ -9,88 +9,88 @@ public class ProjetoUnikut {
         Menu conta = new Menu();
         MenuUsuario usuario = new MenuUsuario();
         MenuAdministrador administrador = new MenuAdministrador();
-        int op;
+        char op;
         do {
             System.out.println("UNIKUT");
             loginOuCadastro();
-            op = in.nextInt();
+            op = in.next().charAt(0);
             switch (op) {
-                case 0:
+                case '0':
                     System.out.println("Fim do programa!");
                     break;
-                case 1:
+                case '1':
                     if (conta.entrar() == false) {
                         System.out.println("Login ou senha inválidos!");
                     } else {
-                        int op2;
+                        char op2;
                         do {
                             System.out.println("Bem-vindo: Usuário.");
                             menuUsuario();
-                            op2 = in.nextInt();
+                            op2 = in.next().charAt(0);
                             switch (op2) {
-                                case 0:
+                                case '0':
                                     System.out.println("De volta ao Menu Inicial.");
                                     break;
-                                case 1:
+                                case '1':
                                     usuario.alteraPerfil();
                                     break;
-                                case 2:
+                                case '2':
                                     usuario.amigos();
                                     break;
-                                case 3:
+                                case '3':
                                     usuario.recados();
                                     break;
-                                case 4:
+                                case '4':
                                     usuario.Match();
                                     break;
                                 default:
                                     System.out.println("Escolha inválida. Tente novamente.");
                                     break;
                             }
-                        } while (op2 != 0);
+                        } while (op2 != '0');
                     }
                     break;
-                case 2:
+                case '2':
                     if(conta.entrarAdm() == false){
                         System.out.println("Login ou senha inválidos!");
                     }
                     else{
-                        int op3;
+                        char op3;
                             do {
                                 System.out.println("Bem-vindo: Administrador.");
                                 menuAdministrador();
-                                op3 = in.nextInt();
+                                op3 = in.next().charAt(0);
                                 switch (op3) {
-                                    case 1:
+                                    case '0':
+                                        System.out.println("De volta ao Menu Inicial.");
+                                        break;
+                                    case '1':
                                         administrador.removerConta();
                                         break;
-                                    case 2:
+                                    case '2':
                                         administrador.alterarConta();
                                         break;
-                                    case 3:
+                                    case '3':
                                         administrador.exibirConta();
-                                        break;
-                                    case 4:
-                                        System.out.println("De volta ao Menu Inicial.");
                                         break;
                                     default:
                                         System.out.println("Escolha inválida! Tente novamente.");
                                         break;
                                 }
-                            } while (op3 != 4);
+                            } while (op3 != '0');
                     }
                     break;
-                case 3:
+                case '3':
                     conta.cadastrar();
                     break;
-                case 4:
+                case '4':
                     conta.cadastrarAdm();
                     break;
                 default:
                     System.out.println("Escolha inválida! Tente novamente.");
                     break;
             }
-        } while (op != 0);
+        } while (op != '0');
 
     }
 

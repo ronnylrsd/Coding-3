@@ -146,14 +146,23 @@ public class Singleton {
             return false;
         }
         else{
-            Usuario.adicionaAmigos(Usuario,Amigo);
+            Usuario.adicionaAmigos(Amigo);
             return true;
         }
     }
 
     public LinkedList ListaDeAmigos() {
         Conta Usuario = buscaSimples(login, senha);
-        return Usuario.listaAmigos();
+        return Usuario.getAmigos();
+
+    }
+    
+    public boolean alteraStatus(String log) {
+        Conta Usuario = buscaSimples(login, senha);
+        if(modelBusca(log) == true){
+            return Usuario.alteraStatusAmigos(log);
+        }
+        return false;
 
     }
 
@@ -186,13 +195,6 @@ public class Singleton {
     public void alteraEstadoCivil(String est) {
         Conta Usuario = buscaSimples(login, senha);
         Usuario.setEstadoCivil(est);
-    }
-
-    public boolean alteraStatus(String log) {
-        Conta Usuario = buscaSimples(login, senha);
-        Conta Amigo = buscaSimples(log, "");
-        return Usuario.alteraStatusAmigos(Amigo);
-
     }
 
     public boolean modelEnviarRecado(String log, String recado) {

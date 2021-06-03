@@ -15,36 +15,39 @@ public class MenuUsuario {
         Scanner in = new Scanner(System.in);
         do {
             System.out.println("Menu de opções:");
+            System.out.println("0-Voltar ao menu da conta.");
             System.out.println("1-Alterar nome.");
             System.out.println("2-Alterar senha.");
             System.out.println("3-Alterar idade.");
             System.out.println("4-Alterar sexo.");
             System.out.println("5-Alterar aniversario.");
             System.out.println("6-Alterar estado civil.");
-            System.out.println("7-Voltar ao menu da conta.");
             System.out.println("Escolha uma opção:");
-            op = in.nextInt();
+            op = in.next().charAt(0);
             in.nextLine();
             switch (op) {
-                case 1:
+                case '0':
+                    System.out.println("Voltando para o menu da conta.");
+                    break;
+                case '1':
                     System.out.println("Informe o novo nome:");
                     String nome = in.nextLine();
                     Controll.alteraPerfil(op, nome);
                     System.out.println("Alteração concluída.");
                     break;
-                case 2:
+                case '2':
                     System.out.println("Informe a nova senha:");
                     String ne = in.nextLine();
                     Controll.alteraPerfil(op, ne);
                     System.out.println("Alteração concluída.");
                     break;
-                case 3:
+                case '3':
                     System.out.println("Informe a nova idade:");
                     String ni = in.nextLine();
                     Controll.alteraPerfil(op, ni);
                     System.out.println("Alteração concluída.");
                     break;
-                case 4:
+                case '4':
                     System.out.println("Informe o sexo:");
                     String ns = in.nextLine();
                     while (ns.compareToIgnoreCase("homem") != 0 && ns.compareToIgnoreCase("mulher") != 0 && ns.compareToIgnoreCase("outro") != 0) {
@@ -54,43 +57,43 @@ public class MenuUsuario {
                     Controll.alteraPerfil(op, ns);
                     System.out.println("Alteração concluída.");
                     break;
-                case 5:
+                case '5':
                     System.out.println("Informe o aniversário:");
                     String na = in.nextLine();
                     Controll.alteraPerfil(op, na);
                     System.out.println("Alteração concluída.");
                     break;
-                case 6:
+                case '6':
                     System.out.println("Informe o estado civil");
                     String nec = in.nextLine();
                     Controll.alteraPerfil(op, nec);
                     System.out.println("Alteração concluída.");
                     break;
-                case 7:
-                    System.out.println("Voltando para o menu da conta.");
-                    break;
                 default:
                     System.out.println("Escolha inválida.");
                     break;
             }
-        } while (op != 7);
+        } while (op != '0');
     }
 
     public void amigos() {
         Scanner in = new Scanner(System.in);
-        int op;
+        char op;
         do {
             System.out.println("Bem-vindo aos amigos.");
             System.out.println("Menu de opções:");
+            System.out.println("0-Sair de amigos.");
             System.out.println("1-Adicionar amigo.");
             System.out.println("2-Status de amizades.");
             System.out.println("3-Aceitar solicitações.");
-            System.out.println("4-Sair de amigos.");
             System.out.println("Escolha uma opção:");
-            op = in.nextInt();
+            op = in.next().charAt(0);
             in.nextLine();
             switch (op) {
-                case 1:
+                case '0':
+                    System.out.println("De volta à conta.");
+                    break;
+                case '1':
                     System.out.println("Informe o login do usuário para enviar a solicitação:");
                     String lg = in.nextLine();
                     if (Controll.controllerVerificar(lg)) {
@@ -104,7 +107,7 @@ public class MenuUsuario {
                         System.out.println("Usuario não existe!");
                     }
                     break;
-                case 2:
+                case '2':
                     LinkedList amigos = Controll.ControlListaAmigos();
                     if (amigos.isEmpty()) {
                         System.out.println("Lista Vazia!");
@@ -114,25 +117,21 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 3:
+                case '3':
                     System.out.println("Informe o login do usuário para alterar status:");
                     String l = in.nextLine();
-                    if (Controll.controllerVerificarConta(l, "") && login.compareTo(l) != 0) {
+                    if (Controll.controllerVerificar(l)) {
                         System.out.println("Status de amigo atualizado!");
                         Controll.StatusDeAmigos(l);
                     } else {
                         System.out.println("Usuario não existe!");
                     }
-
-                    break;
-                case 4:
-                    System.out.println("De volta à conta.");
                     break;
                 default:
                     System.out.println("Escolha inválida. Tente novamente.");
                     break;
             }
-        } while (op != 4);
+        } while (op != '0');
     }
 
     public void recados() {
@@ -141,6 +140,7 @@ public class MenuUsuario {
         do {
             System.out.println("Bem-vindo aos recados.");
             System.out.println("Menu de opções:");
+            System.out.println("0-Sair de recados.");
             System.out.println("1-Enviar recado.");
             System.out.println("2-Enviar recado secreto.");
             System.out.println("3-Enviar recado mural.");
@@ -148,12 +148,14 @@ public class MenuUsuario {
             System.out.println("5-Visualizar recados.");
             System.out.println("6-Vizualizar recados secretos.");
             System.out.println("7-Vizualizar recados mural.");
-            System.out.println("8-Sair de recados.");
             System.out.println("Escolha uma opção:");
-            op = in.nextInt();
+            op = in.next().charAt(0);
             in.nextLine();
             switch (op) {
-                case 1:
+                case '0':
+                    System.out.println("De volta à conta.");
+                    break;
+                case '1':
                     System.out.println("Informe o login do destinatário:");
                     String lgn = in.nextLine();
                     if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
@@ -165,7 +167,7 @@ public class MenuUsuario {
                         System.out.println("Conta não existe!");
                     }
                     break;
-                case 2:
+                case '2':
                     System.out.println("Informe o login do destinatário:");
                     lgn = in.nextLine();
                     if (Controll.controllerVerificarConta(lgn, "") && login.compareTo(lgn) != 0) {
@@ -179,7 +181,7 @@ public class MenuUsuario {
                         System.out.println("Conta não existe!");
                     }
                     break;
-                case 3:
+                case '3':
                     System.out.println("Informe o login do destinatario");
                     String lgm = in.nextLine();
                     if (Controll.controllerVerificarConta(lgm, "") && login.compareTo(lgm) != 0) {
@@ -191,7 +193,7 @@ public class MenuUsuario {
                         System.out.println("Conta não existe!");
                     }
                     break;
-                case 4:
+                case '4':
                     LinkedList MuralRecadosPendentes = Controll.controllerVisualizarRecadosMuralPedente();
                     for (int i = 0; i < MuralRecadosPendentes.size(); i++) {
                         System.out.println(MuralRecadosPendentes.get(i));
@@ -204,7 +206,7 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 5:
+                case '5':
                     LinkedList recados = Controll.controllerVisualizarRecados();
                     if (recados.isEmpty()) {
                         System.out.println("Lista de recados vazia!");
@@ -214,7 +216,7 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 6:
+                case '6':
                     System.out.println("Informe a senha para ler a mensagem:");
                     String senha2 = in.nextLine();
                     LinkedList recadosSecreto = Controll.controllerVisualizarRecadoSecreto(senha2);
@@ -226,7 +228,7 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 7:
+                case '7':
                     LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
                     if (recadosMural.isEmpty()) {
                         System.out.println("Lista de recados vazia!");
@@ -236,31 +238,29 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 8:
-                    System.out.println("De volta à conta.");
-                    break;
                 default:
                     System.out.println("Escolha inválida. Tente novamente.");
                     break;
             }
-        } while (op != 8);
+        } while (op != 0);
     }
 
     public void Match() {
         Scanner in = new Scanner(System.in);
         System.out.println("Bem vindo a aba de Matches");
         int op;
-
         do {
-
             System.out.println("O que deseja fazer?");
+            System.out.println("0-Sair da Aba Match.");
             System.out.println("1-Adicionar Match.");
             System.out.println("2-Ver Status Match.");
-            System.out.println("3-Sair da Aba Match.");
-            op = in.nextInt();
+            op = in.next().charAt(0);
             in.nextLine();
             switch (op) {
-                case 1:
+                case '0':
+                    System.out.println("Saindo da Aba matches.");
+                    break;
+                case '1':
                     System.out.println("Informe o login do usuario que voce quer adicionar no Match:");
                     String lgn;
                     lgn = in.nextLine();
@@ -272,7 +272,7 @@ public class MenuUsuario {
                         System.out.println("Match concluído!");
                     }
                     break;
-                case 2:
+                case '2':
                     LinkedList Match = Controll.VerMeusMatchs();
                     if (Match.isEmpty()) {
                         System.out.println("Lista de recados vazia!");
@@ -282,13 +282,10 @@ public class MenuUsuario {
                         }
                     }
                     break;
-                case 3:
-                    System.out.println("Saindo da Aba matches.");
-                    break;
                 default:
                     System.out.println("Insira um comando valido.");
             }
-        } while (op != 3);
+        } while (op != 0);
 
     }
 }

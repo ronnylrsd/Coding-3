@@ -1,6 +1,5 @@
 package com.model.Unikut;
 
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class Conta implements Comparable<Conta> {
@@ -201,9 +200,8 @@ public class Conta implements Comparable<Conta> {
         return null;
     }
 
-    public void adicionaAmigos(Conta usuario, Conta amigo) {
+    public void adicionaAmigos(Conta amigo) {
         this.amigos.add(amigo);
-        amigo.amigos.add(usuario);
     }
 
     public LinkedList listaAmigos() {
@@ -214,7 +212,8 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public boolean alteraStatusAmigos(Conta result) {
+    public boolean alteraStatusAmigos(String log) {
+        Conta result = new Conta(log);
         Conta amigo = buscaAmigos(result);
         if (amigo != null) {
             if (amigo.getStatus().equalsIgnoreCase("pendente")) {

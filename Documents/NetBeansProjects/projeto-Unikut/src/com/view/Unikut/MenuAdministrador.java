@@ -37,7 +37,7 @@ public class MenuAdministrador {
             if (login.compareTo(lge) == 0 || lge.contains(".adm") == true) {
                 System.out.println("A conta administradora não pode ser alterada!");
             } else {
-                int op;
+                char op;
                 do {
                     System.out.println("Menu de opções:");
                     System.out.println("0-Voltar ao menu da conta administradora.");
@@ -48,31 +48,31 @@ public class MenuAdministrador {
                     System.out.println("5-Alterar aniversario.");
                     System.out.println("6-Alterar estado civil.");
                     System.out.println("Escolha uma opção:");
-                    op = in.nextInt();
+                    op = in.next().charAt(0);
                     in.nextLine();
                     switch (op) {
-                        case 0:
+                        case '0':
                             System.out.println("Voltando para o menu da conta.");
                             break;
-                        case 1:
+                        case '1':
                             System.out.println("Informe o novo nome:");
                             String nome = in.nextLine();
                             Controll.controllerAlteraPerfilAdm(lge, op, nome);
                             System.out.println("Alteração concluída.");
                             break;
-                        case 2:
+                        case '2':
                             System.out.println("Informe a nova senha:");
                             String ne = in.nextLine();
                             Controll.controllerAlteraPerfilAdm(lge, op, ne);
                             System.out.println("Alteração concluída.");
                             break;
-                        case 3:
+                        case '3':
                             System.out.println("Informe a nova idade:");
                             String ni = in.nextLine();
                             Controll.controllerAlteraPerfilAdm(lge, op, ni);
                             System.out.println("Alteração concluída.");
                             break;
-                        case 4:
+                        case '4':
                             System.out.println("Informe o sexo:");
                             String ns = in.nextLine();
                             while (ns.compareToIgnoreCase("homem") != 0 && ns.compareToIgnoreCase("mulher") != 0 && ns.compareToIgnoreCase("outro") != 0) {
@@ -82,13 +82,13 @@ public class MenuAdministrador {
                             Controll.controllerAlteraPerfilAdm(lge, op, ns);
                             System.out.println("Alteração concluída.");
                             break;
-                        case 5:
+                        case '5':
                             System.out.println("Informe o aniversário:");
                             String na = in.nextLine();
                             Controll.controllerAlteraPerfilAdm(lge, op, na);
                             System.out.println("Alteração concluída.");
                             break;
-                        case 6:
+                        case '6':
                             System.out.println("Informe o estado civil");
                             String nec = in.nextLine();
                             Controll.controllerAlteraPerfilAdm(lge, op, nec);
@@ -98,7 +98,7 @@ public class MenuAdministrador {
                             System.out.println("Escolha inválida.");
                             break;
                     }
-                } while (op != 7);
+                } while (op != '0');
             }
         } else {
             System.out.println("Conta não existe!");
