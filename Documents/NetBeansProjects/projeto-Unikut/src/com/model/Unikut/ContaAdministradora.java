@@ -7,6 +7,6 @@ public class ContaAdministradora extends Conta {
     }
 
     public String exibeContaAdm(Conta exibir) {
-        return exibir.ImprimeInformacoesConta();
+        return exibir.toString();
     }
 }

@@ -12,55 +12,61 @@ public class Controle {
     }
     
     public boolean controllerVerificar(String log) {
-        return s.modelBusca(log);
+        return s.modelBusca(log) && log.contains(".adm") == false;
     }
 
-    public boolean VerificarContaAdm(String log, String sen) {
+    public boolean controllerVerificarContaAdm(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == true;
     }
 
-    public boolean Entrar(String log, String sen) {
-        return s.Entrar(log, sen);
+    public boolean controllerEntrar(String log, String sen) {
+        return s.modelEntrar(log, sen);
     }
 
-    public boolean EntrarAdm(String log, String sen) {
-        return s.EntrarAdm(log, sen);
+    public boolean controllerEntrarAdm(String log, String sen) {
+        return s.modelEntrarAdm(log, sen);
     }
 
-    public boolean Cadastrar(String log, String sen,String nom) {
-        return s.Cadastrar(log, sen, nom);
+    public boolean controllerCadastrar(String log, String sen,String nom) {
+        return s.modelCadastrar(log, sen, nom);
     }
 
-    public boolean CadastrarAdm(String log, String sen) {
-        return s.CadastrarAdm(log, sen);
+    public boolean controllerCadastrarAdm(String log, String sen) {
+        return s.modelCadastrarAdm(log, sen);
     }
 
-    public void alteraPerfil(int resp, String mudanca) {
+    public void controllerAlteraPerfil(int resp, String mudanca) {
 
         switch (resp) {
             case 1:
-                s.alteraNome(mudanca);
+                s.modelAlteraNome(mudanca);
                 break;
             case 2:
-                s.alteraSenha(mudanca);
+                s.modelAlteraSenha(mudanca);
                 break;
             case 3:
-                s.alteraIdade(mudanca);
+                s.modelAlteraIdade(mudanca);
                 break;
             case 4:
-                s.alteraSexo(mudanca);
+                s.modelAlteraSexo(mudanca);
                 break;
             case 5:
-                s.alteraAniversario(mudanca);
+                s.modelAlteraAniversario(mudanca);
                 break;
             case 6:
-                s.alteraEstadoCivil(mudanca);
+                s.modelAlteraEstadoCivil(mudanca);
                 break;
         }
 
     }
 
-   
+    public void controllerAdicionarAmigo(int index){
+        s.modelAdicionarAmigo(index);
+    }
+    
+    public boolean controllerAdicionarSituacao(String login){
+       return s.modelAdicionarSitucao(login); 
+    }
     
     public LinkedList controllerVisualizarAmigos() {
         return s.modelVisualizarAmigos();
@@ -68,19 +74,6 @@ public class Controle {
 
     public LinkedList controllerVisualizarAmigosPedentes() {
         return s.modelVisualizarAmigosPendentes();
-    }
-
-    public void controllerAlterarStatusAmigo(String amigo) {
-        s.modelAlterarStatusAmigo(amigo);
-    }
-    
-    public void AdicionarAmigo(int index){
-        s.AdicionarAmigo(index);
-    }
-    
-    public boolean AdicionaSituacao(String login){
-       return s.AdicionaSitucao(login);
-         
     }
 
     public boolean controllerEnviarRecado(String log, String recado) {
@@ -91,16 +84,16 @@ public class Controle {
         return s.modelEnviarRecadoSecreto(log, recado, sen);
     }
 
-    public boolean controllerEnviarRecadoMural(String msg) {
-        return s.modelEnviarRecadoMural(msg);
+    public boolean controllerEnviarRecadoMural(String msg,String dest) {
+        return s.modelEnviarRecadoMural(msg,dest);
     }
 
     public LinkedList controllerVisualizarRecadosMuralPedente() {
         return s.modelVisualizarRecadoMuralPendente();
     }
 
-    public void controllerRecadosMuralAceito(String recado) {
-        s.modelRecadoMuralAceito(recado);
+    public boolean controllerRecadosMuralAceito(int index) {
+        return s.modelRecadoMuralAceito(index);
     }
 
     public LinkedList controllerVisualizarRecados() {
@@ -115,12 +108,12 @@ public class Controle {
         return s.modelVisualizarRecadosMural();
     }
 
-    public void Match(String log) {
-        s.ArmazenarMatch(log);
+    public void controllerMatch(String log) {
+        s.modelArmazenarMatch(log);
     }
 
-    public LinkedList VerMeusMatchs() {
-        return s.VerMatch();
+    public LinkedList controllerVerMeusMatchs() {
+        return s.modelVerMatch();
     }
 
     public boolean controllerRemoveConta(String lg) {
@@ -133,18 +126,15 @@ public class Controle {
                 s.modelAlteraNomeAdm(lg, mudanca);
                 break;
             case 2:
-                s.modelAlteraSenhaAdm(lg, mudanca);
-                break;
-            case 3:
                 s.modelAlteraIdadeAdm(lg, mudanca);
                 break;
-            case 4:
+            case 3:
                 s.modelAlteraSexoAdm(lg, mudanca);
                 break;
-            case 5:
+            case 4:
                 s.modelAlteraAniversarioAdm(lg, mudanca);
                 break;
-            case 6:
+            case 5:
                 s.modelAlteraEstadoCivilAdm(lg, mudanca);
                 break;
         }

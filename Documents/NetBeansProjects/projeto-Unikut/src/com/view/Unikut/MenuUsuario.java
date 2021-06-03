@@ -32,19 +32,19 @@ public class MenuUsuario {
                 case '1':
                     System.out.println("Informe o novo nome:");
                     String nome = in.nextLine();
-                    Controll.alteraPerfil(op, nome);
+                    Controll.controllerAlteraPerfil(op, nome);
                     System.out.println("Alteração concluída.");
                     break;
                 case '2':
                     System.out.println("Informe a nova senha:");
                     String ne = in.nextLine();
-                    Controll.alteraPerfil(op, ne);
+                    Controll.controllerAlteraPerfil(op, ne);
                     System.out.println("Alteração concluída.");
                     break;
                 case '3':
                     System.out.println("Informe a nova idade:");
                     String ni = in.nextLine();
-                    Controll.alteraPerfil(op, ni);
+                    Controll.controllerAlteraPerfil(op, ni);
                     System.out.println("Alteração concluída.");
                     break;
                 case '4':
@@ -54,19 +54,19 @@ public class MenuUsuario {
                         System.out.println("Insira homem,mulher ou outro");
                         ns = in.nextLine();
                     }
-                    Controll.alteraPerfil(op, ns);
+                    Controll.controllerAlteraPerfil(op, ns);
                     System.out.println("Alteração concluída.");
                     break;
                 case '5':
                     System.out.println("Informe o aniversário:");
                     String na = in.nextLine();
-                    Controll.alteraPerfil(op, na);
+                    Controll.controllerAlteraPerfil(op, na);
                     System.out.println("Alteração concluída.");
                     break;
                 case '6':
                     System.out.println("Informe o estado civil");
                     String nec = in.nextLine();
-                    Controll.alteraPerfil(op, nec);
+                    Controll.controllerAlteraPerfil(op, nec);
                     System.out.println("Alteração concluída.");
                     break;
                 default:
@@ -97,10 +97,10 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuário para enviar a solicitação:");
                     String lg = in.nextLine();
                     if (Controll.controllerVerificar(lg)) {
-                        if (Controll.AdicionaSituacao(lg)) {
+                        if (Controll.controllerAdicionarSituacao(lg)) {
                             System.out.println("Convite Enviado!");
                         } else {
-                            System.out.println("Não é possível se adicionar como amigo.");
+                            System.out.println("Não é possível se adicionar como amigo. Nem adicionar novamente o amigo.");
                         }
                     } else {
                         System.out.println("Usuario não existe!");
@@ -111,23 +111,25 @@ public class MenuUsuario {
                     if (amigos.isEmpty()) {
                         System.out.println("Lista Vazia!");
                     } else {
+                        System.out.println("Lista de amigos!");
                         for (int i = 0; i < amigos.size(); i++) {
                             System.out.println(amigos.get(i));
                         }
                     }
                     break;
                 case '3':
-                    
                     LinkedList amigosPendentes = Controll.controllerVisualizarAmigosPedentes();
                     if (amigosPendentes.isEmpty()) {
                         System.out.println("Lista Vazia!");
                     } else {
                         for (int i = 0; i < amigosPendentes.size(); i++) {
+                            System.out.println("Amigo pendente:");
                             System.out.println(amigosPendentes.get(i));
                             System.out.println("Deseja aceitar amigo?");
                             String resposta = in.nextLine();
-                            if (resposta.compareToIgnoreCase("sim") == 0) {                           
-                                 Controll.AdicionarAmigo(i);
+                            if (resposta.compareToIgnoreCase("sim") == 0) {
+                                Controll.controllerAdicionarAmigo(i);
+                                System.out.println("Amigo adicionado!");
                             } else {
                                 System.out.println("Amigo não aceito.");
                             }
@@ -194,7 +196,7 @@ public class MenuUsuario {
                     if (Controll.controllerVerificar(lgm)) {
                         System.out.println("Informe a mensagem do mural:");
                         String msg = in.nextLine();
-                        Controll.controllerEnviarRecadoMural(msg);
+                        Controll.controllerEnviarRecadoMural(msg,lgm);
                         System.out.println("Recado mural enviado!");
                     } else {
                         System.out.println("Conta não existe!");
@@ -202,14 +204,24 @@ public class MenuUsuario {
                     break;
                 case '4':
                     LinkedList MuralRecadosPendentes = Controll.controllerVisualizarRecadosMuralPedente();
-                    for (int i = 0; i < MuralRecadosPendentes.size(); i++) {
-                        System.out.println(MuralRecadosPendentes.get(i));
-                        System.out.println("Deseja aceitar recados?Sim ou Nao");
-                        String resposta = in.nextLine();
-                        if (resposta.compareToIgnoreCase("sim") == 0) {
-                            Controll.controllerRecadosMuralAceito((String) MuralRecadosPendentes.get(i));
-                        } else {
-                            System.out.println("Recado do mural não aceito.");
+                    if (MuralRecadosPendentes.isEmpty()) {
+                        System.out.println("Lista Vazia!");
+                    } else {
+                        for (int i = 0; i < MuralRecadosPendentes.size(); i++) {
+                            System.out.println("Mural recado pendente:");
+                            System.out.println(MuralRecadosPendentes.get(i));
+                            System.out.println("Deseja aceitar mural recado?");
+                            String resposta = in.nextLine();
+                            if (resposta.compareToIgnoreCase("sim") == 0) {
+                                if(Controll.controllerRecadosMuralAceito(i) == true){
+                                    System.out.println("Recado mural adicionado.");
+                                }
+                                else{
+                                    System.out.println("Mural recado não pode ser aceito por quem enviou.");
+                                }
+                            } else {
+                                System.out.println("Mural recado não aceito.");
+                            }
                         }
                     }
                     break;
@@ -238,7 +250,7 @@ public class MenuUsuario {
                 case '7':
                     LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
                     if (recadosMural.isEmpty()) {
-                        System.out.println("Lista de recados vazia!");
+                        System.out.println("Lista de recados do mural vazia!");
                     } else {
                         for (int i = 0; i < recadosMural.size(); i++) {
                             System.out.println(recadosMural.get(i));
@@ -272,20 +284,20 @@ public class MenuUsuario {
                     String lgn;
                     lgn = in.nextLine();
                     Controll.controllerVerificar(lgn);
-                    if (!Controll.controllerVerificar(lgn)){
+                    if (!Controll.controllerVerificar(lgn)) {
                         System.out.println("A conta não existe!");
                     } else {
-                        Controll.Match(lgn);
+                        Controll.controllerMatch(lgn);
                         System.out.println("Match concluído!");
                     }
                     break;
                 case '2':
-                    LinkedList Match = Controll.VerMeusMatchs();
+                    LinkedList Match = Controll.controllerVerMeusMatchs();
                     if (Match.isEmpty()) {
                         System.out.println("Lista de recados vazia!");
                     } else {
                         for (int i = 0; i < Match.size(); i++) {
-                            System.out.println(Match.get(i));                      
+                            System.out.println(Match.get(i));
                         }
                     }
                     break;

@@ -301,9 +301,6 @@ public class Conta implements Comparable<Conta> {
             return null;
         }
     }
- 
-        
-   
     
    public String AdicionarAmigo(int index){
       String log;
@@ -340,7 +337,6 @@ public class Conta implements Comparable<Conta> {
         }
            
     }
- 
 
     public LinkedList ExibirMatch() {
         if (this.Match.isEmpty()) {
@@ -348,15 +344,6 @@ public class Conta implements Comparable<Conta> {
         } else {
             return Match;
         }
-    }
-
-    public String ImprimeInformacoesConta() {
-        return this.login + " " + this.nome + " " + this.idade + " " + this.sexo + " " + this.aniversario + " " + this.estadoCivil;
-    }
-
-    @Override
-    public String toString() {
-        return this.login;
     }
 
     @Override

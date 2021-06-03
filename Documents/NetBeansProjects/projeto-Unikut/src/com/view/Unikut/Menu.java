@@ -15,7 +15,7 @@ public class Menu {
         login = in.nextLine();
         System.out.println("Informe a senha:");
         senha = in.nextLine();
-        return Controll.Entrar(login, senha);
+        return Controll.controllerEntrar(login, senha);
     }
 
     public boolean entrarAdm() {
@@ -24,7 +24,7 @@ public class Menu {
         login = in.nextLine();
         System.out.println("Informe a senha:");
         senha = in.nextLine();
-        return Controll.EntrarAdm(login, senha);
+        return Controll.controllerEntrarAdm(login, senha);
     }
 
     public void cadastrar() {
@@ -44,18 +44,20 @@ public class Menu {
                 case 's':
                     System.out.println("Informe o nome:");
                     nome = in.nextLine();
-                    if (Controll.Cadastrar(lg, s, nome)) {
+                    if (Controll.controllerCadastrar(lg, s, nome)) {
                         System.out.println("Conta do usuário com nome criada com sucesso!");
                     } else {
                         System.out.println("Conta do usuário já existente!");
-                    }   break;
+                    }
+                    break;
                 case 'N':
                 case 'n':
-                    if (Controll.Cadastrar(lg, s, nome)) {
+                    if (Controll.controllerCadastrar(lg, s, nome)) {
                         System.out.println("Conta do usuário sem nome criada com sucesso!");
                     } else {
                         System.out.println("Conta do usuário já existente!");
-                    }   break;
+                    }
+                    break;
                 default:
                     System.out.println("Resposta inválida!");
                     break;
@@ -69,12 +71,15 @@ public class Menu {
         String lg = in.nextLine();
         System.out.println("Informe a senha:");
         String s = in.nextLine();
-
-        if (!Controll.controllerVerificarConta(lg, s)) {
-            Controll.CadastrarAdm(lg, s);
-            System.out.println("Conta do administrador criada com sucesso!");
+        if (lg.contains(".adm") == true) {
+            if (!Controll.controllerVerificarConta(lg, s)) {
+                Controll.controllerCadastrarAdm(lg, s);
+                System.out.println("Conta do administrador criada com sucesso!");
+            } else {
+                System.out.println("Conta do administrador já existente!");
+            }
         } else {
-            System.out.println("Conta do administrador já existente!");
+            System.out.println("Para criar conta administradora adicione (.adm) no seu login.");
         }
     }
 }
