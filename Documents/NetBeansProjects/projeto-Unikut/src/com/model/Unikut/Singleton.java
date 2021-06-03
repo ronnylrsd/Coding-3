@@ -281,31 +281,11 @@ public class Singleton {
         return rede.remove(usuario);
     }
 
-    public void modelAlteraNomeAdm(String log, String n) {
+    public void modelAlterarConta(String log,char resp,String mud){
         Conta Usuario = busca(log);
-        Usuario.setNome(n);
+        Usuario.alterarDadosAdm(resp, mud);
     }
-
-    public void modelAlteraIdadeAdm(String log, String id) {
-        Conta Usuario = busca(log);
-        Usuario.setIdade(id);
-    }
-
-    public void modelAlteraSexoAdm(String log, String sex) {
-        Conta Usuario = busca(log);
-        Usuario.setSexo(sex);
-    }
-
-    public void modelAlteraAniversarioAdm(String log, String aniver) {
-        Conta Usuario = busca(log);
-        Usuario.setAniversario(aniver);
-    }
-
-    public void modelAlteraEstadoCivilAdm(String log, String est) {
-        Conta Usuario = busca(log);
-        Usuario.setEstadoCivil(est);
-    }
-
+    
     public String modelExibeConta(String log) {
         Conta Usuario = busca(log);
         String l = "Login: "+Usuario.getLogin()+".",nom,idd,sex,ani,estC;

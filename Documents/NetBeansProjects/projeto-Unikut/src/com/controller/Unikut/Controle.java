@@ -120,24 +120,8 @@ public class Controle {
         return s.modelRemoveConta(lg);
     }
 
-    public void controllerAlteraPerfilAdm(String lg, int resp, String mudanca) {
-        switch (resp) {
-            case 1:
-                s.modelAlteraNomeAdm(lg, mudanca);
-                break;
-            case 2:
-                s.modelAlteraIdadeAdm(lg, mudanca);
-                break;
-            case 3:
-                s.modelAlteraSexoAdm(lg, mudanca);
-                break;
-            case 4:
-                s.modelAlteraAniversarioAdm(lg, mudanca);
-                break;
-            case 5:
-                s.modelAlteraEstadoCivilAdm(lg, mudanca);
-                break;
-        }
+    public void controllerAlteraPerfilAdm(String lg, char resp, String mudanca) {
+        s.modelAlterarConta(lg, resp, mudanca);
     } 
 
     public String controllerExibeConta(String lg) {

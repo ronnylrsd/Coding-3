@@ -1,7 +1,6 @@
 package com.view.Unikut;
 import java.util.Scanner;
 
-
 public class ProjetoUnikut {
 
     public static void main(String[] args) {

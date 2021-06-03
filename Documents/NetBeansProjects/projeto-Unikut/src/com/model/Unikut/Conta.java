@@ -175,31 +175,6 @@ public class Conta implements Comparable<Conta> {
         this.Recadocomsenha = Recadocomsenha;
     }
 
-    public void alterarDados(Conta result, String info, int resp) {
-
-        switch (resp) {
-            case 1:
-                result.setNome(info);
-                break;
-            case 2:
-                result.setSenha(info);
-                break;
-            case 3:
-                result.setIdade(info);
-                break;
-            case 4:
-                result.setSexo(info);
-                break;
-            case 5:
-                result.setAniversario(info);
-
-                break;
-            case 6:
-                result.setEstadoCivil(info);
-                break;
-        }
-    }
-
     protected String buscaAmigos(String amigo) {
         for (String c : amigos) {
             if (c.contains(amigo) == true) {
@@ -226,7 +201,7 @@ public class Conta implements Comparable<Conta> {
         }
         return -1;
     }
-    
+
     public String AdicionarAmigo(int index) {
         String log;
         log = this.Solicitacoes.get(index);
@@ -286,8 +261,8 @@ public class Conta implements Comparable<Conta> {
             return null;
         }
     }
-    
-    public boolean verificarMatch(String match){
+
+    public boolean verificarMatch(String match) {
         return this.Match.contains(match + ": PENDENTE");
     }
 
@@ -334,6 +309,31 @@ public class Conta implements Comparable<Conta> {
         } else {
             return Match;
         }
+    }
+
+    public void alterarDadosAdm(char resp, String info) {
+        switch (resp) {
+            case '1':
+                this.setNome(info);
+                break;
+            case '2':
+                this.setIdade(info);
+                break;
+            case '3':
+                this.setSexo(info);
+                break;
+            case '4':
+                this.setAniversario(info);
+                break;
+            case '5':
+                this.setEstadoCivil(info);
+                break;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.login;
     }
 
     @Override
