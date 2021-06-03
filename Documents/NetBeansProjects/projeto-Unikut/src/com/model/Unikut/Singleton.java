@@ -149,7 +149,6 @@ public class Singleton {
     public void modelAlteraNome(String nome) {
         Conta Usuario = buscaSimples(login, senha);
         Usuario.setNome(nome);
-
     }
 
     public void modelAlteraSenha(String sen) {

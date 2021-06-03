@@ -21,7 +21,7 @@ public class MenuAdministrador {
 
             }
         } else {
-            System.out.println("Conta não existe!");
+            System.out.println("Conta de usuário não existe!");
         }
     }
 
