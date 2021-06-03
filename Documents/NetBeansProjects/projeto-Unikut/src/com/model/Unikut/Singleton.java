@@ -181,13 +181,11 @@ public class Singleton {
     
     public boolean modelAdicionarAmigos(String loginAmigo) {
         Conta Usuario = buscaSimples(login,senha);
-        Conta Amigo = busca(loginAmigo);
         if(login.compareTo(loginAmigo)==0){
             return false;
         }
         else{
             Usuario.adicionaAmigos(loginAmigo);
-            Amigo.adicionaAmigos(login);
             return true;
         }
     }

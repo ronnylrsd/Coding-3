@@ -204,9 +204,9 @@ public class Conta implements Comparable<Conta> {
     }
     
     public LinkedList listaAmigosPendentes(){
-        LinkedList amigosPendentes = new LinkedList();
-        for (int i = 0; i < amigosPendentes.size(); i++) {
-            if (amigos.get(i).contains(login) == true) {
+        LinkedList<String> amigosPendentes = new LinkedList();
+        for (int i = 0; i < amigos.size(); i++) {
+            if (amigos.get(i).contains("Pendente")) {
                 amigosPendentes.add(amigos.get(i));
             }
         }
@@ -216,7 +216,7 @@ public class Conta implements Comparable<Conta> {
     public void alteraStatusAmigo(String amigo) {
         for (int i = 0; i < amigos.size(); i++) {
             if (amigos.get(i).compareTo(amigo) == 0) {
-                amigos.add(i, amigos.get(i).replace("Pendente", ": Amigo."));
+                amigos.add(i, amigos.get(i).replace("Pendente","Amigo"));
             }
         }
     }

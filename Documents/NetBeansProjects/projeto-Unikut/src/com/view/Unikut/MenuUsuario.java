@@ -124,7 +124,7 @@ public class MenuUsuario {
                         for (int i = 0; i < amigosPendentes.size(); i++) {
                             System.out.println(amigosPendentes.get(i));
                             System.out.println("Deseja aceitar amigo?");
-                            String resposta = in.nextLine();
+                            String resposta = in.nextLine(); in.nextLine();
                             if (resposta.compareToIgnoreCase("sim") == 0) {
                                 Controll.controllerAlterarStatusAmigo((String) amigosPendentes.get(i));
                             } else {
