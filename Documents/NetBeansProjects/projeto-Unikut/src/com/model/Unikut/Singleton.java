@@ -183,16 +183,7 @@ public class Singleton {
         Usuario.setEstadoCivil(est);
     }
     
-    public boolean modelAdicionarAmigos(String loginAmigo) {
-        Conta Usuario = buscaSimples(login,senha);
-        if(login.compareTo(loginAmigo)==0){
-            return false;
-        }
-        else{
-            Usuario.adicionaAmigos(loginAmigo);
-            return true;
-        }
-    }
+    
     
     public LinkedList modelVisualizarAmigos() {
         Conta usuario = buscaSimples(login, senha);
@@ -202,8 +193,27 @@ public class Singleton {
 
     public LinkedList modelVisualizarAmigosPendentes() {
         Conta usuario = buscaSimples(login, senha);
-        return usuario.listaAmigosPendentes();
+        return usuario.getSolicitacoes();
     }
+    
+    public void AdicionarAmigo(int index){
+         Conta usuario = buscaSimples(login, senha); 
+         String log;
+         log=usuario.AdicionarAmigo(index);
+         
+         Conta Amigo=busca(log);
+         Amigo.getAmigos().add(login);
+        
+    }
+    
+    public boolean AdicionaSitucao(String log){
+         Conta usuario = buscaSimples(login, senha); 
+         Conta Situacao = busca(log);
+         
+        return Situacao.AdicionaSolicitacao(login);
+        
+    }
+    
     
     public void modelAlterarStatusAmigo(String amigo) {
         Conta usuario = buscaSimples(login, senha);

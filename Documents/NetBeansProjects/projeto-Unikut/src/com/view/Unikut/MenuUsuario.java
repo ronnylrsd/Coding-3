@@ -97,8 +97,8 @@ public class MenuUsuario {
                     System.out.println("Informe o login do usuário para enviar a solicitação:");
                     String lg = in.nextLine();
                     if (Controll.controllerVerificar(lg)) {
-                        if (Controll.controllerAdicionarAmigo(lg)) {
-                            System.out.println("Amigo adicionado!");
+                        if (Controll.AdicionaSituacao(lg)) {
+                            System.out.println("Convite Enviado!");
                         } else {
                             System.out.println("Não é possível se adicionar como amigo.");
                         }
@@ -117,6 +117,7 @@ public class MenuUsuario {
                     }
                     break;
                 case '3':
+                    
                     LinkedList amigosPendentes = Controll.controllerVisualizarAmigosPedentes();
                     if (amigosPendentes.isEmpty()) {
                         System.out.println("Lista Vazia!");
@@ -124,9 +125,9 @@ public class MenuUsuario {
                         for (int i = 0; i < amigosPendentes.size(); i++) {
                             System.out.println(amigosPendentes.get(i));
                             System.out.println("Deseja aceitar amigo?");
-                            String resposta = in.nextLine(); in.nextLine();
-                            if (resposta.compareToIgnoreCase("sim") == 0) {
-                                Controll.controllerAlterarStatusAmigo((String) amigosPendentes.get(i));
+                            String resposta = in.nextLine();
+                            if (resposta.compareToIgnoreCase("sim") == 0) {                           
+                                 Controll.AdicionarAmigo(i);
                             } else {
                                 System.out.println("Amigo não aceito.");
                             }
