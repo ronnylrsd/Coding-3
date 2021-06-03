@@ -4,15 +4,27 @@ import java.util.LinkedList;
 
 public class Singleton {
 
-    protected LinkedList<Conta> rede;
-    protected LinkedList<String> mural;
+    private static Singleton instance;
+    private LinkedList<Conta> rede;
+    private LinkedList<String> mural;
     private String login, senha;
-    
-    public Singleton(){//cria a lista
+
+    private Singleton() {//cria a lista
         rede = new LinkedList<>();
         mural = new LinkedList<>();
     }
-    
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    public static void setInstance(Singleton instance) {
+        Singleton.instance = instance;
+    }
+
     public LinkedList<Conta> getRede() {
         return rede;
     }
@@ -46,8 +58,8 @@ public class Singleton {
     }
 
     public Conta buscaSimples(String log, String sen) {
-        for(Conta c: rede){
-            if(c.getLogin().compareTo(log) == 0 && c.getSenha().compareTo(sen) == 0){
+        for (Conta c : rede) {
+            if (c.getLogin().compareTo(log) == 0 && c.getSenha().compareTo(sen) == 0) {
                 return c;
             }
         }
@@ -203,13 +215,13 @@ public class Singleton {
     }
 
     public LinkedList modelVisualizarRecados() {
-        Conta usuario = buscaSimples(login,senha);
+        Conta usuario = buscaSimples(login, senha);
         LinkedList lista = usuario.listaRecados();
         return lista;
     }
 
     public LinkedList modelVisualizarRecadoSecreto(String sen) {
-        Conta usuario = buscaSimples(login,senha);
+        Conta usuario = buscaSimples(login, senha);
         LinkedList lista = usuario.listaRecadosComSenha(sen);
         return lista;
     }

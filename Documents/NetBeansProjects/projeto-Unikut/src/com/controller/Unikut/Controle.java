@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Controle {
 
-    Singleton s = new Singleton();
+    Singleton s = Singleton.getInstance();
 
     public boolean VerificarConta(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == false;
@@ -24,13 +24,11 @@ public class Controle {
     }
 
     public boolean Cadastrar(String log, String sen) {
-        s.Cadastrar(log, sen);
-        return true;
+        return s.Cadastrar(log, sen);
     }
 
     public boolean CadastrarAdm(String log, String sen) {
-        s.CadastrarAdm(log, sen);
-        return true;
+        return s.CadastrarAdm(log, sen);
     }
 
     public void alteraPerfil(int resp, String mudanca) {

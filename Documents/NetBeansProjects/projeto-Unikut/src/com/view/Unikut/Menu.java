@@ -46,8 +46,7 @@ public class Menu {
         System.out.println("Informe a senha:");
         String s = in.nextLine();
         //cadastrar com o nome faltando
-        if (!Controll.VerificarConta(lg, s)) {
-            Controll.Cadastrar(lg, s);
+        if (Controll.Cadastrar(lg, s)) {
             System.out.println("Conta do usuário criada com sucesso!");
         } else {
             System.out.println("Conta do usuário já existente!");
