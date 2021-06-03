@@ -138,7 +138,7 @@ public class Controle {
                 s.modelAlteraEstadoCivilAdm(lg, mudanca);
                 break;
         }
-    }
+    } 
 
     public String controllerExibeConta(String lg) {
         return s.modelExibeConta(lg);

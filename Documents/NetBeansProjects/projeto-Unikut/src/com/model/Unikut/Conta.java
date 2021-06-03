@@ -16,18 +16,18 @@ public class Conta implements Comparable<Conta> {
     private LinkedList<String> Match;
     private String situacao;
     private String senhaRecado;
-    private LinkedList<String> Recadocomsenha;  
+    private LinkedList<String> Recadocomsenha;
     private LinkedList<String> Solicitacoes;
-    
+
     public Conta(String log, String senha) {
         this.login = log;
         this.senha = senha;
         this.nome = "convidado";
         this.amigos = new LinkedList<>();
         this.recados = new LinkedList<>();
-        this.Match = new LinkedList();
+        this.Match = new LinkedList<>();
         this.situacao = "espera";
-        this.Solicitacoes= new LinkedList<>();
+        this.Solicitacoes = new LinkedList<>();
         this.Recadocomsenha = new LinkedList<>();
 
     }
@@ -38,23 +38,25 @@ public class Conta implements Comparable<Conta> {
         this.nome = nome;
         this.amigos = new LinkedList();
         this.recados = new LinkedList<>();
-        this.Solicitacoes= new LinkedList<>(); 
+        this.Solicitacoes = new LinkedList<>();
         this.Recadocomsenha = new LinkedList<>();
+        this.Match = new LinkedList<>();
+        this.situacao = "espera";
     }
 
     public Conta(String log) {
         this.login = log;
-        this.amigos = new LinkedList();
+        this.amigos = new LinkedList<>();
         this.situacao = "espera";
-        this.Match = new LinkedList();
-         this.Solicitacoes= new LinkedList<>();
+        this.Match = new LinkedList<>();
+        this.Solicitacoes = new LinkedList<>();
     }
 
     public Conta() {
         this.amigos = new LinkedList<>();
         this.recados = new LinkedList<>();
         this.Recadocomsenha = new LinkedList<>();
-        this.Solicitacoes= new LinkedList<>();
+        this.Solicitacoes = new LinkedList<>();
     }
 
     public String getLogin() {
@@ -161,7 +163,6 @@ public class Conta implements Comparable<Conta> {
         this.Solicitacoes = Solicitacoes;
     }
 
-
     public void setsenhaRecado(String senhaRecado) {
         this.senhaRecado = senhaRecado;
     }
@@ -207,29 +208,16 @@ public class Conta implements Comparable<Conta> {
         }
         return null;
     }
-   
-   
-    
-    public boolean AdicionaSolicitacao(String login){
-    if(this.Solicitacoes.contains(login)){
-        return false;
-    }else{
-        this.Solicitacoes.add(login);
-        return true;
-    }
-    } 
-    
 
-    
-    protected int buscaMatch(String amigo) {
-        for (String c : Match) {
-            if (c.contains(amigo) == true) {
-                return c.indexOf(amigo);
-            }
+    public boolean AdicionaSolicitacao(String login) {
+        if (this.Solicitacoes.contains(login)) {
+            return false;
+        } else {
+            this.Solicitacoes.add(login);
+            return true;
         }
-        return 0;
     }
-    
+
     protected int buscaSituacao(String amigo) {
         for (String c : Solicitacoes) {
             if (c.contains(amigo) == true) {
@@ -238,23 +226,20 @@ public class Conta implements Comparable<Conta> {
         }
         return -1;
     }
-
-    public boolean adicionaAmigos(String loginAmigo) {
-        if (buscaAmigos(login) != null) {
-            return false;
-        } else {
-            String status = "Pendente";
-            this.amigos.add(loginAmigo + ": " + status + ".");
-            return true;
-        }
-    }
     
-   
+    public String AdicionarAmigo(int index) {
+        String log;
+        log = this.Solicitacoes.get(index);
+        this.amigos.add(log);
+        this.Solicitacoes.remove(index);
+        return log;
+    }
+
     public LinkedList listaAmigos() {
         return amigos;
     }
-    
-    public LinkedList listaAmigosPendentes(){
+
+    public LinkedList listaAmigosPendentes() {
         LinkedList<String> amigosPendentes = new LinkedList();
         for (int i = 0; i < amigos.size(); i++) {
             if (amigos.get(i).contains("Pendente")) {
@@ -267,7 +252,7 @@ public class Conta implements Comparable<Conta> {
     public void alteraStatusAmigo(String amigo) {
         for (int i = 0; i < amigos.size(); i++) {
             if (amigos.get(i).compareTo(amigo) == 0) {
-                amigos.add(i, amigos.get(i).replace("Pendente","Amigo"));
+                amigos.add(i, amigos.get(i).replace("Pendente", "Amigo"));
             }
         }
     }
@@ -302,40 +287,45 @@ public class Conta implements Comparable<Conta> {
         }
     }
     
-   public String AdicionarAmigo(int index){
-      String log;
-     log = this.Solicitacoes.get(index);
-     this.amigos.add(log);
-     this.Solicitacoes.remove(index);
-     return log;
-       
-   }
+    public boolean verificarMatch(String match){
+        return this.Match.contains(match + ": PENDENTE");
+    }
+
+    protected int buscaMatch(String amigo) {
+        for (String c : Match) {
+            if (c.contains(amigo) == true) {
+                return c.indexOf(amigo);
+            }
+        }
+        return 0;
+    }
 
     public boolean AdicionarMatch(String passada, String flag) {
         if (this.Match.contains(passada)) {
             return false;
         } else if (flag.equals("Match")) {
-            
-            this.Match.add(passada+": MATCH");
+
+            this.Match.add(passada + ": MATCH");
             return true;
         } else {
-            this.Match.add(passada+": PENDENTE");
+            this.Match.add(passada + ": PENDENTE");
             return true;
         }
     }
-    
-    public void AlteraMatch(String login){
-     int i= Match.indexOf(login+": PENDENTE");
-     Match.set(i,login+" MATCH");
-        
+
+    public void AlteraMatch(String login) {
+        int i = Match.indexOf(login + ": PENDENTE");
+        Match.set(i, login + " MATCH");
+
     }
-    public boolean ValidaMatch(String login){
-        if(this.Match.contains(login)){
+
+    public boolean ValidaMatch(String login) {
+        if (this.Match.contains(login)) {
             return true;
-        }else{
+        } else {
             return false;
         }
-           
+
     }
 
     public LinkedList ExibirMatch() {
