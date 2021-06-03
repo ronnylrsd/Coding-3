@@ -1,6 +1,5 @@
 package com.model.Unikut;
 
-
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -193,17 +192,18 @@ public class Conta implements Comparable<Conta> {
         }
     }
 
-    public boolean adicionaAmigos(Conta result) {
-
-        Conta conta = new Conta(login, senha);
-
-        if (buscaAmigos(result) == null) {
-            this.amigos.add(result);
-            result.amigos.add(conta);
-            return true;
-        } else {
-            return false;
+    protected Conta buscaAmigos(Conta ct) {
+        for (Conta c : amigos) {
+            if (c.getLogin().compareTo(ct.getLogin()) == 0 && c.getSenha().compareTo(ct.getSenha()) == 0) {
+                return c;
+            }
         }
+        return null;
+    }
+
+    public void adicionaAmigos(Conta usuario, Conta amigo) {
+        this.amigos.add(amigo);
+        amigo.amigos.add(usuario);
     }
 
     public LinkedList listaAmigos() {
@@ -211,16 +211,6 @@ public class Conta implements Comparable<Conta> {
             return null;
         } else {
             return amigos;
-        }
-    }
-
-    protected Conta buscaAmigos(Conta ct) {
-        Collections.sort(amigos);
-        int index = Collections.binarySearch(amigos, ct);
-        if (index < 0) {
-            return null;
-        } else {
-            return amigos.get(index);
         }
     }
 
@@ -241,7 +231,7 @@ public class Conta implements Comparable<Conta> {
     public boolean adicionaRecado(String lg, String recado) {
         return recados.add(lg + ": " + recado);
     }
-    
+
     public boolean adicionaRecadoComSenha(String lg, String recado, String senha1) {
         setsenhaRecado(senha1);
         return Recadocomsenha.add(lg + ": " + recado);
@@ -254,7 +244,7 @@ public class Conta implements Comparable<Conta> {
             return recados;
         }
     }
-    
+
     public LinkedList listaRecadosComSenha(String senha2) {
         String SenhaReal = getsenhaRecado();
         if (SenhaReal.equals(senha2)) {
@@ -270,7 +260,7 @@ public class Conta implements Comparable<Conta> {
 
     public boolean AdicionarMatch(Conta passada, String flag) {
         if (this.Match.contains(passada)) {
-           return false;
+            return false;
         } else if (flag.equals("Match")) {
             passada.setSituacao();// mudou para Match
             this.Match.add(passada);
@@ -310,14 +300,14 @@ public class Conta implements Comparable<Conta> {
             return Match;
         }
     }
-    
+
     public String ImprimeInformacoesConta() {
-        return this.login+" "+this.nome+" "+this.idade+" "+this.sexo+" "+this.aniversario+" "+this.estadoCivil;
+        return this.login + " " + this.nome + " " + this.idade + " " + this.sexo + " " + this.aniversario + " " + this.estadoCivil;
     }
-    
+
     @Override
     public String toString() {
-        return this.login+" "+this.status;
+        return this.login + " " + this.status;
     }
 
     @Override

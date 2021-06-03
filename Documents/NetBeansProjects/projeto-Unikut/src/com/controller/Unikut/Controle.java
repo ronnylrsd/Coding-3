@@ -10,6 +10,10 @@ public class Controle {
     public boolean VerificarConta(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == false;
     }
+    
+    public boolean controllerVerificar(String log) {
+        return s.modelBusca(log);
+    }
 
     public boolean VerificarContaAdm(String log, String sen) {
         return s.buscaSimples(log, sen) != null && log.contains(".adm") == true;
@@ -58,11 +62,9 @@ public class Controle {
 
     public boolean AdicionarAmigo(String log) {
         return s.adicionarAmigos(log);
-
     }
 
     public LinkedList ControlListaAmigos() {
-
         return s.ListaDeAmigos();
 
     }

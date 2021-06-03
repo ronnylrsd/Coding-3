@@ -93,32 +93,35 @@ public class MenuUsuario {
                 case 1:
                     System.out.println("Informe o login do usuário para enviar a solicitação:");
                     String lg = in.nextLine();
-                    if (Controll.VerificarConta(lg, " ")) {
+                    if (Controll.controllerVerificar(lg)) {
                         if (Controll.AdicionarAmigo(lg)) {
-                            System.out.println("Amigo adicionado com sucesso");
+                            System.out.println("Amigo adicionado com sucesso!");
                         } else {
-                            System.out.println("Amigo ja adicionado");
+                            System.out.println("Amigo ja adicionado!");
                         }
 
                     } else {
-                        System.out.println("Usuario Nao Existe");
+                        System.out.println("Usuario não existe!");
                     }
                     break;
                 case 2:
-                    LinkedList s = Controll.ControlListaAmigos();
-                    for (int i = 0; i < s.size(); i++) {
-                        System.out.println(s.get(i));
+                    LinkedList amigos = Controll.ControlListaAmigos();
+                    if (amigos.isEmpty()) {
+                        System.out.println("Lista Vazia!");
+                    } else {
+                        for (int i = 0; i < amigos.size(); i++) {
+                            System.out.println(amigos.get(i));
+                        }
                     }
-
                     break;
                 case 3:
                     System.out.println("Informe o login do usuário para alterar status:");
                     String l = in.nextLine();
                     if (Controll.VerificarConta(l, "") && login.compareTo(l) != 0) {
-                        System.out.println("Status de amigo atualizado");
+                        System.out.println("Status de amigo atualizado!");
                         Controll.StatusDeAmigos(l);
                     } else {
-                        System.out.println("Usuario não existe");
+                        System.out.println("Usuario não existe!");
                     }
 
                     break;

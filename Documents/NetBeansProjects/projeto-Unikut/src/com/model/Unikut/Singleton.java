@@ -65,6 +65,15 @@ public class Singleton {
         }
         return null;
     }
+    
+    public boolean modelBusca(String log) {
+        for (Conta c : rede) {
+            if (c.getLogin().compareTo(log) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean Entrar(String log, String sen) {  // adicionar exception
         Conta Usuario = buscaSimples(log, sen);
@@ -129,6 +138,18 @@ public class Singleton {
             return true;
         }
     }
+    
+    public boolean adicionarAmigos(String log) {
+        Conta Usuario = buscaSimples(login, senha);
+        Conta Amigo = buscaSimples(log, "");
+        if(Usuario.getAmigos().contains(Amigo)){
+            return false;
+        }
+        else{
+            Usuario.adicionaAmigos(Usuario,Amigo);
+            return true;
+        }
+    }
 
     public LinkedList ListaDeAmigos() {
         Conta Usuario = buscaSimples(login, senha);
@@ -165,13 +186,6 @@ public class Singleton {
     public void alteraEstadoCivil(String est) {
         Conta Usuario = buscaSimples(login, senha);
         Usuario.setEstadoCivil(est);
-    }
-
-    public boolean adicionarAmigos(String log) {
-        Conta Usuario = buscaSimples(login, senha);
-        Conta Amigo = buscaSimples(log, "");
-        return Usuario.adicionaAmigos(Amigo);
-
     }
 
     public boolean alteraStatus(String log) {
