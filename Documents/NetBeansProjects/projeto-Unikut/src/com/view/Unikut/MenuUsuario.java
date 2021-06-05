@@ -84,9 +84,9 @@ public class MenuUsuario {
                 System.out.println("Lista Vazia!");
             } else {
                 System.out.println("Lista de amigos!");
-                for (int i = 0; i < amigos.size(); i++) {
-                    System.out.println(amigos.get(i));
-                }
+                amigos.forEach((o) -> {
+                    System.out.println(o);
+                });
             }
         }
     }
