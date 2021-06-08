@@ -40,6 +40,7 @@ public class ContaUsuario extends Conta {
     public ContaUsuario(String log) {
         super(log);
         this.amigos = new LinkedList<>();
+        this.recados = new LinkedList<>();
         this.situacao = "espera";
         this.Match = new LinkedList<>();
         this.Solicitacoes = new LinkedList<>();

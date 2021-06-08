@@ -150,28 +150,12 @@ public class MenuUsuario {
             }
         } while (op != '0');
     }
-
-    class threadExibirRecadosMural {
-
-        void executeTask2() {
-
-            LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
-            if (recadosMural.isEmpty()) {
-                System.out.println("Lista de recados do mural vazia!");
-            } else {
-                for (int i = 0; i < recadosMural.size(); i++) {
-                    System.out.println(recadosMural.get(i));
-                }
-            }
-
-        }
-    }
-
+    
     class threadExibirRecados {
 
-        void executeTask() {
+        void executeTask2() {
             LinkedList recados = Controll.controllerVisualizarRecados();
-            if (recados.isEmpty()) {
+            if (recados == null) {
                 System.out.println("Lista de recados vazia!");
             } else {
                 for (int i = 0; i < recados.size(); i++) {
@@ -196,6 +180,22 @@ public class MenuUsuario {
                 }
             } else {
                 System.out.println("Senha Incorreta!");
+            }
+
+        }
+    }
+    
+    class threadExibirRecadosMural {
+
+        void executeTask4() {
+
+            LinkedList recadosMural = Controll.controllerVisualizarMuralRecados();
+            if (recadosMural.isEmpty()) {
+                System.out.println("Lista de recados do mural vazia!");
+            } else {
+                for (int i = 0; i < recadosMural.size(); i++) {
+                    System.out.println(recadosMural.get(i));
+                }
             }
 
         }
@@ -283,16 +283,16 @@ public class MenuUsuario {
                     }
                     break;
                 case '5':
-                    threadExibirRecados task = new threadExibirRecados();
-                    task.executeTask();
+                    threadExibirRecados task2 = new threadExibirRecados();
+                    task2.executeTask2();
                     break;
                 case '6':
                     threadExibirRecadosSegredo task3 = new threadExibirRecadosSegredo();
                     task3.executeTask3();
                     break;
                 case '7':
-                    threadExibirRecadosMural task2 = new threadExibirRecadosMural();
-                    task2.executeTask2();
+                    threadExibirRecadosMural task4 = new threadExibirRecadosMural();
+                    task4.executeTask4();
                     break;
                 default:
                     System.out.println("Escolha inválida. Tente novamente.");
@@ -331,7 +331,7 @@ public class MenuUsuario {
                 case '2':
                     LinkedList Match = Controll.controllerVerMeusMatchs();
                     if (Match.isEmpty()) {
-                        System.out.println("Lista de recados vazia!");
+                        System.out.println("Lista de matches vazia!");
                     } else {
                         for (int i = 0; i < Match.size(); i++) {
                             System.out.println(Match.get(i));
