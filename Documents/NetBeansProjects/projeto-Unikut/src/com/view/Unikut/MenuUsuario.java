@@ -171,7 +171,7 @@ public class MenuUsuario {
 
         void executeTask() {
             LinkedList recados = Controll.controllerVisualizarRecados();
-            if (recados.isEmpty()) {
+            if (recados==null) {
                 System.out.println("Lista de recados vazia!");
             } else {
                 for (int i = 0; i < recados.size(); i++) {
