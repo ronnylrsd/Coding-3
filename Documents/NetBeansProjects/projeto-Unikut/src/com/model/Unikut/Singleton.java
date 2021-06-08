@@ -122,7 +122,7 @@ public class Singleton {
     public boolean modelCadastrar(String log, String sen, String n) {
         Conta busca = buscaSimples(log, sen);
         if (busca == null && !log.contains(".adm")) {
-            ContaUsuario usuario = new ContaUsuario(log, sen, n);
+            ContaUsuario usuario = (ContaUsuario) ContaFactory.getConta(log,sen,n);
             rede.add(usuario);
             return true;
         } else {
@@ -133,7 +133,7 @@ public class Singleton {
     public boolean modelCadastrarAdm(String log, String sen) {
         Conta busca = buscaSimples(log, sen);
         if (busca == null && log.contains(".adm")) {
-            ContaAdministradora adm = new ContaAdministradora(log, sen);
+            ContaAdministradora adm = (ContaAdministradora) ContaFactory.getConta(log,sen,"");
             rede.add(adm);
             return true;
         } else {
