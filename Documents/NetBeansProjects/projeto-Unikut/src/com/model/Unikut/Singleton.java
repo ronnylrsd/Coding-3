@@ -134,7 +134,7 @@ public class Singleton {
         Conta busca = buscaSimples(log, sen);
         if (busca == null && log.contains(".adm")) {
             ContaAdministradora adm = (ContaAdministradora) ContaFactory.getConta(log,sen,"");
-            rede.add(adm);
+            rede.add(adm); 
             return true;
         } else {
             return false;
