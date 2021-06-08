@@ -85,12 +85,7 @@ public class Singleton {
     }
 
     public boolean modelBusca(String log) {
-        for (Conta c : rede) {
-            if (c.getLogin().compareTo(log) == 0) {
-                return true;
-            }
-        }
-        return false;
+        return rede.stream().anyMatch((c) -> (c.getLogin().compareTo(log) == 0));
     }
 
     public boolean modelEntrar(String log, String sen) {  // adicionar exception
@@ -127,7 +122,7 @@ public class Singleton {
     public boolean modelCadastrar(String log, String sen, String n) {
         Conta busca = buscaSimples(log, sen);
         if (busca == null && !log.contains(".adm")) {
-            Conta usuario = new Conta(log, sen, n);
+            ContaUsuario usuario = new ContaUsuario(log, sen, n);
             rede.add(usuario);
             return true;
         } else {
@@ -157,35 +152,35 @@ public class Singleton {
     }
 
     public void modelAlteraIdade(String id) {
-        Conta Usuario = buscaSimples(login, senha);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
         Usuario.setIdade(id);
     }
 
     public void modelAlteraSexo(String sex) {
-        Conta Usuario = buscaSimples(login, senha);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
         Usuario.setSexo(sex);
     }
 
     public void modelAlteraAniversario(String aniver) {
-        Conta Usuario = buscaSimples(login, senha);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
         Usuario.setAniversario(aniver);
     }
 
     public void modelAlteraEstadoCivil(String est) {
-        Conta Usuario = buscaSimples(login, senha);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
         Usuario.setEstadoCivil(est);
     }
 
     public void modelAdicionarAmigo(int index) {
-        Conta usuario = buscaSimples(login, senha);
+        ContaUsuario usuario = (ContaUsuario) buscaSimples(login, senha);
         String log;
         log = usuario.AdicionarAmigo(index);
-        Conta Amigo = busca(log);
+        ContaUsuario Amigo = (ContaUsuario) busca(log);
         Amigo.getAmigos().add(login);
     }
 
     public boolean modelAdicionarSitucao(String log) {
-        Conta Situacao = busca(log);
+        ContaUsuario Situacao = (ContaUsuario) busca(log);
         if (login.compareTo(log) == 0) {
             return false;
         } else {
@@ -194,23 +189,23 @@ public class Singleton {
     }
 
     public LinkedList modelVisualizarAmigos() {
-        Conta usuario = buscaSimples(login, senha);
+        ContaUsuario usuario = (ContaUsuario) buscaSimples(login, senha);
         LinkedList lista = usuario.listaAmigos();
         return lista;
     }
 
     public LinkedList modelVisualizarAmigosPendentes() {
-        Conta usuario = buscaSimples(login, senha);
+        ContaUsuario usuario = (ContaUsuario) buscaSimples(login, senha);
         return usuario.getSolicitacoes();
     }
 
     public boolean modelEnviarRecado(String log, String recado) {
-        Conta destinatario = busca(log);
+        ContaUsuario destinatario = (ContaUsuario) busca(log);
         return destinatario.adicionaRecado(login, recado);
     }
 
     public boolean modelEnviarRecadoSecreto(String log, String recado, String sen) {
-        Conta destinatario = busca(log);
+        ContaUsuario destinatario = (ContaUsuario) busca(log);
         return destinatario.adicionaRecadoComSenha(login, recado, sen);
     }
 
@@ -235,13 +230,13 @@ public class Singleton {
     }
 
     public LinkedList modelVisualizarRecados() {
-        Conta usuario = buscaSimples(login, senha);
+        ContaUsuario usuario = (ContaUsuario) buscaSimples(login, senha);
         LinkedList lista = usuario.listaRecados();
         return lista;
     }
 
     public LinkedList modelVisualizarRecadoSecreto(String sen) {
-        Conta usuario = buscaSimples(login, senha);
+        ContaUsuario usuario = (ContaUsuario) buscaSimples(login, senha);
         return usuario.listaRecadosComSenha(sen);
     }
 
@@ -256,8 +251,8 @@ public class Singleton {
     }
 
     public void modelArmazenarMatch(String log) {
-        Conta Usuario = buscaSimples(login, senha);
-        Conta Match = busca(log);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
+        ContaUsuario Match = (ContaUsuario) busca(log);
         if (Match.getMatch().contains(login + ": PENDENTE")) {
             Usuario.AdicionarMatch(log, "Match");
             Match.AlteraMatch(login);
@@ -269,7 +264,7 @@ public class Singleton {
     }
 
     public LinkedList modelVerMatch() {
-        Conta Usuario = buscaSimples(login, senha);
+        ContaUsuario Usuario = (ContaUsuario) buscaSimples(login, senha);
         return Usuario.getMatch();
 
     }
@@ -280,12 +275,12 @@ public class Singleton {
     }
 
     public void modelAlterarConta(String log, char resp, String mud) {
-        Conta Usuario = busca(log);
+        ContaUsuario Usuario = (ContaUsuario) busca(log);
         Usuario.alterarDadosAdm(resp, mud);
     }
 
     public String modelExibeConta(String log) {
-        Conta Usuario = busca(log);
+        ContaUsuario Usuario = (ContaUsuario) busca(log);
         String l = "Login: " + Usuario.getLogin() + ".", nom, idd, sex, ani, estC;
         if (Usuario.getNome().compareTo("convidado") == 0) {
             nom = "Nome: convidado.";
