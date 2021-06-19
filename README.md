@@ -32,9 +32,9 @@ It consists of a social network built on the MVC pattern
 
 9-View messages with password.
 
-10-Place messages on the wall.
+10-Place messages on the mural.
 
-11-Accept no messages on the wall.
+11-Accept no messages on the mural.
 
 12-View messages from the mural.
 
